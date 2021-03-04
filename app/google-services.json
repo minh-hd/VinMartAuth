@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "998077663107",
+    "project_id": "vinmartauth",
+    "storage_bucket": "vinmartauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998077663107:android:377fb086cc2e0bc8dc18b6",
+        "android_client_info": {
+          "package_name": "com.fpt.vinmartauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998077663107-sjl7n0semq10bmfrprne9a0atut877u3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fpt.vinmartauth",
+            "certificate_hash": "f33ffbe8e6c2853d94fe1a928e6cdfb02a946002"
+          }
+        },
+        {
+          "client_id": "998077663107-bm2sj86i1n68crsqe1393cj1kb02fdc8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLNPqn2bmlgnK26Ua3BisOSQGqTmE07fM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998077663107-bm2sj86i1n68crsqe1393cj1kb02fdc8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
