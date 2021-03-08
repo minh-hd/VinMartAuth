@@ -9,6 +9,7 @@
     tools:context=".login.LoginActivity">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
@@ -68,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/forgot_password"
+                android:textColor="@color/primary_green"
                 app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
                 app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
@@ -76,27 +78,27 @@
                 android:id="@+id/editTextTextEmailAddress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/example_abc_com"
                 android:inputType="textEmailAddress"
                 app:layout_constraintBottom_toTopOf="@+id/password"
                 app:layout_constraintEnd_toStartOf="@+id/guideline78"
                 app:layout_constraintStart_toStartOf="@+id/email"
-                app:layout_constraintTop_toBottomOf="@+id/email"
-                android:autofillHints="" />
+                app:layout_constraintTop_toBottomOf="@+id/email" />
 
             <EditText
                 android:id="@+id/editTextTextPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/enter_password"
                 android:inputType="textPassword"
                 app:layout_constraintBottom_toTopOf="@+id/txtResetPassword"
                 app:layout_constraintEnd_toStartOf="@+id/guideline78"
                 app:layout_constraintStart_toStartOf="@+id/password"
-                app:layout_constraintTop_toBottomOf="@+id/password"
-                android:autofillHints="" />
+                app:layout_constraintTop_toBottomOf="@+id/password" />
 
             <Button
                 android:id="@+id/btnSignIn"
