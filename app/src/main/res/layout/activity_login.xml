@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/forgot_password"
                 android:textColor="@color/primary_green"
-                app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
+                app:layout_constraintBottom_toTopOf="@+id/btnHomeSignIn"
                 app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
@@ -111,7 +111,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/password" />
 
             <Button
-                android:id="@+id/btnSignIn"
+                android:id="@+id/btnHomeSignIn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/sign_in"
@@ -130,7 +130,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/btnSignUp"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/btnSignUp"
-                app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
+                app:layout_constraintTop_toBottomOf="@+id/btnHomeSignIn" />
 
             <Button
                 android:id="@+id/btnSignUp"
