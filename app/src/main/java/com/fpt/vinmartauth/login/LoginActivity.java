@@ -3,6 +3,7 @@ package com.fpt.vinmartauth.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,17 +17,23 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ImageView btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(view -> finish());
+
         Button btnSignUp = findViewById(R.id.btnSignUp);
-        Button btnSignIn = findViewById(R.id.btnSignIn);
-        TextView tvResetPassword = findViewById(R.id.txtResetPassword);
         btnSignUp.setOnClickListener(view -> {
             Intent intent = new Intent(this, SignupActivity.class);
             startActivity(intent);
         });
+
+        Button btnSignIn = findViewById(R.id.btnSignIn);
         btnSignIn.setOnClickListener(view -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
+
+        TextView tvResetPassword = findViewById(R.id.txtResetPassword);
         tvResetPassword.setOnClickListener(view -> {
             Intent i = new Intent(this, ResetPasswordActivity.class);
             startActivity(i);
