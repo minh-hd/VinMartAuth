@@ -7,19 +7,20 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fpt.vinmartauth.MainActivity;
 import com.fpt.vinmartauth.R;
 
-public class SignupActivity extends AppCompatActivity {
+public class VerificationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_verification);
         ImageView btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(view -> finish());
-        Button btnSignUp = findViewById(R.id.btnSignUp);
-        btnSignUp.setOnClickListener(view -> {
-            Intent intent = new Intent(this, VerificationActivity.class);
+        Button btnVerify = findViewById(R.id.btnVerify);
+        btnVerify.setOnClickListener(view -> {
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
     }

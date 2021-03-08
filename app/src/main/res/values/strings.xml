@@ -13,4 +13,12 @@
     <string name="enter_password">Enter Password</string>
     <string name="name">Name</string>
     <string name="back">Back</string>
+    <string name="verification">Verification</string>
+    <string name="Continue">continue</string>
+    <string name="a_6_digit_otp_has_been_sent_to_your_e_mail_address_enter_to_continue">A 6-digit OTP has been sent to your e-mail address. Enter to continue.</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="enter_new_password_to_continue">Enter new password to continue</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="yes_it_s_my_new_password">Yes it\'s my new Password!</string>
 </resources>

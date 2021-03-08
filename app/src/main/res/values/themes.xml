@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.VinMartAuth" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_green</item>
         <item name="colorPrimaryVariant">@color/darker_green</item>
@@ -15,14 +16,17 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/source_san_pro</item>
     </style>
+
     <style name="SmallText">
         <item name="android:textColor">@color/gray_text</item>
     </style>
+
     <style name="BoldText">
         <item name="android:textSize">32sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginTop">8dp</item>
     </style>
+
     <style name="GreenLink">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/primary_green</item>
