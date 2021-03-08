@@ -15,8 +15,10 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
         ImageView btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(view -> finish());
+
         Button btnSignUp = findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(view -> {
             Intent intent = new Intent(this, VerificationActivity.class);
