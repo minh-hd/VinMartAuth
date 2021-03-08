@@ -1,23 +1,54 @@
-package com.fpt.vinmartauth;
+package com.fpt.vinmartauth
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.fpt.vinmartauth.login.LoginActivity;
-
-public class MainActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button btnSignIn = findViewById(R.id.button);
-        btnSignIn.setOnClickListener(view -> {
-            Intent i = new Intent(this, LoginActivity.class);
-            startActivity(i);
-        });
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val defaultFragment = MainFragment.newInstance()
+        openFragment(defaultFragment)
+        //call bottom nav view by id
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNavView)
+        //create on-click listener
+        val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                //"if" by id
+                R.id.home -> {
+                    //create new instance
+                    val mainFragment = MainFragment.newInstance()
+                    openFragment(mainFragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.profile -> {
+                    val profileFragment = ProfileFragment.newInstance()
+                    openFragment(profileFragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.cart -> {
+                    val cartFragment = CartFragment.newInstance()
+                    openFragment(cartFragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            true
+        }
+        //set the listener
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
+
+    //open fragments
+    private fun openFragment(fragment: Fragment) {
+        Log.d("Fragment", "Trying to add")
+        val transaction = supportFragmentManager.beginTransaction()
+        //replace this fragment into the old one. There are more e.g add, remove etc
+        transaction.replace(R.id.fragment_container, fragment, "New Fragment")
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
 }
