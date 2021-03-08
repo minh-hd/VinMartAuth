@@ -9,20 +9,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fpt.vinmartauth.R;
 
-public class SignupActivity extends AppCompatActivity {
+public class ResetPasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_reset_password);
 
         ImageView btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(view -> finish());
 
-        Button btnSignUp = findViewById(R.id.btnSignUp);
-        btnSignUp.setOnClickListener(view -> {
-            Intent intent = new Intent(this, VerificationActivity.class);
-            startActivity(intent);
+        Button btnResetPassword = findViewById(R.id.btnResetPassword);
+        btnResetPassword.setOnClickListener(view -> {
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
         });
     }
 }
