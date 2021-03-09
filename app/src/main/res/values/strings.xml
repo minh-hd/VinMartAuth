@@ -21,4 +21,7 @@
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="yes_it_s_my_new_password">Yes it\'s my new Password!</string>
+    <string name="home">Home</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
 </resources>
