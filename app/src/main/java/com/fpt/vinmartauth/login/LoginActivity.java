@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Button btnSignIn = findViewById(R.id.btnSignIn);
+        Button btnSignIn = findViewById(R.id.btnHomeSignIn);
         btnSignIn.setOnClickListener(view -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
