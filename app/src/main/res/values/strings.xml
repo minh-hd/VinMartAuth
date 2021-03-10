@@ -24,4 +24,7 @@
     <string name="home">Home</string>
     <string name="cart">Cart</string>
     <string name="profile">Profile</string>
+    <string name="item_icon">Item Icon</string>
+    <string name="item_name">Item Name</string>
+    <string name="arrow_forward">Arrow forward</string>
 </resources>
