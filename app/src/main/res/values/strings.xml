@@ -24,4 +24,15 @@
     <string name="home">Home</string>
     <string name="cart">Cart</string>
     <string name="profile">Profile</string>
+    <string name="item_icon">Item Icon</string>
+    <string name="item_name">Item Name</string>
+    <string name="arrow_forward">Arrow forward</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="order_history">Order History</string>
+    <string name="track_order">Track Order</string>
+    <string name="cards">Cards</string>
+    <string name="notifications">Notifications</string>
+    <string name="log_out">Log Out</string>
 </resources>

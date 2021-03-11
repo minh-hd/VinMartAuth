@@ -6,32 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class ProfileFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
     }
@@ -44,7 +29,21 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        ArrayList<ProfileMenuItem> items = new ArrayList<>();
+        RecyclerView rv = view.findViewById(R.id.rcvProfileMenu);
+        items.add(new ProfileMenuItem(R.drawable.ic_baseline_edit_24, getString(R.string.edit_profile)));
+        items.add(new ProfileMenuItem(R.drawable.ic_baseline_location_on_24, getString(R.string.shipping_address)));
+        items.add(new ProfileMenuItem(R.drawable.ic_baseline_favorite_border_24, getString(R.string.wishlist)));
+        items.add(new ProfileMenuItem(R.drawable.ic_baseline_history_24, getString(R.string.order_history)));
+        items.add(new ProfileMenuItem(R.drawable.ic_baseline_local_shipping_24, getString(R.string.track_order)));
+        items.add(new ProfileMenuItem(R.drawable.ic_baseline_credit_card_24, getString(R.string.cards)));
+        items.add(new ProfileMenuItem(R.drawable.ic_baseline_notifications_24, getString(R.string.notifications)));
+        items.add(new ProfileMenuItem(R.drawable.ic_baseline_exit_to_app_24, getString(R.string.log_out)));
+        ProfileMenuItemAdapter adapter = new ProfileMenuItemAdapter(items);
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rv.setAdapter(adapter);
+        return view;
     }
 }
