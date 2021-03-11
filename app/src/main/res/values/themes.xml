@@ -17,11 +17,6 @@
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
     </style>
 
-    <style name="RecycleView">
-        <item name="android:layout_margin">16dp</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
     <style name="SmallText">
         <item name="android:textColor">@color/gray_text</item>
     </style>
