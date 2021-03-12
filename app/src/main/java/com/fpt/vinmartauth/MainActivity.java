@@ -1,5 +1,8 @@
 package com.fpt.vinmartauth;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -31,6 +34,34 @@ public class MainActivity extends AppCompatActivity {
         };
         //set the listener
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    //when back button pressed
+    @Override
+    public void onBackPressed() {
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavView);
+        int selectedItemId = bottomNavigation.getSelectedItemId();
+        //if main fragment is not currently active, back to main fragment
+        if (R.id.home != selectedItemId) {
+            setHomeItem(MainActivity.this);
+        } else {//if user is already in the main fragment
+            new AlertDialog.Builder(this)
+                    .setTitle("Really Exit?")
+                    .setMessage("Are you sure you want to exit?")
+                    .setNegativeButton(android.R.string.no, null) //if no, show main activity.
+                    .setPositiveButton(android.R.string.yes, (arg0, arg1) -> {//if yes, back to home screen.
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }).create().show();
+        }
+    }
+
+    //to set home icon on button nav state to "selected"
+    private static void setHomeItem(Activity activity) {
+        BottomNavigationView bottomNavigationView = activity.findViewById(R.id.bottomNavView);
+        bottomNavigationView.setSelectedItemId(R.id.home);
     }
 
     //open fragments
