@@ -35,7 +35,7 @@ public class ProfileFragment extends Fragment {
         RecyclerView rv = view.findViewById(R.id.rcvProfileMenu);
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_edit_24, getString(R.string.edit_profile)));
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_location_on_24, getString(R.string.shipping_address)));
-        items.add(new ProfileMenuItem(R.drawable.ic_baseline_favorite_border_24, getString(R.string.wishlist)));
+        items.add(new ProfileMenuItem(R.drawable.ic_baseline_favorite_border_24, getString(R.string.favorite)));
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_history_24, getString(R.string.order_history)));
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_local_shipping_24, getString(R.string.track_order)));
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_credit_card_24, getString(R.string.cards)));
@@ -43,7 +43,7 @@ public class ProfileFragment extends Fragment {
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_exit_to_app_24, getString(R.string.log_out)));
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_edit_24, getString(R.string.edit_profile)));
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_location_on_24, getString(R.string.shipping_address)));
-        items.add(new ProfileMenuItem(R.drawable.ic_baseline_favorite_border_24, getString(R.string.wishlist)));
+        items.add(new ProfileMenuItem(R.drawable.ic_baseline_favorite_border_24, getString(R.string.favorite)));
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_history_24, getString(R.string.order_history)));
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_local_shipping_24, getString(R.string.track_order)));
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_credit_card_24, getString(R.string.cards)));
