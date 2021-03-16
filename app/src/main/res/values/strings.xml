@@ -31,8 +31,8 @@
     <string name="shipping_address">Địa chỉ giao hàng</string>
     <string name="favorite">Sản phẩm yêu thích</string>
     <string name="order_history">Lịch sử đơn hàng</string>
-    <string name="track_order">Theo dõi đơn hàg</string>
-    <string name="cards">Thẻ</string>
+    <string name="track_order">Theo dõi đơn hàng</string>
+    <string name="cards">Thẻ Ngân hàng</string>
     <string name="notifications">Thông báo</string>
     <string name="log_out">Đăng xuất</string>
 </resources>
