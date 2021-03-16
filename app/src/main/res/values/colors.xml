@@ -12,5 +12,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="quite_white">#F5F5F5</color>
+    <color name="darker_crimson">#e82229</color>
+    <color name="primary_crimson">#ee1b24</color>
+    <color name="matisse">#1b77a4</color>
+    <color name="picton_blue">#54b8e7</color>
     <color name="gray_text">#929292</color>
 </resources>

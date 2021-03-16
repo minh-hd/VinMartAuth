@@ -50,7 +50,7 @@
                 app:OtpItemCount="6"
                 app:OtpItemSpacing="16dp"
                 app:OtpItemWidth="32dp"
-                app:OtpLineColor="@color/primary_green"
+                app:OtpLineColor="@color/primary_crimson"
                 app:OtpViewType="line"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline78"

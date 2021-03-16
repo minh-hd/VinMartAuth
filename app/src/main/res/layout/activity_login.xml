@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/forgot_password"
-                android:textColor="@color/primary_green"
+                android:textColor="@color/primary_crimson"
                 app:layout_constraintBottom_toTopOf="@+id/btnHomeSignIn"
                 app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
