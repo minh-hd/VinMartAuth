@@ -1,13 +1,18 @@
 package com.fpt.vinmartauth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.fpt.vinmartauth.login.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -31,6 +36,12 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         // Inflate the layout for this fragment
+        TextView tvLogIn = view.findViewById(R.id.tvLogin);
+        tvLogIn.setOnClickListener(view1 -> {
+                    //must be this.getContext(), not just "this".
+                    Intent i = new Intent(this.getContext(), LoginActivity.class);
+                    startActivity(i);
+                });
         ArrayList<ProfileMenuItem> items = new ArrayList<>();
         RecyclerView rv = view.findViewById(R.id.rcvProfileMenu);
         items.add(new ProfileMenuItem(R.drawable.ic_baseline_edit_24, getString(R.string.edit_profile)));

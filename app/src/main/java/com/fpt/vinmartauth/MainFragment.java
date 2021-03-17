@@ -28,12 +28,12 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         //must declare to find view by id
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        Button btnSignIn = view.findViewById(R.id.btnHomeSignIn);
-        btnSignIn.setOnClickListener(view1 -> {
-            //must be this.getContext(), not just "this".
-            Intent i = new Intent(this.getContext(), LoginActivity.class);
-            startActivity(i);
-        });
+//        Button btnSignIn = view.findViewById(R.id.btnHomeSignIn);
+//        btnSignIn.setOnClickListener(view1 -> {
+//            //must be this.getContext(), not just "this".
+//            Intent i = new Intent(this.getContext(), LoginActivity.class);
+//            startActivity(i);
+//        });
         // Inflate the layout for this fragment
         return view;
     }
