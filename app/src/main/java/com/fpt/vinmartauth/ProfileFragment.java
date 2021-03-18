@@ -35,10 +35,8 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        // Inflate the layout for this fragment
         TextView tvLogIn = view.findViewById(R.id.tvLogin);
         tvLogIn.setOnClickListener(view1 -> {
-                    //must be this.getContext(), not just "this".
                     Intent i = new Intent(this.getContext(), LoginActivity.class);
                     startActivity(i);
                 });
