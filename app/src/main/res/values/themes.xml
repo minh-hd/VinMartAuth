@@ -35,13 +35,26 @@
         <item name="android:textSize">32sp</item>
         <item name="android:layout_marginTop">8dp</item>
     </style>
+
     <style name="ItemLabelText">
         <item name="android:textSize">18sp</item>
         <item name="android:layout_marginTop">8dp</item>
     </style>
+
     <style name="GreenLink">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/primary_crimson</item>
+    </style>
+
+    <style name="Price">
+        <item name="android:textColor">@color/primary_crimson</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="ProductName">
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_margin">8dp</item>
     </style>
 </resources>
 <!--<resources xmlns:tools="http://schemas.android.com/tools">-->

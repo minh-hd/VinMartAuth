@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fpt.vinmartauth.R;
-import com.fpt.vinmartauth.profile.ProfileMenuItem;
 
 import java.util.ArrayList;
 
