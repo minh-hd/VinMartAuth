@@ -1,17 +1,17 @@
-package com.fpt.vinmartauth;
+package com.fpt.vinmartauth.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.login.LoginActivity;
 
 import java.util.ArrayList;

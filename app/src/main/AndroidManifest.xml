@@ -13,7 +13,7 @@
         <activity android:name=".login.VerificationActivity" />
         <activity android:name=".login.SignupActivity" />
         <activity android:name=".login.LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".main_screen.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

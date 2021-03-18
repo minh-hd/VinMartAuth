@@ -1,4 +1,4 @@
-package com.fpt.vinmartauth;
+package com.fpt.vinmartauth.main_screen;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.fpt.vinmartauth.profile.ProfileFragment;
+import com.fpt.vinmartauth.R;
+import com.fpt.vinmartauth.cart.CartFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
