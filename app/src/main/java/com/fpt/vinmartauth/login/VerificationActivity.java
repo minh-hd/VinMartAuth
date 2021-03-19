@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.fpt.vinmartauth.main_screen.MainActivity;
+import com.fpt.vinmartauth.MainActivity;
 import com.fpt.vinmartauth.R;
 
 public class VerificationActivity extends AppCompatActivity {

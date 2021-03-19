@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.fpt.vinmartauth.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -58,7 +59,7 @@ public class ProductAdapter extends Adapter {
             itemName.setText(item.getProductName());
             itemBrand.setText(item.getProductBrand());
             itemPrice.setText(item.getProductPrice() + "₫");
-            itemImage.setImageResource(item.getImageSrc());
+            Picasso.get().load(item.getImageSrc()).into(itemImage);
         }
     }
 
