@@ -1,4 +1,4 @@
-package com.fpt.vinmartauth;
+package com.fpt.vinmartauth.entity;
 
 public class ProfileMenuItem {
     int iconID;

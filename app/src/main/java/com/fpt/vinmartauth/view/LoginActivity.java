@@ -1,4 +1,4 @@
-package com.fpt.vinmartauth.login;
+package com.fpt.vinmartauth.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.fpt.vinmartauth.MainActivity;
 import com.fpt.vinmartauth.R;
 
 public class LoginActivity extends AppCompatActivity {

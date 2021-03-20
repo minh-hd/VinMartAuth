@@ -1,4 +1,4 @@
-package com.fpt.vinmartauth;
+package com.fpt.vinmartauth.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.fpt.vinmartauth.R;
+import com.fpt.vinmartauth.adapter.ProfileMenuItemAdapter;
+import com.fpt.vinmartauth.entity.ProfileMenuItem;
 
 import java.util.ArrayList;
 
