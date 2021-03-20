@@ -2,7 +2,11 @@ package com.fpt.vinmartauth.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,31 +17,49 @@ import com.fpt.vinmartauth.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+  ImageView btnBack;
+  Button btnSignIn;
+  TextView tvResetPassword;
+  EditText edtEmail;
 
-        ImageView btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(view -> finish());
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_login);
+    btnBack = findViewById(R.id.btnBack);
+    btnBack.setOnClickListener(view -> finish());
 
-        Button btnSignUp = findViewById(R.id.btnSignUp);
-        btnSignUp.setOnClickListener(view -> {
-            Intent intent = new Intent(this, SignupActivity.class);
-            startActivity(intent);
-        });
+    btnSignIn = findViewById(R.id.btnHomeSignIn);
+    btnSignIn.setOnClickListener(view -> {
+      Intent intent = new Intent(this, MainActivity.class);
+      startActivity(intent);
+    });
 
-        Button btnSignIn = findViewById(R.id.btnHomeSignIn);
-        btnSignIn.setOnClickListener(view -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        });
+    tvResetPassword = findViewById(R.id.txtResetPassword);
+    tvResetPassword.setOnClickListener(view -> {
+      Intent i = new Intent(this, ResetPasswordActivity.class);
+      startActivity(i);
+    });
 
-        TextView tvResetPassword = findViewById(R.id.txtResetPassword);
-        tvResetPassword.setOnClickListener(view -> {
-            Intent i = new Intent(this, ResetPasswordActivity.class);
-            startActivity(i);
-        });
-    }
+    edtEmail = findViewById(R.id.editTextTextEmailAddress);
+    edtEmail.addTextChangedListener(new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        Log.d("EditTextEmail Before", "");
+      }
+
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        Log.d("EditTextEmail Current", s.toString());
+      }
+
+      @Override
+      public void afterTextChanged(Editable s) {
+
+        Log.d("EditTextEmail After", "");
+      }
+    });
+  }
 
 }

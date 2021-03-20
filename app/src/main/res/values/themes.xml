@@ -25,6 +25,10 @@
     <style name="SmallText">
         <item name="android:textColor">@color/gray_text</item>
     </style>
+    <style name="BoldSmallText">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <style name="BoldText">
         <item name="android:textSize">32sp</item>
