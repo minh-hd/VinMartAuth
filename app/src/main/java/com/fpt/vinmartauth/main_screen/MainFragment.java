@@ -36,14 +36,6 @@ public class MainFragment extends Fragment {
         ArrayList<Product> itemRecommended = new ArrayList<>();
         RecyclerView rvRecommended = view.findViewById(R.id.rvRecommended);
         RecyclerView rvBestSelling = view.findViewById(R.id.rvBestSelling);
-        itemBestSelling.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/bo.png", "BeoPlay Speaker", "Bang and Olufsen", 600000));
-        itemBestSelling.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/watch.png", "Leather Wristwatch", "Tag Heuer", 9800000));
-        itemBestSelling.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/speaker.png", "Smart Bluetooth Speaker", "Google", 500000));
-        itemBestSelling.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/packback.png", "Smart Luggage", "Smart Inc", 1200000));
-        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/watch.png", "Leather Wristwatch", "Tag Heuer", 9800000));
-        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/bo.png", "BeoPlay Speaker", "Bang and Olufsen", 600000));
-        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/packback.png", "Smart Luggage", "Smart Inc", 1200000));
-        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/speaker.png", "Smart Bluetooth Speaker", "Google", 500000));
         ProductAdapter adapterBestSelling = new ProductAdapter(itemBestSelling);
         ProductAdapter adapterRecommended = new ProductAdapter(itemRecommended);
         rvBestSelling.setLayoutManager(new GridLayoutManager(getActivity(), 2));
