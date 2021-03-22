@@ -1,10 +1,10 @@
 package com.fpt.vinmartauth.main_screen.product;
 
 public class Product {
-    String imageSrc;
-    String productName;
-    String productBrand;
-    int productPrice;
+    private final String imageSrc;
+    private final String productName;
+    private final String productBrand;
+    private final int productPrice;
 
     public Product(String imageSrc, String productName, String productBrand, int productPrice) {
         this.imageSrc = imageSrc;
