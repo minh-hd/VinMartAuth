@@ -1,4 +1,4 @@
-package com.fpt.vinmartauth;
+package com.fpt.vinmartauth.view.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,8 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
-import com.fpt.vinmartauth.login.LoginActivity;
+import com.fpt.vinmartauth.R;
+import com.fpt.vinmartauth.view.LoginActivity;
 
 
 public class MainFragment extends Fragment {
