@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/quite_white"
-    tools:context=".view.SignupActivity">
+    tools:context=".login.SignupActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -23,7 +23,7 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/verification"
+                android:id="@+id/sign_up"
                 style="@style/BoldText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,9 +39,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
-                app:layout_constraintBottom_toTopOf="@+id/etRegEmail"
-                app:layout_constraintStart_toStartOf="@+id/etRegEmail"
-                app:layout_constraintTop_toBottomOf="@+id/etRegName" />
+                app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
+                app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
             <TextView
                 android:id="@+id/name"
@@ -49,9 +49,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
-                app:layout_constraintBottom_toTopOf="@+id/etRegName"
-                app:layout_constraintStart_toStartOf="@+id/etRegName"
-                app:layout_constraintTop_toBottomOf="@+id/verification" />
+                app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
+                app:layout_constraintTop_toBottomOf="@+id/sign_up" />
 
             <TextView
                 android:id="@+id/password"
@@ -59,12 +59,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
-                app:layout_constraintBottom_toTopOf="@+id/etRegPassword"
-                app:layout_constraintStart_toStartOf="@+id/etRegPassword"
-                app:layout_constraintTop_toBottomOf="@+id/etRegEmail" />
+                app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
+                app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
 
             <EditText
-                android:id="@+id/etRegEmail"
+                android:id="@+id/editTextTextEmailAddress"
                 android:layout_width="303dp"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
@@ -76,27 +76,26 @@
                 app:layout_constraintTop_toBottomOf="@+id/email" />
 
             <EditText
-                android:id="@+id/etRegPassword"
+                android:id="@+id/editTextTextPassword"
                 android:layout_width="303dp"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/enter_password"
                 android:inputType="textPassword"
-                app:layout_constraintBottom_toTopOf="@+id/btnSignUp"
-                app:layout_constraintEnd_toEndOf="@+id/btnSignUp"
-                app:layout_constraintStart_toStartOf="@+id/btnSignUp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_sign_up"
+                app:layout_constraintStart_toStartOf="@+id/btn_sign_up"
                 app:layout_constraintTop_toBottomOf="@+id/password" />
 
             <Button
-                android:id="@+id/btnSignUp"
+                android:id="@+id/btn_sign_up"
                 android:layout_width="303dp"
                 android:layout_height="wrap_content"
                 android:text="@string/sign_up"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline78"
                 app:layout_constraintStart_toStartOf="@+id/guideline7"
-                app:layout_constraintTop_toBottomOf="@+id/etRegPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline7"
@@ -113,7 +112,7 @@
                 app:layout_constraintGuide_percent=".9" />
 
             <EditText
-                android:id="@+id/etRegName"
+                android:id="@+id/editTextTextPersonName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
