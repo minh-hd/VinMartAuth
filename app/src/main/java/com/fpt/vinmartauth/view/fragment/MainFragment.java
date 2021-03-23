@@ -1,16 +1,19 @@
 package com.fpt.vinmartauth.view.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.fpt.vinmartauth.R;
-import com.fpt.vinmartauth.view.LoginActivity;
+import com.fpt.vinmartauth.adapter.ProductAdapter;
+import com.fpt.vinmartauth.entity.Product;
+
+import java.util.ArrayList;
 
 
 public class MainFragment extends Fragment {
@@ -29,12 +32,23 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         //must declare to find view by id
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        Button btnSignIn = view.findViewById(R.id.btnHomeSignIn);
-        btnSignIn.setOnClickListener(view1 -> {
-            //must be this.getContext(), not just "this".
-            Intent i = new Intent(this.getContext(), LoginActivity.class);
-            startActivity(i);
-        });
+        ArrayList<Product> itemBestSelling = new ArrayList<>();
+        ArrayList<Product> itemRecommended = new ArrayList<>();
+        RecyclerView rvRecommended = view.findViewById(R.id.rvRecommended);
+        RecyclerView rvBestSelling = view.findViewById(R.id.rvBestSelling);
+        itemBestSelling.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/watch.png", "Leather Wristwatch", "Tag Heuer", 9800000));
+        itemBestSelling.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/speaker.png", "Smart Bluetooth Speaker", "Google", 500000));
+        itemBestSelling.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/packback.png", "Smart Luggage", "Smart Inc", 1200000));
+        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/watch.png", "Leather Wristwatch", "Tag Heuer", 9800000));
+        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/bo.png", "BeoPlay Speaker", "Bang and Olufsen", 600000));
+        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/packback.png", "Smart Luggage", "Smart Inc", 1200000));
+        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/speaker.png", "Smart Bluetooth Speaker", "Google", 500000));
+        ProductAdapter adapterBestSelling = new ProductAdapter(itemBestSelling);
+        ProductAdapter adapterRecommended = new ProductAdapter(itemRecommended);
+        rvBestSelling.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        rvBestSelling.setAdapter(adapterBestSelling);
+        rvRecommended.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        rvRecommended.setAdapter(adapterRecommended);
         // Inflate the layout for this fragment
         return view;
     }

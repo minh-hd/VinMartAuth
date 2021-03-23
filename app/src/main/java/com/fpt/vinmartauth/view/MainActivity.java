@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
             setHomeItem(MainActivity.this);
         } else {//if user is already in the main fragment
             new AlertDialog.Builder(this)
-                    .setTitle("Really Exit?")
-                    .setMessage("Are you sure you want to exit?")
-                    .setNegativeButton("No", null) //if no, show main activity.
-                    .setPositiveButton("Yes", (arg0, arg1) -> {//if yes, back to home screen.
+                    .setTitle("Xác nhận")
+                    .setMessage("Thoát ứng dụng?")
+                    .setNegativeButton("Hủy", null) //if no, show main activity.
+                    .setPositiveButton("Thoát", (arg0, arg1) -> {//if yes, back to home screen.
                         Intent intent = new Intent(Intent.ACTION_MAIN);
                         intent.addCategory(Intent.CATEGORY_HOME);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
