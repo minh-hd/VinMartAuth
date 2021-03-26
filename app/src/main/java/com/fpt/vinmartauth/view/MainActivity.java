@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.fpt.vinmartauth.R;
+import com.fpt.vinmartauth.model.CustomerModel;
 import com.fpt.vinmartauth.view.fragment.CartFragment;
 import com.fpt.vinmartauth.view.fragment.MainFragment;
 import com.fpt.vinmartauth.view.fragment.ProfileFragment;
