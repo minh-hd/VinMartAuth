@@ -1,10 +1,12 @@
-package com.fpt.vinmartauth.view.fragment;
+package com.fpt.vinmartauth.view.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,14 +20,14 @@ import com.fpt.vinmartauth.model.ProductModel.GetAllProductsCallbacks;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements MainView{
     public static MainFragment newInstance() {
         return new MainFragment();
     }
 
-    private final ProductModel productModel = new ProductModel();
     ProductAdapter adapterBestSelling = new ProductAdapter();
     ProductAdapter adapterRecommended = new ProductAdapter();
+    private MainController controller = new MainController();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,14 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //must declare to find view by id
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_main, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        controller.setView(this);
         ArrayList<Product> itemRecommended = new ArrayList<>();
         RecyclerView rvRecommended = view.findViewById(R.id.rvRecommended);
         RecyclerView rvBestSelling = view.findViewById(R.id.rvBestSelling);
@@ -53,22 +62,11 @@ public class MainFragment extends Fragment {
         rvRecommended.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rvRecommended.setAdapter(adapterRecommended);
 
-        fetchProducts();
-        // Inflate the layout for this fragment
-        return view;
+        controller.fetchAllProducts();
     }
 
-    private void fetchProducts() {
-        productModel.getAllProduct(new GetAllProductsCallbacks() {
-            @Override
-            public void onSuccess(List<Product> products) {
-                adapterBestSelling.setData(products);
-            }
-
-            @Override
-            public void onFailed() {
-
-            }
-        });
+    @Override
+    public void setProducts(List<Product> products) {
+        adapterBestSelling.setData(products);
     }
 }

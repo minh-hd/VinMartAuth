@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.fpt.vinmartauth.entity.Product;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -34,33 +36,42 @@ public class ProductModel {
         });
     }
 
+
+
     public interface GetAllProductsCallbacks {
         void onSuccess(List<Product> products);
         void onFailed();
     }
 
-    public Product getProductById(int id){
-        CollectionReference productCollectionRef = instance.collection("products");
-        Query productQuery = productCollectionRef.whereEqualTo("ID",id);
-        productQuery.get().addOnCompleteListener(task -> {
+    public void getProductById(String id){
+        DocumentReference documentReference = instance.collection("products").document(id);
+        documentReference.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
-                Log.i(SUCCESS_TAG,"OK");
+                DocumentSnapshot document = task.getResult();
+                if(document.exists()) {
+                    Log.i(SUCCESS_TAG, "OK");
+                } else {
+                    Log.i(ERROR_TAG,"Something wrong happened");
+                }
+            } else {
+                Log.i(ERROR_TAG,"Get fail");
+            }
+        });
+    }
+    public Product getProductByName(String title){
+        DocumentReference documentReference = instance.collection("products").document(title);;
+        documentReference.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                DocumentSnapshot document = task.getResult();
+                if(document.exists()) {
+                    Log.i(SUCCESS_TAG, "OK");
+                } else {
+                    Log.i(ERROR_TAG,"Something wrong happened");
+                }
             } else {
                 Log.i(ERROR_TAG,"Something wrong happened");
             }
         });
         return null;
     }
-//    public Product getProductByName(String name){
-//        CollectionReference productCollectionRef = instance.collection("products");
-//        Query productQuery = productCollectionRef.whereEqualTo("ID",id);
-//        productQuery.get().addOnCompleteListener(task -> {
-//            if(task.isSuccessful()){
-//                Log.i(SUCCESS_TAG,"OK");
-//            } else {
-//                Log.i(ERROR_TAG,"Something wrong happened");
-//            }
-//        });
-//        return null;
-//    }
 }
