@@ -1,3 +1,10 @@
 package com.fpt.vinmartauth.entity
 
-class Product(val imageSrc: String, val productName: String, val productBrand: String, val productPrice: Int)
+data class Product(
+        val description: String = "",
+        val image: String = "",
+        val price: Int = 0,
+        val quantity: String = "",
+        val title: String = "",
+        val vendor: String = ""
+)

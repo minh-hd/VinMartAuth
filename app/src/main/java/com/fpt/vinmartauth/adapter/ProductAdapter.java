@@ -15,14 +15,15 @@ import com.fpt.vinmartauth.entity.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductAdapter extends Adapter {
     private final ArrayList<Product> items = new ArrayList<>();
 
-    public ProductAdapter(final ArrayList<Product> i) {
-        if (i != null) {
-            this.items.addAll(i);
-        }
+    public void setData(List<Product> products) {
+        items.clear();
+        items.addAll(products);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -57,10 +58,12 @@ public class ProductAdapter extends Adapter {
         }
 
         public void bind(final Product item) {
-            itemName.setText(item.getProductName());
-            itemBrand.setText(item.getProductBrand());
-            itemPrice.setText(item.getProductPrice() + "₫");
-            Picasso.get().load(item.getImageSrc()).into(itemImage);
+            itemName.setText(item.getTitle());
+            itemBrand.setText(item.getVendor());
+            itemPrice.setText(item.getPrice() + "₫");
+            if (!item.getImage().isEmpty()) {
+                Picasso.get().load(item.getImage()).into(itemImage);
+            }
         }
     }
 
