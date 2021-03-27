@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.view.fragment.CartFragment;
-import com.fpt.vinmartauth.view.main.MainFragment;
+import com.fpt.vinmartauth.view.productview.ProductFragment;
 import com.fpt.vinmartauth.view.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,13 +22,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        openFragment(MainFragment.newInstance());
+        openFragment(ProductFragment.newInstance());
         //call bottom nav view by id
         BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavView);
         //create on-click listener
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = item -> {
             if (item.getItemId() == R.id.home) {
-                openFragment(MainFragment.newInstance());
+                openFragment(ProductFragment.newInstance());
             } else if (item.getItemId() == R.id.cart) {
                 openFragment(CartFragment.newInstance());
             } else if (item.getItemId() == R.id.profile) {

@@ -1,4 +1,4 @@
-package com.fpt.vinmartauth.view.main;
+package com.fpt.vinmartauth.view.productview;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,20 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.adapter.ProductAdapter;
 import com.fpt.vinmartauth.entity.Product;
-import com.fpt.vinmartauth.model.ProductModel;
-import com.fpt.vinmartauth.model.ProductModel.GetAllProductsCallbacks;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFragment extends Fragment implements MainView{
-    public static MainFragment newInstance() {
-        return new MainFragment();
+public class ProductFragment extends Fragment implements ProductView {
+    public static ProductFragment newInstance() {
+        return new ProductFragment();
     }
 
     ProductAdapter adapterBestSelling = new ProductAdapter();
     ProductAdapter adapterRecommended = new ProductAdapter();
-    private MainController controller = new MainController();
+    private ProductViewController controller = new ProductViewController();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

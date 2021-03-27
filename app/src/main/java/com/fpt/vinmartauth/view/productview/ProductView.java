@@ -1,10 +1,10 @@
-package com.fpt.vinmartauth.view.main;
+package com.fpt.vinmartauth.view.productview;
 
 import com.fpt.vinmartauth.entity.Product;
 
 import java.util.List;
 
-public interface MainView {
+public interface ProductView {
     void setProducts(List<Product> products);
 
 }

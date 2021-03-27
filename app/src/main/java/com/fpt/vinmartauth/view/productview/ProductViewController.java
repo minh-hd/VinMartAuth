@@ -1,15 +1,15 @@
-package com.fpt.vinmartauth.view.main;
+package com.fpt.vinmartauth.view.productview;
 
 import com.fpt.vinmartauth.entity.Product;
 import com.fpt.vinmartauth.model.ProductModel;
 
 import java.util.List;
 
-public class MainController {
-    private MainView view;
+public class ProductViewController {
+    private ProductView view;
     private final ProductModel productModel = new ProductModel();
 
-    void setView(MainView view) {
+    void setView(ProductView view) {
         this.view = view;
     }
 
