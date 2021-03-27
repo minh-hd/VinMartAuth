@@ -31,7 +31,7 @@
             app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rvCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -46,7 +46,7 @@
             android:text="Bán chạy nhất"
             style="@style/RedTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/rvCategory" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBestSelling"
@@ -66,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@+id/rvBestSelling" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView3"
+            android:id="@+id/rvHighlightedProduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:text="VịnMart khuyên dùng"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView3" />
+            app:layout_constraintTop_toBottomOf="@+id/rvHighlightedProduct" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

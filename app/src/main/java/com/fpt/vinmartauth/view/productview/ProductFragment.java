@@ -25,6 +25,7 @@ public class ProductFragment extends Fragment implements ProductView {
 
     ProductAdapter adapterBestSelling = new ProductAdapter();
     ProductAdapter adapterRecommended = new ProductAdapter();
+    ProductAdapter adapterHighlighted = new ProductAdapter();
     private ProductViewController controller = new ProductViewController();
 
     @Override
@@ -45,26 +46,23 @@ public class ProductFragment extends Fragment implements ProductView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         controller.setView(this);
-        ArrayList<Product> itemRecommended = new ArrayList<>();
         RecyclerView rvRecommended = view.findViewById(R.id.rvRecommended);
         RecyclerView rvBestSelling = view.findViewById(R.id.rvBestSelling);
-//        itemBestSelling.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/watch.png", "Leather Wristwatch", "Tag Heuer", 9800000));
-//        itemBestSelling.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/speaker.png", "Smart Bluetooth Speaker", "Google", 500000));
-//        itemBestSelling.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/packback.png", "Smart Luggage", "Smart Inc", 1200000));
-//        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/watch.png", "Leather Wristwatch", "Tag Heuer", 9800000));
-//        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/bo.png", "BeoPlay Speaker", "Bang and Olufsen", 600000));
-//        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/packback.png", "Smart Luggage", "Smart Inc", 1200000));
-//        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/speaker.png", "Smart Bluetooth Speaker", "Google", 500000));
+        RecyclerView rvHighlightedProduct = view.findViewById(R.id.rvHighlightedProduct);
+        RecyclerView rvCategory = view.findViewById(R.id.rvCategory);
         rvBestSelling.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rvBestSelling.setAdapter(adapterBestSelling);
-        rvRecommended.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        rvRecommended.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rvRecommended.setAdapter(adapterRecommended);
-
+        rvHighlightedProduct.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        rvHighlightedProduct.setAdapter(adapterHighlighted);
         controller.fetchAllProducts();
     }
 
     @Override
     public void setProducts(List<Product> products) {
+        adapterRecommended.setData(products);
         adapterBestSelling.setData(products);
+
     }
 }
