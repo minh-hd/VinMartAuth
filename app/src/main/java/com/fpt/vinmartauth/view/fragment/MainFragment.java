@@ -10,6 +10,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import com.fpt.vinmartauth.R;
+import com.fpt.vinmartauth.authentication.UserAuthentication;
 import com.fpt.vinmartauth.view.LoginActivity;
 
 
@@ -32,8 +33,10 @@ public class MainFragment extends Fragment {
         Button btnSignIn = view.findViewById(R.id.btnHomeSignIn);
         btnSignIn.setOnClickListener(view1 -> {
             //must be this.getContext(), not just "this".
-            Intent i = new Intent(this.getContext(), LoginActivity.class);
-            startActivity(i);
+           if (!new UserAuthentication().isLoggedIn()) {
+             Intent i = new Intent(this.getContext(), LoginActivity.class);
+             startActivity(i);
+           }
         });
         // Inflate the layout for this fragment
         return view;
