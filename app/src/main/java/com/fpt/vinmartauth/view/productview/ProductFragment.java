@@ -9,10 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fpt.vinmartauth.R;
+import com.fpt.vinmartauth.adapter.CategoryAdapter;
 import com.fpt.vinmartauth.adapter.ProductAdapter;
+import com.fpt.vinmartauth.entity.CategoryIcon;
 import com.fpt.vinmartauth.entity.Product;
 
 import java.util.ArrayList;
@@ -50,6 +53,20 @@ public class ProductFragment extends Fragment implements ProductView {
         RecyclerView rvBestSelling = view.findViewById(R.id.rvBestSelling);
         RecyclerView rvHighlightedProduct = view.findViewById(R.id.rvHighlightedProduct);
         RecyclerView rvCategory = view.findViewById(R.id.rvCategory);
+        List<CategoryIcon> icons = new ArrayList<>();
+        icons.add( new CategoryIcon(R.drawable.vegetable, "Rau củ"));
+        icons.add( new CategoryIcon(R.drawable.drinks, "Đồ uống"));
+        icons.add( new CategoryIcon(R.drawable.milk, "Sữa"));
+        icons.add( new CategoryIcon(R.drawable.candy, "Bánh kẹo"));
+        icons.add( new CategoryIcon(R.drawable.noodle, "Mì, phở"));
+        icons.add( new CategoryIcon(R.drawable.cooking, "Gia vị"));
+        icons.add( new CategoryIcon(R.drawable.rice, "Gạo, bột"));
+        icons.add( new CategoryIcon(R.drawable.seafood, "Đồ đông lạnh"));
+        icons.add( new CategoryIcon(R.drawable.cleaner, "Vệ sinh nhà cửa"));
+        icons.add( new CategoryIcon(R.drawable.fan, "Đồ dùng gia đình"));
+        rvCategory.setLayoutManager(new GridLayoutManager(getActivity(), 5));
+        CategoryAdapter categoryAdapter = new CategoryAdapter(icons);
+        rvCategory.setAdapter(categoryAdapter);
         rvBestSelling.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rvBestSelling.setAdapter(adapterBestSelling);
         rvRecommended.setLayoutManager(new GridLayoutManager(getActivity(), 2));
@@ -63,6 +80,6 @@ public class ProductFragment extends Fragment implements ProductView {
     public void setProducts(List<Product> products) {
         adapterRecommended.setData(products);
         adapterBestSelling.setData(products);
-
+        adapterHighlighted.setData(products);
     }
 }
