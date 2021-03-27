@@ -57,7 +57,7 @@ public class ProductFragment extends Fragment implements ProductView {
 //        itemRecommended.add(new Product("https://raw.githubusercontent.com/Tamkien/images-of-vijnmart/main/speaker.png", "Smart Bluetooth Speaker", "Google", 500000));
         rvBestSelling.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rvBestSelling.setAdapter(adapterBestSelling);
-        rvRecommended.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        rvRecommended.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         rvRecommended.setAdapter(adapterRecommended);
 
         controller.fetchAllProducts();

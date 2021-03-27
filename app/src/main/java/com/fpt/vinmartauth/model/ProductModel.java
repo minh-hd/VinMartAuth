@@ -104,7 +104,7 @@ public class ProductModel {
 
     public void addNewProduct(Product product){
         Map<String, Object> data = new HashMap<>();
-        data.put("category", product.getCategory());
+//        data.put("category", product.getCategory());
         data.put("description", product.getDescription());
         data.put("image", product.getImage());
         data.put("price",product.getPrice());
