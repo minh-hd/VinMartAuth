@@ -1,5 +1,6 @@
 package com.fpt.vinmartauth.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.entity.Product;
+import com.fpt.vinmartauth.view.productview.ProductDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -35,7 +37,21 @@ public class ProductAdapter extends Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ProductAdapter.ViewHolder) holder).bind(items.get(position));
+        Product d = items.get(position);
+        ((ProductAdapter.ViewHolder) holder).bind(d);
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), ProductDetailsActivity.class);
+            intent.putExtra("ID", d.getID());
+            intent.putExtra("category", d.getCategory());
+            intent.putExtra("description", d.getDescription());
+            intent.putExtra("image", d.getImage());
+            intent.putExtra("quantity", d.getQuantity());
+            intent.putExtra("title", d.getTitle());
+            intent.putExtra("vendor", d.getVendor());
+            intent.putExtra("price", d.getPrice());
+            v.getContext().startActivity(intent);
+                }
+        );
     }
 
     @Override
