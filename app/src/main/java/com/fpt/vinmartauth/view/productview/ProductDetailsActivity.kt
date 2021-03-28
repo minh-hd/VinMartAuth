@@ -1,9 +1,9 @@
 package com.fpt.vinmartauth.view.productview
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.fpt.vinmartauth.R
 import com.fpt.vinmartauth.entity.Product
 import com.squareup.picasso.Picasso

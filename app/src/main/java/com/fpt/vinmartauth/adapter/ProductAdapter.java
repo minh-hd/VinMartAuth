@@ -40,16 +40,16 @@ public class ProductAdapter extends Adapter {
         Product d = items.get(position);
         ((ProductAdapter.ViewHolder) holder).bind(d);
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), ProductDetailsActivity.class);
-            intent.putExtra("ID", d.getID());
-            intent.putExtra("category", d.getCategory());
-            intent.putExtra("description", d.getDescription());
-            intent.putExtra("image", d.getImage());
-            intent.putExtra("quantity", d.getQuantity());
-            intent.putExtra("title", d.getTitle());
-            intent.putExtra("vendor", d.getVendor());
-            intent.putExtra("price", d.getPrice());
-            v.getContext().startActivity(intent);
+                    Intent intent = new Intent(v.getContext(), ProductDetailsActivity.class);
+                    intent.putExtra("ID", d.getID());
+                    intent.putExtra("category", d.getCategory());
+                    intent.putExtra("description", d.getDescription());
+                    intent.putExtra("image", d.getImage());
+                    intent.putExtra("quantity", d.getQuantity());
+                    intent.putExtra("title", d.getTitle());
+                    intent.putExtra("vendor", d.getVendor());
+                    intent.putExtra("price", d.getPrice());
+                    v.getContext().startActivity(intent);
                 }
         );
     }
