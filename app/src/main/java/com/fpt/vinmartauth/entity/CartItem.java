@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Map;
 
 public class CartItem {
-    private String document;
+    private String documentID;
     private String cartID;
     private Date createdAt;
     private String description;
@@ -16,9 +16,9 @@ public class CartItem {
 
     }
 
-    public CartItem(String document, String cartID, Date createdAt, String description,
+    public CartItem(String documentID, String cartID, Date createdAt, String description,
                     Map<String, String> product, int quantity, Date updatedAt) {
-        this.document = document;
+        this.documentID = documentID;
         this.cartID = cartID;
         this.createdAt = createdAt;
         this.description = description;
@@ -27,12 +27,12 @@ public class CartItem {
         this.updatedAt = updatedAt;
     }
 
-    public String getDocument() {
-        return document;
+    public String getDocumentID() {
+        return documentID;
     }
 
-    public void setDocument(String document) {
-        this.document = document;
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
     }
 
     public String getCartID() {
