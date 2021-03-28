@@ -6,7 +6,7 @@ import com.fpt.vinmartauth.model.ProductModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductListController{
+public class ProductListController {
     private ProductListView view;
     private final ProductModel productModel = new ProductModel();
 
@@ -15,7 +15,7 @@ public class ProductListController{
     }
 
     void fetchProductById(String title) {
-        productModel.getProductByName(title,new ProductModel.GetProductsByTitleCallbacks(){
+        productModel.getProductByName(title, new ProductModel.GetProductsByTitleCallbacks() {
 
             @Override
             public void onSuccess(List<Product> products) {

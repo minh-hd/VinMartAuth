@@ -11,7 +11,7 @@
         android:theme="@style/Theme.VinMartAuth">
         <activity android:name=".view.productDetailView.ProductDetailsActivity" />
         <activity android:name=".view.productlist.ProductListActivity" />
-        <activity android:name=".view.productview.ViewByCategoryActivity" />
+        <activity android:name=".view.by_category.ViewByCategoryActivity" />
         <activity android:name=".view.ResetPasswordActivity" />
         <activity android:name=".view.VerificationActivity" />
         <activity android:name=".view.SignupActivity" />

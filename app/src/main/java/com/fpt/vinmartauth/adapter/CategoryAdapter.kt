@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fpt.vinmartauth.R
 import com.fpt.vinmartauth.entity.CategoryIcon
-import com.fpt.vinmartauth.view.productview.ViewByCategoryActivity
+import com.fpt.vinmartauth.view.by_category.ViewByCategoryActivity
 
 class CategoryAdapter(private val list: List<CategoryIcon>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
