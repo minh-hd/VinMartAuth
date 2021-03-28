@@ -35,7 +35,9 @@ public class ProductModel {
                 List<Product> products = new ArrayList<>();
                 for (QueryDocumentSnapshot document: snapshot) {
                     Product product = document.toObject(Product.class);
+                    product.setId(document.getId());
                     products.add(product);
+                    Log.d("anhntl",product.toString());
                 }
                 callbacks.onSuccess(products);
             }else {
@@ -86,7 +88,7 @@ public class ProductModel {
     }
 
 
-    public void getProductByCategory(String category){
+    public void getProductByCategoryId(String category){
         DocumentReference documentReference = instance.collection("products").document(category);;
         documentReference.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){

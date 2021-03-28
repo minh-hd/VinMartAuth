@@ -1,4 +1,4 @@
-package com.fpt.vinmartauth.view;
+package com.fpt.vinmartauth.view.productDetailView;
 
 import android.os.Bundle;
 

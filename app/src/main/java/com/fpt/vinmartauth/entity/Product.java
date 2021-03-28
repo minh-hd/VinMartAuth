@@ -1,8 +1,8 @@
 package com.fpt.vinmartauth.entity;
 
 public class Product {
-    private String ID;
-    private String category;
+    private String id;
+    private Category category;
     private String description;
     private String image;
     private int price;
@@ -10,8 +10,8 @@ public class Product {
     private String title;
     private String vendor;
 
-    public Product(String ID, String category, String description, String image, int price, String quantity, String title, String vendor) {
-        this.ID = ID;
+    public Product(String id, Category category, String description, String image, int price, String quantity, String title, String vendor) {
+        this.id = id;
         this.category = category;
         this.description = description;
         this.image = image;
@@ -24,19 +24,19 @@ public class Product {
     public Product() {
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -86,5 +86,19 @@ public class Product {
 
     public void setVendor(String vendor) {
         this.vendor = vendor;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", category=" + category +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                ", quantity='" + quantity + '\'' +
+                ", title='" + title + '\'' +
+                ", vendor='" + vendor + '\'' +
+                '}';
     }
 }
