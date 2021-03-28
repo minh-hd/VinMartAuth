@@ -27,20 +27,23 @@ public class ProductModel {
     private final String ERROR_TAG = "Error request: ";
 
     public void getAllProduct(GetAllProductsCallbacks callbacks){
+
         CollectionReference productsCollectionRef = instance.collection("products");
         productsCollectionRef.get().addOnCompleteListener(task -> {
-           if(task.isSuccessful()){
-               QuerySnapshot snapshot = task.getResult();
-               List<Product> products = new ArrayList<>();
+            if(task.isSuccessful()){
+                QuerySnapshot snapshot = task.getResult();
+                List<Product> products = new ArrayList<>();
                 for (QueryDocumentSnapshot document: snapshot) {
                     Product product = document.toObject(Product.class);
                     products.add(product);
                 }
                 callbacks.onSuccess(products);
-           }else {
-               callbacks.onFailed();
-           }
+            }else {
+                callbacks.onFailed();
+            }
         });
+
+
     }
 
 
@@ -65,8 +68,26 @@ public class ProductModel {
             }
         });
     }
+
     public void getProductByName(String title){
-        DocumentReference documentReference = instance.collection("products").document(title);;
+        DocumentReference documentReference = instance.collection("products").document(title);
+        documentReference.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                DocumentSnapshot document = task.getResult();
+                if(document.exists()) {
+                    Log.i(SUCCESS_TAG, "OK");
+                } else {
+                    Log.i(ERROR_TAG,"Something wrong happened");
+                }
+            } else {
+                Log.i(ERROR_TAG,"Something wrong happened");
+            }
+        });
+    }
+
+
+    public void getProductByCategory(String category){
+        DocumentReference documentReference = instance.collection("products").document(category);;
         documentReference.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 DocumentSnapshot document = task.getResult();

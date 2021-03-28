@@ -1,8 +1,13 @@
 package com.fpt.vinmartauth.model;
 
+import android.util.Log;
+
 import com.fpt.vinmartauth.entity.Category;
 import com.fpt.vinmartauth.entity.Product;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -32,9 +37,21 @@ public class CategoriesModel {
         });
     }
 
-
     public interface GetAllCategoriesCallbacks {
         void onSuccess(List<Category> categories);
         void onFailed();
     }
+
+    //comment no di
+//    public Category getCategoryById(String id){
+//
+//        DocumentReference documentReference = instance.collection("categories").document(id);
+//        documentReference.get().addOnCompleteListener(new OnSuccessListener<DocumentSnapshot>(){
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                Category category = documentSnapshot.toObject(Category.class);
+//            }
+//        });
+//
+//    }
 }

@@ -1,11 +1,11 @@
 package com.fpt.vinmartauth.entity;
 
 public class Category {
-    private String Id;
+    private String ID;
     private String title;
 
     public Category(String id, String title) {
-        Id = id;
+        this.ID = id;
         this.title = title;
     }
 
@@ -13,11 +13,11 @@ public class Category {
     }
 
     public String getId() {
-        return Id;
+        return ID;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.ID = id;
     }
 
     public String getTitle() {
