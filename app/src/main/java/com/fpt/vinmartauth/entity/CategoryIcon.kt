@@ -1,3 +1,3 @@
 package com.fpt.vinmartauth.entity
 
-class CategoryIcon(var imgSrc: Int, var catName: String)
+class CategoryIcon(var imgSrc: Int, var catName: String, var catID : String)

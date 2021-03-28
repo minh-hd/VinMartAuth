@@ -24,11 +24,13 @@ class CategoryAdapter(private val list: List<CategoryIcon>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val icon = list[position]
         if (holder is ViewHolder) {
-            holder.bind(list[position])
+            holder.bind(icon)
             holder.itemView.setOnClickListener { v ->
                 val intent = Intent(v.context, ViewByCategoryActivity::class.java)
-                intent.putExtra("CategoryName", holder.itemView.findViewById<TextView>(R.id.tvCatName).text)
+                intent.putExtra("CategoryName", icon.catName)
+                intent.putExtra("CategoryID", icon.catID)
                 v.context.startActivity(intent)
             }
         }
