@@ -43,9 +43,7 @@ public class ProductAdapter extends Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Product product = items.get(position);
         ((ProductAdapter.ViewHolder) holder).bind(product);
-        holder.itemView.setOnClickListener(v -> {
-                    listener.onProductClick(product);
-                }
+        holder.itemView.setOnClickListener(v -> listener.onProductClick(product)
         );
     }
 

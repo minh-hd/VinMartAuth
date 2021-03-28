@@ -31,7 +31,6 @@ public class ProductListActivity extends Activity implements ProductListView, Pr
         searchBar = findViewById(R.id.search);
         searchBar.setOnSearchActionListener(this);
         String keyword = getIntent().getStringExtra("keyword");
-
         searchBar.setTextHintColor(ContextCompat.getColor(this, R.color.black));
         searchBar.setHint(keyword);
         searchBar.setPlaceHolder(keyword);
