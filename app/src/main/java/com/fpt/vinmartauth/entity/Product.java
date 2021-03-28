@@ -1,6 +1,8 @@
 package com.fpt.vinmartauth.entity;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private String id;
     private Category category;
     private String description;

@@ -1,5 +1,6 @@
 package com.fpt.vinmartauth.view.productview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +18,14 @@ import com.fpt.vinmartauth.adapter.CategoryAdapter;
 import com.fpt.vinmartauth.adapter.ProductAdapter;
 import com.fpt.vinmartauth.entity.CategoryIcon;
 import com.fpt.vinmartauth.entity.Product;
+import com.fpt.vinmartauth.view.productDetailView.ProductDetailsActivity;
+import com.fpt.vinmartauth.view.productlist.ProductListActivity;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductFragment extends Fragment implements ProductView {
+public class ProductFragment extends Fragment implements ProductView, ProductAdapter.ProductAdapterListener, MaterialSearchBar.OnSearchActionListener {
     public static ProductFragment newInstance() {
         return new ProductFragment();
     }
@@ -49,6 +53,7 @@ public class ProductFragment extends Fragment implements ProductView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         controller.setView(this);
+        MaterialSearchBar searchBar = view.findViewById(R.id.searchBar);
         RecyclerView rvRecommended = view.findViewById(R.id.rvRecommended);
         RecyclerView rvBestSelling = view.findViewById(R.id.rvBestSelling);
         RecyclerView rvHighlightedProduct = view.findViewById(R.id.rvHighlightedProduct);
@@ -73,6 +78,10 @@ public class ProductFragment extends Fragment implements ProductView {
         rvRecommended.setAdapter(adapterRecommended);
         rvHighlightedProduct.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rvHighlightedProduct.setAdapter(adapterHighlighted);
+        adapterBestSelling.setListener(this);
+        adapterHighlighted.setListener(this);
+        adapterRecommended.setListener(this);
+        searchBar.setOnSearchActionListener(this);
         controller.fetchAllProducts();
     }
 
@@ -81,5 +90,30 @@ public class ProductFragment extends Fragment implements ProductView {
         adapterRecommended.setData(products);
         adapterBestSelling.setData(products);
         adapterHighlighted.setData(products);
+
+    }
+
+    @Override
+    public void onProductClick(Product product) {
+        Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
+        intent.putExtra("product", product);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onSearchStateChanged(boolean enabled) {
+
+    }
+
+    @Override
+    public void onSearchConfirmed(CharSequence text) {
+        Intent intent = new Intent(getContext(), ProductListActivity.class);
+        intent.putExtra("keyword", text.toString().trim());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onButtonClicked(int buttonCode) {
+
     }
 }

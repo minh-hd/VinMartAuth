@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.entity.Product;
-import com.fpt.vinmartauth.view.productview.ProductDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,6 +20,11 @@ import java.util.List;
 
 public class ProductAdapter extends Adapter {
     private final ArrayList<Product> items = new ArrayList<>();
+    private ProductAdapterListener listener;
+
+    public void setListener(ProductAdapterListener listener) {
+        this.listener = listener;
+    }
 
     public void setData(List<Product> products) {
         items.clear();
@@ -37,21 +41,16 @@ public class ProductAdapter extends Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Product d = items.get(position);
-        ((ProductAdapter.ViewHolder) holder).bind(d);
+        Product product = items.get(position);
+        ((ProductAdapter.ViewHolder) holder).bind(product);
         holder.itemView.setOnClickListener(v -> {
-                    Intent intent = new Intent(v.getContext(), ProductDetailsActivity.class);
-                    intent.putExtra("ID", d.getID());
-                    intent.putExtra("category", d.getCategory());
-                    intent.putExtra("description", d.getDescription());
-                    intent.putExtra("image", d.getImage());
-                    intent.putExtra("quantity", d.getQuantity());
-                    intent.putExtra("title", d.getTitle());
-                    intent.putExtra("vendor", d.getVendor());
-                    intent.putExtra("price", d.getPrice());
-                    v.getContext().startActivity(intent);
+                    listener.onProductClick(product);
                 }
         );
+    }
+
+    public interface ProductAdapterListener {
+        void onProductClick(Product product);
     }
 
     @Override
