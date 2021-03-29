@@ -3,7 +3,7 @@ package com.fpt.vinmartauth.entity;
 import java.io.Serializable;
 import java.util.Collections;
 
-public class Product implements Serializable {
+public class Product implements Serializable, Comparable<Product> {
     private String id;
     private Category category;
     private String description;
@@ -105,5 +105,14 @@ public class Product implements Serializable {
                 '}';
     }
 
-//    public sortByPrice
+    @Override
+    public int compareTo(Product o) {
+        if(price == o.price){
+            return 0;
+        } else if(price > o.price ){
+            return 1;
+        } else {
+            return -1;
+        }
+    }
 }

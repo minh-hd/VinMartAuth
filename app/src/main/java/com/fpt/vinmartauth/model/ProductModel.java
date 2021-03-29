@@ -84,9 +84,7 @@ public class ProductModel {
 
     public interface GetProductsByTitleCallbacks {
         void onSuccess(List<Product> products);
-
         void onFailed();
-
     }
 
     public void getProductByCategoryId(Category category,GetProductsByTitleCallbacks callbacks) {
@@ -109,21 +107,21 @@ public class ProductModel {
         });
     }
 
-    public void getAllProductSortByPrice(){
+    public void getAllProductSortByPrice(GetProductsByTitleCallbacks callbacks){
         getAllProduct(new GetAllProductsCallbacks() {
             @Override
             public void onSuccess(List<Product> products) {
-                List<Integer> filteredProducts = new ArrayList<>();
-                products.forEach(product -> {
-                    filteredProducts.add(product.getPrice());
-                });
-                Collections.sort(filteredProducts);
-                Log.d("bbbbb",filteredProducts.toString());
+//                List<Integer> filteredProducts = new ArrayList<>();
+//                List<Product> p = new ArrayList<>();
+                Collections.sort(products);
+                callbacks.onSuccess(products);
+
+//                Log.d("bbbbb",filteredProducts.toString());
             }
 
             @Override
             public void onFailed() {
-
+                callbacks.onFailed();
             }
         });
     }
