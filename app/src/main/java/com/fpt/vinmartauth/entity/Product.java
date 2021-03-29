@@ -1,6 +1,7 @@
 package com.fpt.vinmartauth.entity;
 
 import java.io.Serializable;
+import java.util.Collections;
 
 public class Product implements Serializable {
     private String id;
@@ -103,4 +104,6 @@ public class Product implements Serializable {
                 ", vendor='" + vendor + '\'' +
                 '}';
     }
+
+//    public sortByPrice
 }

@@ -18,6 +18,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,6 +105,25 @@ public class ProductModel {
             @Override
             public void onFailed() {
                 callbacks.onFailed();
+            }
+        });
+    }
+
+    public void getAllProductSortByPrice(){
+        getAllProduct(new GetAllProductsCallbacks() {
+            @Override
+            public void onSuccess(List<Product> products) {
+                List<Integer> filteredProducts = new ArrayList<>();
+                products.forEach(product -> {
+                    filteredProducts.add(product.getPrice());
+                });
+                Collections.sort(filteredProducts);
+                Log.d("bbbbb",filteredProducts.toString());
+            }
+
+            @Override
+            public void onFailed() {
+
             }
         });
     }
