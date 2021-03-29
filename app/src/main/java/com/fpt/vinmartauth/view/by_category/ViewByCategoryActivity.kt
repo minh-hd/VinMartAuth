@@ -2,6 +2,7 @@ package com.fpt.vinmartauth.view.by_category
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log.d
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,13 +17,38 @@ import com.fpt.vinmartauth.view.productDetailView.ProductDetailsActivity
 class ViewByCategoryActivity : AppCompatActivity(), ByCategoryView, ProductAdapter.ProductAdapterListener {
     var controller = ByCategoryController()
     private val productAdapter = ProductAdapter()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_by_category)
         findViewById<TextView>(R.id.tvCategoryTitle).text = intent.getStringExtra("CategoryName")
         val catID = intent.getStringExtra("CategoryID")
         val view = findViewById<RecyclerView>(R.id.rvViewByCategory)
+        val tvNewest: TextView = findViewById(R.id.tvNewest)
+        val tvSortBy: TextView = findViewById(R.id.tvSortBy)
+        val tvAsc: TextView = findViewById(R.id.tvAscending)
+        val tvDesc: TextView = findViewById(R.id.tvDescending)
+        tvNewest.setOnClickListener {
+            d("sorter", "newest")
+            tvNewest.isSelected = true
+            tvSortBy.isSelected = false
+            tvAsc.isSelected = false
+            tvDesc.isSelected = false
+
+        }
+        tvDesc.setOnClickListener {
+            d("sorter", "desc")
+            tvNewest.isSelected = false
+            tvSortBy.isSelected = true
+            tvAsc.isSelected = false
+            tvDesc.isSelected = true
+        }
+        tvAsc.setOnClickListener {
+            d("sorter", "asc")
+            tvNewest.isSelected = false
+            tvSortBy.isSelected = true
+            tvAsc.isSelected = true
+            tvDesc.isSelected = false
+        }
         view.adapter = productAdapter
         productAdapter.setListener(this)
         controller.setView(this)
