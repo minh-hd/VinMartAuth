@@ -40,8 +40,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Address"
-                        android:textColor="BLACK"
+                        android:text="Địa chỉ"
+                        android:textColor="@color/black"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -60,7 +60,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Payment"
+                        android:text="Thanh toán"
                         android:textColor="@color/gray_text"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -80,7 +80,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Confirm"
+                        android:text="Xác nhận"
                         android:textColor="@color/gray_text"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -113,7 +113,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text="Full Name"
+                            android:text="Tên đầy đủ"
                             android:textSize="14dp" />
 
                         <EditText
@@ -125,7 +125,7 @@
                             android:layout_marginBottom="5dp"
                             android:background="@android:color/transparent"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ."
-                            android:hint="Name"
+                            android:hint="Tên"
                             android:inputType="textPersonName"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -148,7 +148,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text="Email Address"
+                            android:text="Email"
                             android:textSize="14dp" />
 
                         <EditText
@@ -183,7 +183,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text="Mobile Number"
+                            android:text="Số điện thoại"
                             android:textSize="14dp" />
 
                         <EditText
@@ -195,7 +195,7 @@
                             android:layout_marginBottom="5dp"
                             android:background="@android:color/transparent"
                             android:digits="0123456789"
-                            android:hint="mobile"
+                            android:hint="Sđt"
                             android:inputType="number"
                             android:maxLength="10"
                             android:textColor="@color/black"
@@ -219,7 +219,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text="Address"
+                            android:text="Địa chỉ"
                             android:textSize="14dp" />
 
                         <EditText
@@ -231,7 +231,7 @@
                             android:layout_marginBottom="10dp"
                             android:background="@android:color/transparent"
                             android:gravity="bottom"
-                            android:hint="House No. / Street No."
+                            android:hint="Địa chỉ"
                             android:inputType="textPostalAddress"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -266,7 +266,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="15dp"
-                                    android:text="State"
+                                    android:text="Quận"
                                     android:textSize="14dp" />
 
                                 <Spinner
@@ -287,37 +287,7 @@
                                 android:layout_margin="5dp"
                                 android:background="@color/gray_text" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="15dp"
-                                    android:text="Zip Code"
-                                    android:textSize="14dp" />
-
-                                <EditText
-                                    android:id="@+id/sa_zip"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:background="@android:color/transparent"
-                                    android:digits="0123456789"
-                                    android:hint="Zip Code"
-                                    android:inputType="number"
-                                    android:maxLength="6"
-                                    android:textColor="@color/black"
-                                    android:textColorHint="@color/black"
-                                    android:textSize="18dp" />
-
-                            </LinearLayout>
                         </LinearLayout>
 
                         <View
@@ -342,7 +312,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="15dp"
-                                android:text="City"
+                                android:text="Thành phố"
                                 android:textSize="14sp" />
 
                             <Spinner
@@ -381,7 +351,7 @@
                         android:background="@color/lotus_pink"
                         android:elevation="5dp"
                         android:gravity="center"
-                        android:text="Save"
+                        android:text="OK"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
 
@@ -390,5 +360,8 @@
         </FrameLayout>
 
     </LinearLayout>
-
+    <include
+        android:id="@+id/progress_bar"
+        layout="@layout/progressbar"
+        android:visibility="gone" />
 </FrameLayout>

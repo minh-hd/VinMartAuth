@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
+import android.view.View;
 import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.model.CustomerModel;
 import com.fpt.vinmartauth.view.fragment.CartFragment;

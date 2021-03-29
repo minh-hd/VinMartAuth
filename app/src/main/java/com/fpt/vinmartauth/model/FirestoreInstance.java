@@ -1,17 +1,17 @@
 package com.fpt.vinmartauth.model;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import android.annotation.SuppressLint;
 
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FirestoreInstance {
   @SuppressLint("StaticFieldLeak")
   private static FirebaseFirestore instance;
 
-  private FirestoreInstance(){
+  public FirestoreInstance() {
   }
 
-  public static FirebaseFirestore getInstance() {
+  public static FirebaseFirestore  getInstance() {
     if (instance == null) {
       instance = FirebaseFirestore.getInstance();
     }

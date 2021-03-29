@@ -2,5 +2,8 @@
 <resources>
     <dimen name="margin_4dp">4dp</dimen>
     <dimen name="margin_20dp">20dp</dimen>
-
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="text">15dp</dimen>
+    <dimen name="sub_text">10dp</dimen>
+    <dimen name="margin_1dp">1dp</dimen>
 </resources>

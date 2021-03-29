@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
     btnSignIn = findViewById(R.id.btnHomeSignIn);
     btnSignIn.setOnClickListener(view -> {
+
       String email = edtEmail.getText().toString().trim();
       String password = edtPassword.getText().toString().trim();
       if (!authValidation.isEmail(email)) {
@@ -95,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
           toast.show();
         }
       });
+
 
     });
 

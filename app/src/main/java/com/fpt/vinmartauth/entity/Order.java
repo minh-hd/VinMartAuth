@@ -7,7 +7,6 @@ public class Order {
     String paymentID;
     String shipID;
     String statusID;
-    String address;
 
     public Order() {
     }
@@ -16,23 +15,16 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Order(String orderId, String customerID, String cartID, String paymentID, String shipID, String statusID, String address) {
+    public Order(String orderId, String customerID, String cartID, String paymentID, String shipID, String statusID) {
         this.orderId = orderId;
         this.customerID = customerID;
         this.cartID = cartID;
         this.paymentID = paymentID;
         this.shipID = shipID;
         this.statusID = statusID;
-        this.address = address;
     }
 
-    public String getAddress() {
-        return address;
-    }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getOrderId() {
         return orderId;

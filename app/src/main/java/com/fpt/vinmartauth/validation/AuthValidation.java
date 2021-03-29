@@ -8,6 +8,8 @@ public class AuthValidation {
   private final String EMAIL_PATTERN = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$";
   private final String PHONE_PATTERN = "^\\+?\\d{10,11}$";
   private final String PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\w\\d]).{8,20}$";
+  public static final String regEx = "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b";
+
 
   public boolean isEmail(String s) {
     return s.matches(EMAIL_PATTERN);

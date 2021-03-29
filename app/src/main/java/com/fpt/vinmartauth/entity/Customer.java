@@ -12,8 +12,24 @@ public class Customer {
   private Enum<Gender> gender;
   private Date dateOfBirth;
   private String profileImageLink;
+  private Address address;
 
   public Customer() {
+  }
+
+  public Customer(String fullName, String phone, String email, Address address) {
+    this.fullName = fullName;
+    this.phone = phone;
+    this.email = email;
+    this.address = address;
+  }
+
+  public Address getAddress() {
+    return address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
   }
 
   public Customer(String fullName, String phone, String email, String password, Enum<Gender> gender, Date dateOfBirth, String profileImageLink) {
@@ -24,6 +40,12 @@ public class Customer {
     this.gender = gender;
     this.dateOfBirth = dateOfBirth;
     this.profileImageLink = profileImageLink;
+  }
+
+  public Customer(String fullName, String phone, String email) {
+    this.fullName = fullName;
+    this.phone = phone;
+    this.email = email;
   }
 
   public String getFullName() {

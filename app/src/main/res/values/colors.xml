@@ -17,4 +17,6 @@
     <color name="matisse">#1b77a4</color>
     <color name="picton_blue">#54b8e7</color>
     <color name="gray_text">#929292</color>
+    <color name="text">#545454</color>
+    <color name="lightgrey">#d1d1d1</color>
 </resources>
