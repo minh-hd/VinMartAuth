@@ -2,11 +2,18 @@ package com.fpt.vinmartauth.view.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.fpt.vinmartauth.R;
 
@@ -19,12 +26,12 @@ public class PaymentFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    RadioGroup paymentGroup;
+    FrameLayout cardFrame;
+    RadioButton card, cash;
+    LinearLayout payll;
+    TextView pay;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public PaymentFragment() {
         // Required empty public constructor
@@ -34,33 +41,59 @@ public class PaymentFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+
      * @return A new instance of fragment PaymentFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PaymentFragment newInstance(String param1, String param2) {
-        PaymentFragment fragment = new PaymentFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //you can set the title for your toolbar here for different fragments different titles
+        getActivity().setTitle("Payment");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_payment, container, false);
+        final View view = inflater.inflate(R.layout.fragment_payment, container, false);
+        paymentGroup = view.findViewById(R.id.payment_group);
+        card = view.findViewById(R.id.card_payment);
+        cash = view.findViewById(R.id.cash_on_delivery);
+        cardFrame = view.findViewById(R.id.card_frame);
+        payll = view.findViewById(R.id.pay_ll);
+        pay = view.findViewById(R.id.total_pay);
+        Double amount = 500.000;
+                //((BaseActivity) getActivity()).getTotalPrice(); // chỗ này chưa có giá của ĐỨc
+        pay.append(amount + "");
+
+        payll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+
+                ft.replace(R.id.content_frame, new ConfirmFragment());
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
+        paymentGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = view.findViewById(checkedId);
+                if (radioButton.getId() == R.id.cash_on_delivery) {
+                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.content_frame, new ConfirmFragment());
+                    ft.addToBackStack(null);
+                    ft.commit();
+                }
+                // Toast.makeText(getContext(),radioButton.getText()+"",Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        return view;
     }
 }

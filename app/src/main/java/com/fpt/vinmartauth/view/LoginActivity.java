@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
     mAuthListener = firebaseAuth -> {
       FirebaseUser user = firebaseAuth.getCurrentUser();
       if (user != null) {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, CheckOutActivity.class);
         startActivity(intent);
       }
     };
@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         loadingDialog.dismissDialog();
         if (task.isSuccessful()) {
           Log.i("Login", "OK!");
-          Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+          Intent intent = new Intent(LoginActivity.this, CheckOutActivity.class);
           startActivity(intent);
         } else {
           Log.i("Login", "Failed!");

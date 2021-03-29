@@ -249,46 +249,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="15dp"
-                                    android:text="Quận"
-                                    android:textSize="14dp" />
-
-                                <Spinner
-                                    android:id="@+id/stateSpinner"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="15dp"
-                                    android:ellipsize="marquee"
-                                    android:gravity="center"
-                                    android:singleLine="true"
-                                    android:spinnerMode="dialog" />
-
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="5dp"
-                                android:background="@color/gray_text" />
-
-
-                        </LinearLayout>
 
                         <View
                             android:layout_width="match_parent"
@@ -312,7 +273,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="15dp"
-                                android:text="Thành phố"
+                                android:text="Hình thức giao hàng"
                                 android:textSize="14sp" />
 
                             <Spinner

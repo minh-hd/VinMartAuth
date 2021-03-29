@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
@@ -16,23 +17,15 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fpt.vinmartauth.R;
-import com.fpt.vinmartauth.entity.Address;
 import com.fpt.vinmartauth.entity.Customer;
+import com.fpt.vinmartauth.entity.Ship;
 import com.fpt.vinmartauth.validation.AuthValidation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.gson.Gson;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,14 +39,16 @@ public class AddressFragment extends Fragment {
 
     Context context;
     TextView txt_pyment;
-    Spinner citySpinner, stateSpinner;
+    Spinner shipSpinner;
     ArrayList<String> stringArrayState;
     ArrayList<String> stringArrayCity;
-    String spinnerStateValue, _name, _email, _mobile, _address, _city, _state;
+    String spinnerStateValue, _name, _email, _mobile, _address, _ship;
     EditText name, email, mobile, address;
     Customer customer;
     View progress;
     FirebaseAuth mAuth;
+    FirebaseFirestore fstore;
+
     FirebaseAuth.AuthStateListener authStateListener;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,19 +79,18 @@ public class AddressFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        mAuth = FirebaseAuth.getInstance();
-
-        FirebaseUser user = mAuth.getCurrentUser().
 
         View v = inflater.inflate(R.layout.fragment_address, container, false);
-        citySpinner = v.findViewById(R.id.citySpinner);
-        stateSpinner = v.findViewById(R.id.stateSpinner);
+        shipSpinner = v.findViewById(R.id.citySpinner);
+
         name = v.findViewById(R.id.sa_name);
         email = v.findViewById(R.id.sa_email);
         mobile = v.findViewById(R.id.sa_mobile);
         address = v.findViewById(R.id.sa_address);
 
-        //init();
+
+
+        init();
         context = container.getContext();
         txt_pyment = v.findViewById(R.id.txt_pyment);
 
@@ -131,19 +125,24 @@ public class AddressFragment extends Fragment {
                     address.setError("Điền địa chỉ");
                     address.requestFocus();
                 } else {
-//                    Address cusAddress = new Address(_address,_state,_city);
-//                    Customer userAddress = new Customer( _name, _mobile, _email,cusAddress);
-//                    String user_address = gson.toJson(userAddress);
-//                   // localStorage.createUserLoginSession(user_address);
 //
-//                    saveUserAddress(userAddress);
+                    Customer userAddress = new Customer( _name, _mobile, _email,_address);
 
+//
+                    //saveUserAddress(userAddress);
+
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    //replace this fragment into the old one. There are more e.g add, remove etc
+                    transaction.replace(R.id.content_frame, new PaymentFragment());
+                    transaction.addToBackStack(null);
+                    transaction.commit();
 
                 }
 
 
             }
         });
+
         return v;
     }
 //    private void saveUserAddress(Customer userAddress) {
@@ -179,150 +178,54 @@ public class AddressFragment extends Fragment {
 //
 //    }
 //
-//    private void init() {
-//        stringArrayState = new ArrayList<String>();
-//        stringArrayCity = new ArrayList<String>();
-//
-//        //set city adapter
-//        final ArrayAdapter<String> adapterCity = new ArrayAdapter<String>(getActivity(), R.layout.spinnertextview, stringArrayCity);
-//        adapterCity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        citySpinner.setAdapter(adapterCity);
-//
-//        if (user.getCity() != null) {
-//            int selectionPosition = adapterCity.getPosition(user.getCity());
-//            citySpinner.setSelection(selectionPosition);
-//        }
-//
-//        //Get state json value from assets folder
-//        try {
-//            JSONObject obj = new JSONObject(loadJSONFromAssetState());
-//            JSONArray m_jArry = obj.getJSONArray("statelist");
-//
-//            for (int i = 0; i < m_jArry.length(); i++) {
-//                JSONObject jo_inside = m_jArry.getJSONObject(i);
-//
-//                String state = jo_inside.getString("State");
-//                String id = jo_inside.getString("id");
-//
-//                stringArrayState.add(state);
-//
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinnertextview, stringArrayState);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        stateSpinner.setAdapter(adapter);
-//        if (user.getState() != null) {
-//            int selectionPosition = adapter.getPosition(user.getState());
-//            stateSpinner.setSelection(selectionPosition);
-//        }
-//
-//
-//        //state spinner item selected listner with the help of this we get selected value
-//
-//        stateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Object item = parent.getItemAtPosition(position);
-//                String Text = stateSpinner.getSelectedItem().toString();
-//
-//
-//                spinnerStateValue = String.valueOf(stateSpinner.getSelectedItem());
-//                _state = spinnerStateValue;
-//                stringArrayCity.clear();
-//
-//                try {
-//                    JSONObject obj = new JSONObject(loadJSONFromAssetCity());
-//                    JSONArray m_jArry = obj.getJSONArray("citylist");
-//
-//                    for (int i = 0; i < m_jArry.length(); i++) {
-//                        JSONObject jo_inside = m_jArry.getJSONObject(i);
-//                        String state = jo_inside.getString("State");
-//                        String cityid = jo_inside.getString("id");
-//
-//                        if (spinnerStateValue.equalsIgnoreCase(state)) {
-//                            _city = jo_inside.getString("city");
-//                            stringArrayCity.add(_city);
-//                        }
-//
-//                    }
-//
-//                    //notify adapter city for getting selected value according to state
-//                    adapterCity.notifyDataSetChanged();
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//
-//            public void onNothingSelected(AdapterView<?> parent) {
-//            }
-//        });
-//
-//
-//        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String spinnerCityValue = String.valueOf(citySpinner.getSelectedItem());
-//                Log.e("SpinnerCityValue", spinnerCityValue);
-//
-//                _city = spinnerCityValue;
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//
-//    }
-//
-//
-//    public String loadJSONFromAssetState() {
-//        String json = null;
-//        try {
-//            InputStream is = getContext().getAssets().open("state.json");
-//            int size = is.available();
-//            byte[] buffer = new byte[size];
-//            is.read(buffer);
-//            is.close();
-//            json = new String(buffer, StandardCharsets.UTF_8);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//            return null;
-//        }
-//        return json;
-//    }
-//
-//    public String loadJSONFromAssetCity() {
-//        String json = null;
-//        try {
-//            InputStream is = getContext().getAssets().open("cityState.json");
-//            int size = is.available();
-//            byte[] buffer = new byte[size];
-//            is.read(buffer);
-//            is.close();
-//            json = new String(buffer, StandardCharsets.UTF_8);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//            return null;
-//        }
-//        return json;
-//    }
-//
-//    public void onBackPressed() {
-//        if (getFragmentManager().getBackStackEntryCount() > 0) {
-//            getFragmentManager().popBackStack();
-//        }
-//    }
-//
-//    @Override
-//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        //you can set the title for your toolbar here for different fragments different titles
-//        getActivity().setTitle("Address");
-//    }
+public static Ship[] getShipment()  {
+    Ship sh1 = new Ship("SH01", "Standard", "As usual");
+    Ship sh2 = new Ship("SH02", "Fast", "Within 24 hours");
+    return new Ship[] {sh1, sh2};
+}
+    private void init() {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        name.setText(user.getDisplayName());
+        email.setText(user.getEmail());
+        mobile.setText(user.getPhoneNumber());
+
+
+        Ship[] shipment = getShipment();
+        final ArrayAdapter<Ship> adapterShip = new ArrayAdapter<Ship>(getActivity(), R.layout.spinnertextview, shipment);
+        adapterShip.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        shipSpinner.setAdapter(adapterShip);
+
+
+        shipSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String spinnerShipValue = String.valueOf(shipSpinner.getSelectedItem());
+                Log.e("SpinnerShipValue", spinnerShipValue);
+
+                _ship = spinnerShipValue;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //you can set the title for your toolbar here for different fragments different titles
+        getActivity().setTitle("Address");
+    }
 
 
     private void hideProgressDialog() {

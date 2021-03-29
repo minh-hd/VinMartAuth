@@ -267,7 +267,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Quay lại"
+                android:text="Hủy"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text" />
         </LinearLayout>

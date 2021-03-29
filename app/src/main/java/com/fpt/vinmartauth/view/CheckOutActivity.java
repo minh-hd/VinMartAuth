@@ -37,25 +37,25 @@ public class CheckOutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out);
         openFragment(AddressFragment.newInstance());
-        fullName = findViewById(R.id.sa_name);
-        email = findViewById(R.id.sa_email);
-        phone = findViewById(R.id.sa_mobile);
-        fAuth = FirebaseAuth.getInstance();
-        fstore = FirebaseFirestore.getInstance();
-        FirebaseUser currentUser = fAuth.getCurrentUser();
-
-           // cusID = fAuth.getCurrentUser().getUid();
-
-
-        DocumentReference documentReference = fstore.collection("customers").document("Cux001");
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                phone.setText(value.getString("phone"));
-                fullName.setText(value.getString("fullName"));
-                email.setText(value.getString("email"));
-            }
-        });
+//        fullName = findViewById(R.id.sa_name);
+//        email = findViewById(R.id.sa_email);
+//        phone = findViewById(R.id.sa_mobile);
+//        fAuth = FirebaseAuth.getInstance();
+//        fstore = FirebaseFirestore.getInstance();
+//
+//
+//        cusID = fAuth.getCurrentUser().getUid();
+//
+//
+//        DocumentReference documentReference = fstore.collection("customers").document(cusID);
+//        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+//            @Override
+//            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+//                phone.setText(value.getString("phone"));
+//                fullName.setText(value.getString("fullName"));
+//                email.setText(value.getString("email"));
+//            }
+//        });
     }
 
     private void openFragment(Fragment fragment) {

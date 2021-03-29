@@ -1,6 +1,6 @@
 package com.fpt.vinmartauth.entity;
 
-import androidx.annotation.RecentlyNonNull;
+//import androidx.annotation.RecentlyNonNull;
 
 import java.util.Date;
 
@@ -12,23 +12,23 @@ public class Customer {
   private Enum<Gender> gender;
   private Date dateOfBirth;
   private String profileImageLink;
-  private Address address;
+  private String address;
 
   public Customer() {
   }
 
-  public Customer(String fullName, String phone, String email, Address address) {
+  public Customer(String fullName, String phone, String email, String address) {
     this.fullName = fullName;
     this.phone = phone;
     this.email = email;
     this.address = address;
   }
 
-  public Address getAddress() {
+  public String getAddress() {
     return address;
   }
 
-  public void setAddress(Address address) {
+  public void setAddress(String address) {
     this.address = address;
   }
 
