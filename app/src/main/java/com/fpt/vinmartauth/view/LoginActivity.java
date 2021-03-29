@@ -13,18 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.validation.AuthValidation;
 import com.fpt.vinmartauth.view.dialog.LoadingDialog;
-import com.fpt.vinmartauth.viewmodel.AuthViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -91,14 +84,13 @@ public class LoginActivity extends AppCompatActivity {
       inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
       loadingDialog.startLoadingDialog();
       mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+        loadingDialog.dismissDialog();
         if (task.isSuccessful()) {
           Log.i("Login", "OK!");
           Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-          loadingDialog.dismissDialog();
           startActivity(intent);
         } else {
-          Log.i("Login", "Login failed!");
-          loadingDialog.dismissDialog();
+          Log.i("Login", "Failed!");
           Toast toast = Toast.makeText(LoginActivity.this, "Sai email hoặc mật khẩu", Toast.LENGTH_LONG);
           toast.show();
         }
