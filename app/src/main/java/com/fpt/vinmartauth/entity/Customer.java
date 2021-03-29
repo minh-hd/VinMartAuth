@@ -1,5 +1,7 @@
 package com.fpt.vinmartauth.entity;
 
+import androidx.annotation.RecentlyNonNull;
+
 import java.util.Date;
 
 public class Customer {
@@ -78,5 +80,18 @@ public class Customer {
 
   public void setProfileImageLink(String profileImageLink) {
     this.profileImageLink = profileImageLink;
+  }
+
+  @Override
+  public String toString() {
+    return "Customer{" +
+            "fullName='" + fullName + '\'' +
+            ", phone='" + phone + '\'' +
+            ", email='" + email + '\'' +
+            ", password='" + password + '\'' +
+            ", gender=" + gender +
+            ", dateOfBirth=" + dateOfBirth +
+            ", profileImageLink='" + profileImageLink + '\'' +
+            '}';
   }
 }
