@@ -1,32 +1,38 @@
-package com.fpt.vinmartauth.view.by_category;
+package com.fpt.vinmartauth.view.by_category
 
-import com.fpt.vinmartauth.entity.Category;
-import com.fpt.vinmartauth.entity.Product;
-import com.fpt.vinmartauth.model.ProductModel;
+import com.fpt.vinmartauth.entity.Category
+import com.fpt.vinmartauth.entity.Product
+import com.fpt.vinmartauth.model.ProductModel
+import com.fpt.vinmartauth.model.ProductModel.GetProductsByTitleCallbacks
+import java.util.*
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ByCategoryController {
-    private ByCategoryView view;
-    private final ProductModel productModel = new ProductModel();
-
-    void setView(ByCategoryView view) {
-        this.view = view;
+class ByCategoryController {
+    private var view: ByCategoryView? = null
+    private val productModel = ProductModel()
+    fun setView(view: ByCategoryView?) {
+        this.view = view
     }
 
-    void fetchProductByCategory(Category category) {
-        productModel.getProductByCategoryId(category, new ProductModel.GetProductsByTitleCallbacks() {
-            @Override
-            public void onSuccess(List<Product> products) {
-                view.setProducts(products);
+    fun fetchProductByCategory(category: Category?, sort: Int) {
+        productModel.getProductByCategoryId(category, object : GetProductsByTitleCallbacks {
+            override fun onSuccess(products: List<Product>) {
+                when (sort) {
+                    0 -> {
+                        view!!.setProducts(products.sortedByDescending { it.id })
+                    }
+                    2 -> {
+                        view!!.setProducts(products.sortedByDescending { it.price})
+                    }
+                    1 -> {
+                        view!!.setProducts(products.sortedBy { it.price })
+                    }
+                    else -> view!!.setProducts(products)
+                }
             }
 
-            @Override
-            public void onFailed() {
-                view.setProducts(new ArrayList<>());
+            override fun onFailed() {
+                view!!.setProducts(ArrayList())
             }
-
-        });
+        })
     }
 }

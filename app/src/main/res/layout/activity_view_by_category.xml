@@ -74,7 +74,7 @@
             style="@style/sorter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tăng dần"
+            android:text="Tăng dần ↑"
             app:layout_constraintBottom_toBottomOf="@+id/tvSortBy"
             app:layout_constraintStart_toEndOf="@+id/tvSortBy"
             app:layout_constraintTop_toTopOf="@+id/tvSortBy" />
@@ -84,7 +84,7 @@
             style="@style/sorter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Giảm dần"
+            android:text="Giảm dần ↓"
             app:layout_constraintBottom_toBottomOf="@+id/tvAscending"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvAscending"

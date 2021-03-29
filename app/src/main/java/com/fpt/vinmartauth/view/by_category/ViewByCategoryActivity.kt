@@ -27,12 +27,17 @@ class ViewByCategoryActivity : AppCompatActivity(), ByCategoryView, ProductAdapt
         val tvSortBy: TextView = findViewById(R.id.tvSortBy)
         val tvAsc: TextView = findViewById(R.id.tvAscending)
         val tvDesc: TextView = findViewById(R.id.tvDescending)
+        view.adapter = productAdapter
+        productAdapter.setListener(this)
+        controller.setView(this)
+        controller.fetchProductByCategory(Category(catID, "pff"), 4)
         tvNewest.setOnClickListener {
             d("sorter", "newest")
             tvNewest.isSelected = true
             tvSortBy.isSelected = false
             tvAsc.isSelected = false
             tvDesc.isSelected = false
+            controller.fetchProductByCategory(Category(catID, "pff"), 0)
 
         }
         tvDesc.setOnClickListener {
@@ -41,6 +46,7 @@ class ViewByCategoryActivity : AppCompatActivity(), ByCategoryView, ProductAdapt
             tvSortBy.isSelected = true
             tvAsc.isSelected = false
             tvDesc.isSelected = true
+            controller.fetchProductByCategory(Category(catID, "pff"), 2)
         }
         tvAsc.setOnClickListener {
             d("sorter", "asc")
@@ -48,11 +54,8 @@ class ViewByCategoryActivity : AppCompatActivity(), ByCategoryView, ProductAdapt
             tvSortBy.isSelected = true
             tvAsc.isSelected = true
             tvDesc.isSelected = false
+            controller.fetchProductByCategory(Category(catID, "pff"), 1)
         }
-        view.adapter = productAdapter
-        productAdapter.setListener(this)
-        controller.setView(this)
-        controller.fetchProductByCategory(Category(catID, "pff"))
         view.layoutManager = GridLayoutManager(view?.context, 2)
         findViewById<ImageView>(R.id.imageView5).setOnClickListener {
             finish()
