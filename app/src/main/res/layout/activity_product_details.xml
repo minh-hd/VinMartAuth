@@ -27,6 +27,9 @@
 
             <TextView
                 android:id="@+id/tvProductDetailTitle"
+                style="@style/TitleText"
+                android:textStyle="bold"
+                android:layout_margin="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nike Dri-FIT Long Sleeve"
@@ -35,11 +38,16 @@
 
             <TextView
                 android:id="@+id/textView13"
+                android:layout_margin="8dp"
+                style="@style/ItemLabelText"
+                android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Chi tiết sản phẩm" />
 
             <TextView
+                android:layout_margin="8dp"
+                android:textSize="12sp"
                 android:id="@+id/tvProductDetailDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,12 +55,17 @@
 
             <TextView
                 android:id="@+id/textView15"
+                android:textColor="@color/primary_crimson"
+                android:layout_margin="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Đọc thêm" />
 
             <TextView
                 android:id="@+id/textView16"
+                android:layout_margin="8dp"
+                style="@style/ItemLabelText"
+                android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Đánh giá" />
@@ -70,6 +83,7 @@
 
         <TextView
             android:id="@+id/tvProductDetailPrice"
+            style="@style/RedTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="123 000 đ"
@@ -83,7 +97,7 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"
+            android:text="Thêm vào giỏ"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.9"
