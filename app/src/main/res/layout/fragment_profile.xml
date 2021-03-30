@@ -35,7 +35,8 @@
                 style="@style/TitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tamkien Cao" />
+                android:textColor="@color/primary_crimson"
+                android:text="Login" />
 
 
             <TextView
@@ -43,7 +44,7 @@
                 style="@style/SmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="kiencthe140322@fpt.edu.vn" />
+                android:text="lorem ipsum dolor sit amet" />
         </LinearLayout>
 
     </LinearLayout>
