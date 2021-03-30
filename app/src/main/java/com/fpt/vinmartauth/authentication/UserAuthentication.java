@@ -11,7 +11,7 @@ public class UserAuthentication {
     mAuth = FirebaseAuth.getInstance();
   }
 
-  public FirebaseUser isLoggedIn() {
-    return mAuth.getCurrentUser();
+  public boolean isLoggedIn() {
+    return mAuth.getCurrentUser() != null;
   }
 }
