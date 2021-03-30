@@ -41,7 +41,7 @@ public class OrderModel {
             public void onSuccess(List<Order> orders) {
                 List<Order> filteredOrders = new ArrayList<>();
                 orders.forEach(order -> {
-                    if (order.getCart().getCartID().contains(cart.getCartID())) {
+                    if (order.getCart().getDocumentID().contains(cart.getDocumentID())) {
                         filteredOrders.add(order);
                     }
                 });

@@ -35,8 +35,7 @@ import java.util.regex.Pattern;
  * Use the {@link AddressFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddressFragment extends Fragment {
-
+public class AddressFragment extends Fragment implements OnFragmentManager{
     Context context;
     TextView txt_pyment;
     Spinner shipSpinner;
@@ -47,8 +46,7 @@ public class AddressFragment extends Fragment {
     Customer customer;
     View progress;
     FirebaseAuth mAuth;
-    FirebaseFirestore fstore;
-
+    OnFragmentManager listener;
     FirebaseAuth.AuthStateListener authStateListener;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -126,10 +124,6 @@ public class AddressFragment extends Fragment {
                     address.requestFocus();
                 } else {
 //
-                    Customer userAddress = new Customer( _name, _mobile, _email,_address);
-
-//
-                    //saveUserAddress(userAddress);
 
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     //replace this fragment into the old one. There are more e.g add, remove etc
@@ -145,38 +139,7 @@ public class AddressFragment extends Fragment {
 
         return v;
     }
-//    private void saveUserAddress(Customer userAddress) {
-//
-//        Call<UserResult> call = RestClient.getRestService(getContext()).updateUser(userAddress);
-//        call.enqueue(new Callback<UserResult>() {
-//            @Override
-//            public void onResponse(Call<UserResult> call, Response<UserResult> response) {
-//                Log.d("Response :=>", response.body() + "");
-//                if (response != null) {
-//
-//                    UserResult userResult = response.body();
-//                    if (userResult.getCode() == 200) {
-//
-//                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-//                        ft.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left);
-//                        ft.replace(R.id.content_frame, new PaymentFragment());
-//                        ft.commit();
-//                    } else {
-//                        Toast.makeText(getContext(), "Please try again", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                }
-//
-//                hideProgressDialog();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserResult> call, Throwable t) {
-//
-//            }
-//        });
-//
-//    }
+
 //
 public static Ship[] getShipment()  {
     Ship sh1 = new Ship("SH01", "Standard", "As usual");
@@ -234,5 +197,15 @@ public static Ship[] getShipment()  {
 
     private void showProgressDialog() {
         progress.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDataSelected(String data) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentManager ){
+            listener= (OnFragmentManager ) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement onViewSelected");
+        }
     }
 }

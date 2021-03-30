@@ -14,108 +14,70 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fpt.vinmartauth.R;
+import com.fpt.vinmartauth.entity.CartItem;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-//public class CheckoutCartAdapter extends RecyclerView.Adapter<CheckoutCartAdapter.MyViewHolder> {
+public class CheckoutCartAdapter extends RecyclerView.Adapter {
+    private final ArrayList<CartItem> items = new ArrayList<>();
+    private CartItemAdapterListener listener;
+    public void setListener(CartItemAdapterListener listener) {
+        this.listener = listener;
+    }
 
-//    List<Cart> cartList;
-//    Context context;
-//    int pQuantity = 1;
-//    String _subtotal, _price, _quantity;
-//    LocalStorage localStorage;
-//    Gson gson;
+
+    public void setData(List<CartItem> cartItems) {
+        items.clear();
+        items.addAll(cartItems);
+        notifyDataSetChanged();
+    }
+    @NonNull
+    @Override
+    public CheckoutCartAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_row_cart_item, parent, false);
+        return new CheckoutCartAdapter.ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        CartItem cartItem = items.get(position);
+        ((CheckoutCartAdapter.ViewHolder) holder).bind(cartItem);
+
+    }
+    public interface CartItemAdapterListener {
+        void onCartItemClick(CartItem cartItem);
+    }
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView itemName;
+        private final TextView itemAmount;
+        private final TextView itemPrice;
+        private final ImageView itemImage;
+
+        public ViewHolder(final View view) {
+            super(view);
+            itemName = view.findViewById(R.id.tv_product_title);
+            itemAmount = view.findViewById(R.id.tv_amount);
+            itemPrice = view.findViewById(R.id.tv_product_price);
+            itemImage = view.findViewById(R.id.img_product);
+        }
+
+        public void bind(final CartItem item) {
+            itemName.setText(item.getProductTitle());
+            itemAmount.setText(item.getQuantity());
+            itemPrice.setText(item.getProductPrice() + " ₫");
+            if (!item.getProductImage().isEmpty()) {
+                Picasso.get().load(item.getProductImage()).into(itemImage);
+            }
+        }
+    }
 //
-//
-//    public CheckoutCartAdapter(List<Cart> cartList, Context context) {
-//        this.cartList = cartList;
-//        this.context = context;
-//    }
-//
-//    public interface OnClickAddress {
-//        void onclickAdd(String text);
-//    }
-//    @NonNull
-//    @Override
-//    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-//        View itemView;
-//
-//        itemView = LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.row_cart, parent, false);
-//
-//
-//        return new MyViewHolder(itemView);
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-//
-//        final Cart cart = cartList.get(position);
-//        localStorage = new LocalStorage(context);
-//        gson = new Gson();
-//        holder.title.setText(cart.getTitle());
-//        holder.attribute.setText(cart.getAttribute());
-//        _price = cart.getPrice();
-//        _quantity = cart.getQuantity();
-//        holder.quantity.setText(_quantity);
-//        holder.price.setText(_price);
-//        holder.currency.setText(cart.getCurrency());
-//        _subtotal = String.valueOf(Double.parseDouble(_price) * Integer.parseInt(_quantity));
-//        holder.plus.setVisibility(View.GONE);
-//        holder.minus.setVisibility(View.GONE);
-//        holder.delete.setVisibility(View.GONE);
-//        holder.currency.setText(cart.getCurrency());
-//        holder.subTotal.setText(_subtotal);
-//        Picasso.get()
-//                .load(Utils.ProductImage + cart.getImage())
-//                .into(holder.imageView, new Callback() {
-//                    @Override
-//                    public void onSuccess() {
-//                        holder.progressBar.setVisibility(View.GONE);
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception e) {
-//                        Log.d("Error : ", e.getMessage());
-//                    }
-//                });
-//
-//
-//
-//
-//
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//
-//        return cartList.size();
-//    }
-//
-//    public class MyViewHolder extends RecyclerView.ViewHolder {
-//        ImageView imageView;
-//        TextView title;
-//        ProgressBar progressBar;
-//        CardView cardView;
-//        TextView offer, currency, price, quantity, attribute, addToCart, subTotal;
-//        Button plus, minus, delete;
-//
-//        public MyViewHolder(@NonNull View itemView) {
-//            super(itemView);
-//
-//            imageView = itemView.findViewById(R.id.product_image);
-//            title = itemView.findViewById(R.id.product_title);
-//            progressBar = itemView.findViewById(R.id.progressbar);
-//            quantity = itemView.findViewById(R.id.quantity);
-//            attribute = itemView.findViewById(R.id.product_attribute);
-//            plus = itemView.findViewById(R.id.quantity_plus);
-//            minus = itemView.findViewById(R.id.quantity_minus);
-//            delete = itemView.findViewById(R.id.cart_delete);
-//            subTotal = itemView.findViewById(R.id.sub_total);
-//            price = itemView.findViewById(R.id.product_price);
-//            currency = itemView.findViewById(R.id.product_currency);
-//        }
-//    }
-//}
+}
 

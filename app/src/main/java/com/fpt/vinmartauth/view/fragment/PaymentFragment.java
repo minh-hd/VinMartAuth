@@ -65,9 +65,7 @@ public class PaymentFragment extends Fragment {
         cardFrame = view.findViewById(R.id.card_frame);
         payll = view.findViewById(R.id.pay_ll);
         pay = view.findViewById(R.id.total_pay);
-        Double amount = 500.000;
-                //((BaseActivity) getActivity()).getTotalPrice(); // chỗ này chưa có giá của ĐỨc
-        pay.append(amount + "");
+
 
         payll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +87,7 @@ public class PaymentFragment extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
                 }
-                // Toast.makeText(getContext(),radioButton.getText()+"",Toast.LENGTH_LONG).show();
+
             }
         });
 
