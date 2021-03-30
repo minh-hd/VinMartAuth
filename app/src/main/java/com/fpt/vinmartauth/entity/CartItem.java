@@ -1,30 +1,20 @@
 package com.fpt.vinmartauth.entity;
 
+import com.google.firebase.Timestamp;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
 public class CartItem {
     private String documentID;
-    private String cartID;
-    private Date createdAt;
-    private String description;
-    private Map<String, String> product;
-    private int quantity;
-    private Date updatedAt;
+    private String productID;
+    private String productImage;
+    private String productTitle;
+    private String productPrice;
+    private String quantity;
 
     public CartItem() {
-
-    }
-
-    public CartItem(String documentID, String cartID, Date createdAt, String description,
-                    Map<String, String> product, int quantity, Date updatedAt) {
-        this.documentID = documentID;
-        this.cartID = cartID;
-        this.createdAt = createdAt;
-        this.description = description;
-        this.product = product;
-        this.quantity = quantity;
-        this.updatedAt = updatedAt;
     }
 
     public String getDocumentID() {
@@ -35,52 +25,44 @@ public class CartItem {
         this.documentID = documentID;
     }
 
-    public String getCartID() {
-        return cartID;
+    public String getProductID() {
+        return productID;
     }
 
-    public void setCartID(String cartID) {
-        this.cartID = cartID;
+    public void setProductID(String productID) {
+        this.productID = productID;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public String getProductImage() {
+        return productImage;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
-    public String getDescription() {
-        return description;
+    public String getProductTitle() {
+        return productTitle;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setProductTitle(String productTitle) {
+        this.productTitle = productTitle;
     }
 
-    public Map<String, String> getProduct() {
-        return product;
+    public String getProductPrice() {
+        return productPrice;
     }
 
-    public void setProduct(Map<String, String> product) {
-        this.product = product;
+    public void setProductPrice(String productPrice) {
+        this.productPrice = productPrice;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
 
