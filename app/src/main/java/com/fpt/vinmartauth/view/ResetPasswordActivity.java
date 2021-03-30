@@ -52,7 +52,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     btnResetPassword.setOnClickListener(view -> {
       String email = edtEmail.getText().toString().trim();
 
-      if (authValidation.isEmail(email)) {
+      if (!authValidation.isEmail(email)) {
         edtEmail.setError("Email không hợp lệ");
         return;
       }
@@ -63,6 +63,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         } else {
           Toast.makeText(ResetPasswordActivity.this, "Có lỗi xảy ra", Toast.LENGTH_LONG).show();
         }
+        finish();
       });
 
 
