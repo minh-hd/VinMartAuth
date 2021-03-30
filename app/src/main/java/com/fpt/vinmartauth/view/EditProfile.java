@@ -122,6 +122,8 @@ public class EditProfile extends AppCompatActivity {
       User u = new User();
       u.setFullName(name);
       userController.updateUserProfile(this, u);
+      Intent i = new Intent(EditProfile.this, MainActivity.class);
+      startActivity(i);
     });
 
   }

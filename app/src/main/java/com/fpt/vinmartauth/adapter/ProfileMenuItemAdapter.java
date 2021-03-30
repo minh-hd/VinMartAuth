@@ -15,6 +15,7 @@ import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.entity.ProfileMenuItem;
 import com.fpt.vinmartauth.view.EditProfile;
 import com.fpt.vinmartauth.view.LoginActivity;
+import com.fpt.vinmartauth.view.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -73,7 +74,11 @@ public class ProfileMenuItemAdapter extends Adapter {
                     .setTitle("Đăng xuất")
                     .setMessage("Bạn có chắc chắn muốn đăng xuất không?")
                     .setNegativeButton("Không", null)
-                    .setPositiveButton("Có", (args0, args1) -> signOut())
+                    .setPositiveButton("Có", (args0, args1) ->{
+                       signOut();
+                       Intent i = new Intent(v.getContext(), MainActivity.class);
+                       v.getContext().startActivity(i);
+                    })
                     .create()
                     .show();
             break;
