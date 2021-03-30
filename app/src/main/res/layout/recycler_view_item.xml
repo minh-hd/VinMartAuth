@@ -27,10 +27,10 @@
       app:layout_constraintStart_toEndOf="@+id/imageView2"
       android:layout_marginStart="8dp"
       android:layout_marginBottom="8dp"
-      app:layout_constraintBottom_toTopOf="@+id/textView2" />
+      app:layout_constraintBottom_toTopOf="@+id/tvProductDetailTitle" />
 
   <TextView
-      android:id="@+id/textView2"
+      android:id="@+id/tvProductDetailTitle"
       android:layout_width="285dp"
       android:layout_height="20dp"
       tools:text="@tools:sample/lorem[4:10]"
