@@ -15,6 +15,7 @@ public class Cart {
     public Cart() {
         this.createdAt = new Timestamp(new Date());
         this.updatedAt = new Timestamp(new Date());
+        this.isCheckout = false;
     }
 
     public String getDocumentID() {
