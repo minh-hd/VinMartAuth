@@ -5,7 +5,8 @@ public class UserSession {
     private  String cartID;
     private static UserSession session = new UserSession();
 
-    private UserSession() {}
+    private UserSession() {
+    }
 
     public static UserSession getInstance() {
         if (session != null) {

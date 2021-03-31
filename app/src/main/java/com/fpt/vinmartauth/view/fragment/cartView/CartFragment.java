@@ -45,6 +45,7 @@ public class CartFragment extends Fragment implements CartView{
     private static final String CURRENCY_SYMBOL = " đ";
     private Button btnCheckout;
     private FirebaseAuth mAuth;
+    private UserSession session = UserSession.getInstance();
 
 
     public CartFragment() {}
@@ -84,6 +85,8 @@ public class CartFragment extends Fragment implements CartView{
             cartItemList = new ArrayList<>();
             // clear cart items list and reset adapter
             cartAdapter.setData(cartItemList);
+            // clear UserSession cartID
+            session.setCartID("");
         });
         rvCartList.setAdapter(cartAdapter);
         controller.fetchCartItems();
@@ -101,9 +104,13 @@ public class CartFragment extends Fragment implements CartView{
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            UserSession session = UserSession.getInstance();
-            session.setUID(user.getUid());
-            controller.fetchUserCart();
+            // run first time
+            if (session.getUID() == null || "".equals(session.getUID())) {
+                session.setUID(user.getUid());
+                if (session.getCartID() == null || "".equals(session.getCartID())) {
+                    controller.fetchUserCart();
+                }
+            }
         } else {
             // redirect to login
             Intent intent = new Intent(this.getContext(), LoginActivity.class);
