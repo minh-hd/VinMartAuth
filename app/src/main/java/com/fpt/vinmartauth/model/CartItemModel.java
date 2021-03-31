@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.fpt.vinmartauth.entity.Cart;
 import com.fpt.vinmartauth.entity.CartItem;
+import com.fpt.vinmartauth.entity.Product;
 import com.fpt.vinmartauth.view.fragment.cartView.UserSession;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
@@ -30,10 +31,15 @@ public class CartItemModel {
     private final String CART_UID_FIELD = "UID";
     private final String CART_UPDATED_AT_FIELD = "updatedAt";
     private final String CART_CART_TOTAL_FIELD = "cartTotal";
+    private final String CART_DOCUMENT_ID_FIELD = "documentID";
     private final String ITEM_COLLECTION_PATH = "items";
     private final String ITEM_QUANTITY_FIELD = "quantity";
     private final String UPDATE_SUCCESS_MESSAGE = "Đơn hàng đặt thành công";
     private final String UPDATE_ERROR_MESSAGE = "Lỗi đặt hàng.";
+    private final String CART_DOCUMENT_ID_PREFIX = "Cax";
+    private final String ITEM_DOCUMENT_ID_PREFIX = "CI";
+    private final String ITEM_DOCUMENT_START_ID = "CI01";
+
 
     public CartItemModel() {
         instance = FirestoreInstance.getInstance();
@@ -89,7 +95,7 @@ public class CartItemModel {
                 if (cart.getDocumentID() == null || "".equals(cart.getDocumentID())) {
                     cart.setUID(UID);
                     // Generate new documentID
-                    cart.setDocumentID("Cax".concat(String.format("%03d" , allCarts.size() + 1)));
+                    cart.setDocumentID(CART_DOCUMENT_ID_PREFIX.concat(String.format("%03d" , allCarts.size() + 1)));
                     cart.setCartTotal("");
                     cartRef.document(cart.getDocumentID()).set(cart).addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
@@ -110,9 +116,73 @@ public class CartItemModel {
         void onSuccess(Cart cart);
     }
 
+    private List<CartItem> populateCartItem(QuerySnapshot collection) {
+        List<CartItem> items = new ArrayList<>();
+        for (DocumentSnapshot doc : collection) {
+            CartItem item = doc.toObject(CartItem.class);
+            items.add(item);
+        }
+        return items;
+    }
+
     // method to add cart items
-    public void addCartItems() {
-        // PENDING FOR PRODUCT MODEL AND PRODUCT ENTITY
+    @SuppressLint("DefaultLocale")
+    public void addCartItems(Product product, String cartID) {
+        // getAllItemInCart()
+        DocumentReference docCart = instance.collection(CART_COLLECTION_PATH)
+                .document(cartID);
+        docCart.get().addOnCompleteListener(task -> {
+            // if cart exists, do:
+            if (task.isSuccessful() && cartID.equals(task.getResult().get(CART_DOCUMENT_ID_FIELD))) {
+                docCart.collection(ITEM_COLLECTION_PATH).get()
+                        .addOnCompleteListener(task1 -> {
+                            // if sub-collection "items" exists, do:
+                        if (task.isSuccessful() && task1.getResult().size() > 0) {
+                            // populate DocumentSnapshot into List of CartItem for processing
+                            QuerySnapshot collection = task1.getResult();
+                            List<CartItem> items = populateCartItem(collection);
+                            // check if product has exists in cart, return new CartItem if not found
+                            CartItem item = items.stream()
+                                    .filter(i -> product.getId().equals(i.getProductID())).findFirst().orElse(new CartItem());
+                            if (item.getDocumentID() == null || "".equals(item.getDocumentID())) {
+                                docCart.collection(ITEM_COLLECTION_PATH).document(item.getDocumentID())
+                                        // product exists, set quantity of item by 1
+                                        .update(ITEM_QUANTITY_FIELD, String.valueOf(Integer.parseInt(item.getQuantity()) + 1))
+                                        .addOnCompleteListener(task2 -> {
+                                            /* Do callbacks to send update quantity success message */
+                                        });
+                            } else {
+                                // product not exists, add new item to sub-collection "items"
+                                // generate item document ID, format type "CIXX" -> XX is number
+                                item.setDocumentID(ITEM_DOCUMENT_ID_PREFIX.concat(String.format("%02d" , items.size() + 1)));
+                                // set starting quantity as 1
+                                item.setQuantity("1");
+                                item.setProductID(product.getId());
+                                item.setProductImage(product.getImage());
+                                item.setProductTitle(product.getTitle());
+                                item.setProductPrice(String.valueOf(product.getPrice()));
+                                docCart.collection(ITEM_COLLECTION_PATH)
+                                        .document(item.getDocumentID())
+                                        .set(item).addOnSuccessListener(aVoid -> {
+                                            /* Do callbacks to send item add success message */
+                                        });
+                            }
+                        } else {
+                            // add the first item to sub-collection "items"
+                            CartItem item = new CartItem(ITEM_DOCUMENT_START_ID, product.getId(), product.getImage(), product.getTitle(),
+                                    String.valueOf(product.getPrice()),"1");
+                            docCart.collection(ITEM_COLLECTION_PATH)
+                                    .document(item.getDocumentID())
+                                    .set(item).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    /* Do callbacks to send item add success message */
+                                }
+                            });
+                        }
+                });
+            }
+        });
     }
 
     // method to get all cart items
