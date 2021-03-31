@@ -26,24 +26,14 @@ public class CartItemModel {
     private final String SUCCESS_TAG = "SUCCESS";
     private final String ERROR_TAG = "ERROR";
     private final String CART_COLLECTION_PATH = "carts";
-    private final String CART_DOCUMENT_ID_FIELD = "documentID";
     private final String CART_IS_CHECKOUT_FIELD = "isCheckout";
     private final String CART_UID_FIELD = "UID";
-    private final String CART_CREATED_AT_FIELD = "createdAt";
     private final String CART_UPDATED_AT_FIELD = "updatedAt";
     private final String CART_CART_TOTAL_FIELD = "cartTotal";
     private final String ITEM_COLLECTION_PATH = "items";
-    private final String ITEM_DOCUMENT_ID_FIELD = "string";
-    private final String ITEM_PRODUCT_TITLE_FIELD = "productTitle";
-    private final String ITEM_PRODUCT_PRICE_FIELD = "productPrice";
-    private final String ITEM_PRODUCT_IMAGE_FIELD = "productImage";
-    private final String ITEM_PRODUCT_ID_FIELD = "productID";
     private final String ITEM_QUANTITY_FIELD = "quantity";
     private final String UPDATE_SUCCESS_MESSAGE = "Đơn hàng đặt thành công";
     private final String UPDATE_ERROR_MESSAGE = "Lỗi đặt hàng.";
-    // *==REMOVE THIS LINE BELOW AFTER FOUND A SOLUTION TO STORE CURRENT CART==*
-    private final String currentUserCartID = "Cax001"; // there are 4 method references to this line, delete with caution!!!
-    // *=======================================================================*
 
     public CartItemModel() {
         instance = FirestoreInstance.getInstance();
@@ -221,7 +211,7 @@ public class CartItemModel {
 
     public void updateCartForCheckout(String cartID, int cartTotal, UpdateCartForCheckoutCallbacks callbacks) {
         WriteBatch updateBatch = instance.batch();
-        DocumentReference docCart = instance.collection(CART_COLLECTION_PATH).document(currentUserCartID);
+        DocumentReference docCart = instance.collection(CART_COLLECTION_PATH).document(cartID);
         updateBatch.update(docCart, CART_CART_TOTAL_FIELD, String.valueOf(cartTotal));
         updateBatch.update(docCart, CART_IS_CHECKOUT_FIELD, true);
         updateBatch.update(docCart, CART_UPDATED_AT_FIELD, new Timestamp(new Date()));
