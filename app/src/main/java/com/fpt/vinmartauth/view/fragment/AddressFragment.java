@@ -1,6 +1,7 @@
 package com.fpt.vinmartauth.view.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,6 +23,8 @@ import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.entity.Customer;
 import com.fpt.vinmartauth.entity.Ship;
 import com.fpt.vinmartauth.validation.AuthValidation;
+import com.fpt.vinmartauth.view.CheckOutActivity;
+import com.fpt.vinmartauth.view.MyClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,7 +38,7 @@ import java.util.regex.Pattern;
  * Use the {@link AddressFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddressFragment extends Fragment implements OnFragmentManager{
+public class AddressFragment extends Fragment{
     Context context;
     TextView txt_pyment;
     Spinner shipSpinner;
@@ -46,10 +49,11 @@ public class AddressFragment extends Fragment implements OnFragmentManager{
     Customer customer;
     View progress;
     FirebaseAuth mAuth;
-    OnFragmentManager listener;
+
     FirebaseAuth.AuthStateListener authStateListener;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 
     public static AddressFragment newInstance() {
         return new AddressFragment();
@@ -123,13 +127,15 @@ public class AddressFragment extends Fragment implements OnFragmentManager{
                     address.setError("Điền địa chỉ");
                     address.requestFocus();
                 } else {
-//
+                    String spinnerShipValue = String.valueOf(shipSpinner.getSelectedItem());
+
 
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     //replace this fragment into the old one. There are more e.g add, remove etc
                     transaction.replace(R.id.content_frame, new PaymentFragment());
                     transaction.addToBackStack(null);
                     transaction.commit();
+
 
                 }
 
@@ -199,13 +205,5 @@ public static Ship[] getShipment()  {
         progress.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void onDataSelected(String data) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentManager ){
-            listener= (OnFragmentManager ) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement onViewSelected");
-        }
-    }
+
 }

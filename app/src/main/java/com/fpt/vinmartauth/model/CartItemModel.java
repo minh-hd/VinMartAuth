@@ -73,6 +73,23 @@ public class CartItemModel {
     public interface GetTotalPricesCallbacks {
         void onSuccess(int cartTotals);
     }
+
+    public void getTotalAmount(GetTotalAmountCallbacks callbacks) {
+        getCheckoutCartAndItems(new GetCheckoutCartAndItemsCallbacks() {
+            @Override
+            public void onSuccess(List<CartItem> items) {
+                int itemTotalAmount = items.stream().mapToInt(item -> Integer.parseInt(item.getQuantity())).sum();
+                Log.d("anhdt", String.valueOf(itemTotalAmount));
+                callbacks.onSuccess(itemTotalAmount);
+            }
+            @Override
+            public void onFailure() {
+            }
+        });
+    }
+    public interface GetTotalAmountCallbacks {
+        void onSuccess(int cartAmounTotals);
+    }
     public interface GetCheckoutCartAndItemsCallbacks {
         void onSuccess(List<CartItem> cartItemList);
         void onFailure();

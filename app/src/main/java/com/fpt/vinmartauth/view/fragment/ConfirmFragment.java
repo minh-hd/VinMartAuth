@@ -69,8 +69,8 @@ public class ConfirmFragment extends Fragment implements ConfirmCheckoutControll
         totalPayment = view.findViewById(R.id.total);
         controller.fetchCartTotal();
         totalAmount = view.findViewById(R.id.total_amount);
-
-       // totalAmount.setText( + "");
+        controller.fetchAmountTotal();
+             // totalAmount.setText( + "");
         //total.setText(controller.fetchCartTotal().toSt);
     }
 
@@ -87,6 +87,7 @@ public class ConfirmFragment extends Fragment implements ConfirmCheckoutControll
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_confirm, container, false);
+
         back = view.findViewById(R.id.back);
         order = view.findViewById(R.id.place_order);
         back.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +143,13 @@ public class ConfirmFragment extends Fragment implements ConfirmCheckoutControll
     }
 
     @Override
+    public void setAmount(int amount) {
+        totalAmount.setText(amount + "");
+    }
+
+    @Override
     public void onCartItemClick(CartItem cartItem) {
 
     }
+
 }

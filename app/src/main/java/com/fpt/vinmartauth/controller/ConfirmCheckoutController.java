@@ -40,9 +40,20 @@ public void fetchCartTotal()
         }
     });
 }
+
+public void fetchAmountTotal()
+{
+    cartItemModel.getTotalAmount(new CartItemModel.GetTotalAmountCallbacks() {
+        @Override
+        public void onSuccess(int cartAmounTotals) {
+            view.setAmount(cartAmounTotals);
+        }
+    });
+}
     public interface CartItemCheckoutView {
         void setProductsCO(List<CartItem> cartItems);
         void setTotal(int total);
+        void setAmount (int amount);
     }
 }
 

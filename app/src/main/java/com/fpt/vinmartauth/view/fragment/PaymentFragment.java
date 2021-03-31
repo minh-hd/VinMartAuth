@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fpt.vinmartauth.R;
+import com.fpt.vinmartauth.view.MyClass;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +61,8 @@ public class PaymentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_payment, container, false);
+
+
         paymentGroup = view.findViewById(R.id.payment_group);
         card = view.findViewById(R.id.card_payment);
         cash = view.findViewById(R.id.cash_on_delivery);

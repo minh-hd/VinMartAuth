@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.view.fragment.AddressFragment;
+import com.fpt.vinmartauth.view.fragment.ConfirmFragment;
 import com.fpt.vinmartauth.view.fragment.MainFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,7 +39,9 @@ public class CheckOutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out);
         openFragment(AddressFragment.newInstance());
-//        fullName = findViewById(R.id.sa_name);
+
+// Set Fragmentclass Arguments
+       //   fullName = findViewById(R.id.sa_name);
 //        email = findViewById(R.id.sa_email);
 //        phone = findViewById(R.id.sa_mobile);
 //        fAuth = FirebaseAuth.getInstance();
@@ -68,4 +72,6 @@ public class CheckOutActivity extends AppCompatActivity {
         transaction.commit();
 
     }
+
+
 }
