@@ -109,6 +109,11 @@ public class CartFragment extends Fragment implements CartView{
         }
     };
 
+    private void init() {
+        // Get current User
+        // Save UID somewhere
+    }
+
     @Override
     public void setCart(List<CartItem> cartItemList) {
         cartAdapter.setData(cartItemList);
