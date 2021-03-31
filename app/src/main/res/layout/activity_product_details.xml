@@ -47,32 +47,11 @@
 
             <TextView
                 android:layout_margin="8dp"
-                android:textSize="12sp"
                 android:id="@+id/tvProductDetailDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Go to Opera > Preferences… > System > Use DNS-over-HTTPS instead of the system’s DNS settings and check your DNS-over-HTTPS provider." />
 
-            <TextView
-                android:id="@+id/textView15"
-                android:textColor="@color/primary_crimson"
-                android:layout_margin="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Đọc thêm" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_margin="8dp"
-                style="@style/ItemLabelText"
-                android:textSize="24sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Đánh giá" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
 
@@ -84,6 +63,7 @@
         <TextView
             android:id="@+id/tvProductDetailPrice"
             style="@style/RedTitle"
+            android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="123 000 đ"
