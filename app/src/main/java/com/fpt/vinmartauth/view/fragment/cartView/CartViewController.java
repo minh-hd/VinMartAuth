@@ -1,4 +1,4 @@
-package com.fpt.vinmartauth.view.fragment;
+package com.fpt.vinmartauth.view.fragment.cartView;
 
 import com.fpt.vinmartauth.entity.Cart;
 import com.fpt.vinmartauth.entity.CartItem;
@@ -9,13 +9,14 @@ import java.util.List;
 public class CartViewController {
     private CartView view;
     private final CartItemModel cartItemModel = new CartItemModel();
+    private final UserSession session = UserSession.getInstance();
 
     void setView(CartView view) {
         this.view = view;
     }
 
     void fetchCartItems() {
-        cartItemModel.getAllCartItem(new CartItemModel.GetAllCartsCallbacks() {
+        cartItemModel.getAllCartItem(session.getCartID(), new CartItemModel.GetAllCartsCallbacks() {
 
             @Override
             public void onSuccess(List<CartItem> items) {
@@ -28,7 +29,7 @@ public class CartViewController {
     }
 
     void fetchCartItemsTotal() {
-        cartItemModel.getTotalItemsPrice(new CartItemModel.GetTotalPricesCallbacks() {
+        cartItemModel.getTotalItemsPrice(session.getCartID(), new CartItemModel.GetTotalPricesCallbacks() {
             @Override
             public void onSuccess(int cartTotals) {
                 view.setTotal(cartTotals);
@@ -37,7 +38,7 @@ public class CartViewController {
     }
 
     void fetchCartAfterDelete(String itemID) {
-        cartItemModel.getCartAfterDelete(itemID, new CartItemModel.GetAllCartsCallbacks() {
+        cartItemModel.getCartAfterDelete(session.getCartID(), itemID, new CartItemModel.GetAllCartsCallbacks() {
             @Override
             public void onSuccess(List<CartItem> items) {
                 view.setCart(items);
@@ -49,7 +50,7 @@ public class CartViewController {
     }
 
     void doCartItemsUpdate(List<CartItem> items) {
-        cartItemModel.updateCartItemsQuantity(items, new CartItemModel.GetAllCartsCallbacks() {
+        cartItemModel.updateCartItemsQuantity(session.getCartID(), items, new CartItemModel.GetAllCartsCallbacks() {
             @Override
             public void onSuccess(List<CartItem> items) {
                 view.setCart(items);
@@ -61,13 +62,11 @@ public class CartViewController {
     }
 
     // invoke on main activity started
-    void fetchUserAbandonedCart() {
-        // Get Current user ID
-        String UID = "";
-        cartItemModel.getCurrentUserCart(UID, new CartItemModel.GetCurrentUserCartCallbacks() {
+    void fetchUserCart() {
+        cartItemModel.getCurrentUserCart(session.getUID(),new CartItemModel.GetCurrentUserCartCallbacks() {
             @Override
             public void onSuccess(Cart cart) {
-                // SET CURRENT CART HERE
+                session.setCartID(cart.getDocumentID());
             }
         });
     }
@@ -76,8 +75,7 @@ public class CartViewController {
         // Use Java 8 Stream
         int totalCart = items.stream().mapToInt(i -> Integer.parseInt(i.getProductPrice()) * Integer.parseInt(i.getQuantity())).sum();
         // Get Current cart
-        String currentCartID = "";
-        cartItemModel.updateCartForCheckout(currentCartID, totalCart, new CartItemModel.UpdateCartForCheckoutCallbacks() {
+        cartItemModel.updateCartForCheckout(session.getCartID(), totalCart, new CartItemModel.UpdateCartForCheckoutCallbacks() {
             @Override
             public void onSuccess(String successMessage) {
                 // set checkout success message

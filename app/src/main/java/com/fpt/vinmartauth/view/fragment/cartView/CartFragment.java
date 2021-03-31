@@ -1,5 +1,7 @@
-package com.fpt.vinmartauth.view.fragment;
+package com.fpt.vinmartauth.view.fragment.cartView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.adapter.CartAdapter;
 import com.fpt.vinmartauth.entity.CartItem;
+import com.fpt.vinmartauth.view.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +44,7 @@ public class CartFragment extends Fragment implements CartView{
     private final String TOAST_DELETE_MESSAGE_HEAD = "Đã xóa: ";
     private static final String CURRENCY_SYMBOL = " đ";
     private Button btnCheckout;
+    private FirebaseAuth mAuth;
 
 
     public CartFragment() {}
@@ -60,6 +66,7 @@ public class CartFragment extends Fragment implements CartView{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        init();
         controller.setView(this);
         tvCartTotal = view.findViewById(R.id.tv_cart_total);
         rvCartList = view.findViewById(R.id.rvCart);
@@ -90,6 +97,20 @@ public class CartFragment extends Fragment implements CartView{
         controller.doCartItemsUpdate(cartItemList);
     }
 
+    private void init() {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            UserSession session = UserSession.getInstance();
+            session.setUID(user.getUid());
+            controller.fetchUserCart();
+        } else {
+            // redirect to login
+            Intent intent = new Intent(this.getContext(), LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
     // Manage swipe interaction
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(10,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
         @Override
@@ -109,10 +130,6 @@ public class CartFragment extends Fragment implements CartView{
         }
     };
 
-    private void init() {
-        // Get current User
-        // Save UID somewhere
-    }
 
     @Override
     public void setCart(List<CartItem> cartItemList) {

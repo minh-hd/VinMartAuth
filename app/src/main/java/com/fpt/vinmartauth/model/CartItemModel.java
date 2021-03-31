@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.fpt.vinmartauth.entity.Cart;
 import com.fpt.vinmartauth.entity.CartItem;
+import com.fpt.vinmartauth.view.fragment.cartView.UserSession;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
@@ -14,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,7 +41,6 @@ public class CartItemModel {
     private final String ITEM_QUANTITY_FIELD = "quantity";
     private final String UPDATE_SUCCESS_MESSAGE = "Đơn hàng đặt thành công";
     private final String UPDATE_ERROR_MESSAGE = "Lỗi đặt hàng.";
-
     // *==REMOVE THIS LINE BELOW AFTER FOUND A SOLUTION TO STORE CURRENT CART==*
     private final String currentUserCartID = "Cax001"; // there are 4 method references to this line, delete with caution!!!
     // *=======================================================================*
@@ -49,15 +50,17 @@ public class CartItemModel {
     }
 
     // method to get Cart by ID
-    public void getCartByID(String cartID, GetCartByIDCallbacks callbacks) {
+    public void getCartByID(String UID, GetCartByIDCallbacks callbacks) {
         CollectionReference cartRef = instance.collection(CART_COLLECTION_PATH);
-        Query query = cartRef.whereEqualTo(CART_DOCUMENT_ID_FIELD,cartID);
+        Query query = cartRef.whereEqualTo(CART_UID_FIELD, UID);
         query.addSnapshotListener((value, error) -> {
             if (!value.isEmpty()) {
                 Cart cart = null;
                 for (DocumentSnapshot doc : value.getDocuments()) {
-                    cart = doc.toObject(Cart.class);
-                    cart.setCheckout(doc.getBoolean(CART_IS_CHECKOUT_FIELD));
+                    if (!doc.getBoolean(CART_IS_CHECKOUT_FIELD)) {
+                        cart = doc.toObject(Cart.class);
+                        cart.setCheckout(doc.getBoolean(CART_IS_CHECKOUT_FIELD));
+                    }
                 }
                 callbacks.onSuccess(cart);
             } else {
@@ -123,9 +126,9 @@ public class CartItemModel {
     }
 
     // method to get all cart items
-    public void getAllCartItem(GetAllCartsCallbacks callbacks){
+    public void getAllCartItem(String cartID, GetAllCartsCallbacks callbacks){
         CollectionReference cartRef = instance.collection(CART_COLLECTION_PATH);
-        cartRef.document(currentUserCartID)
+        cartRef.document(cartID)
                 .collection(ITEM_COLLECTION_PATH)
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -147,8 +150,8 @@ public class CartItemModel {
         void onFailure();
     }
 
-    public void getTotalItemsPrice(GetTotalPricesCallbacks callbacks) {
-        getAllCartItem(new GetAllCartsCallbacks() {
+    public void getTotalItemsPrice(String cartID, GetTotalPricesCallbacks callbacks) {
+        getAllCartItem(cartID, new GetAllCartsCallbacks() {
             @Override
             public void onSuccess(List<CartItem> items) {
                 int itemTotal = 0;
@@ -169,14 +172,14 @@ public class CartItemModel {
     }
 
     // method to delete cart item
-    public void getCartAfterDelete(String itemID, GetAllCartsCallbacks callbacks) {
+    public void getCartAfterDelete(String cartID, String itemID, GetAllCartsCallbacks callbacks) {
         CollectionReference cartRef = instance.collection(CART_COLLECTION_PATH);
-        cartRef.document(currentUserCartID)
+        cartRef.document(cartID)
                 .collection(ITEM_COLLECTION_PATH)
                 .document(itemID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                getAllCartItem(new GetAllCartsCallbacks() {
+                getAllCartItem(cartID, new GetAllCartsCallbacks() {
                     @Override
                     public void onSuccess(List<CartItem> items) {
                         callbacks.onSuccess(items);
@@ -190,10 +193,10 @@ public class CartItemModel {
     }
 
     // method to update cart item quantity
-    public void updateCartItemsQuantity(List<CartItem> items, GetAllCartsCallbacks callbacks) {
+    public void updateCartItemsQuantity(String cartID, List<CartItem> items, GetAllCartsCallbacks callbacks) {
         WriteBatch updateBatch =  instance.batch();
         CollectionReference cartItemRef = instance.collection(CART_COLLECTION_PATH)
-                .document(currentUserCartID)
+                .document(cartID)
                 .collection(ITEM_COLLECTION_PATH);
         // add item needed update to batch
         for (CartItem item : items) {
@@ -203,7 +206,7 @@ public class CartItemModel {
         updateBatch.commit().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Log.d(SUCCESS_TAG, UPDATE_SUCCESS_MESSAGE);
-                getAllCartItem(new GetAllCartsCallbacks() {
+                getAllCartItem(cartID, new GetAllCartsCallbacks() {
                     @Override
                     public void onSuccess(List<CartItem> items) {callbacks.onSuccess(items);}
 
