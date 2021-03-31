@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends Adapter {
-    private final ArrayList<Product> items = new ArrayList<>();
+    public static ArrayList<Product> items = new ArrayList<>();
     private ProductAdapterListener listener;
 
     public void setListener(ProductAdapterListener listener) {

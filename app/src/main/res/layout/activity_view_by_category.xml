@@ -90,4 +90,13 @@
             app:layout_constraintStart_toEndOf="@+id/tvAscending"
             app:layout_constraintTop_toTopOf="@+id/tvAscending" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvNullProduct"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="Rất tiếc, chưa có sản phẩm nào trong danh mục."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rvViewByCategory" />
 </androidx.constraintlayout.widget.ConstraintLayout>

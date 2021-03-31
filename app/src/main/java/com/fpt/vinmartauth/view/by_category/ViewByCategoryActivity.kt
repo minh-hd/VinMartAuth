@@ -2,7 +2,9 @@ package com.fpt.vinmartauth.view.by_category
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Log.d
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -22,12 +24,12 @@ class ViewByCategoryActivity : AppCompatActivity(), ByCategoryView, ProductAdapt
         setContentView(R.layout.activity_view_by_category)
         findViewById<TextView>(R.id.tvCategoryTitle).text = intent.getStringExtra("CategoryName")
         val catID = intent.getStringExtra("CategoryID")
-        val view = findViewById<RecyclerView>(R.id.rvViewByCategory)
+        val recyclerView = findViewById<RecyclerView>(R.id.rvViewByCategory)
         val tvNewest: TextView = findViewById(R.id.tvNewest)
         val tvSortBy: TextView = findViewById(R.id.tvSortBy)
         val tvAsc: TextView = findViewById(R.id.tvAscending)
         val tvDesc: TextView = findViewById(R.id.tvDescending)
-        view.adapter = productAdapter
+        recyclerView.adapter = productAdapter
         productAdapter.setListener(this)
         controller.setView(this)
         controller.fetchProductByCategory(Category(catID, "pff"), 4)
@@ -56,7 +58,7 @@ class ViewByCategoryActivity : AppCompatActivity(), ByCategoryView, ProductAdapt
             tvDesc.isSelected = false
             controller.fetchProductByCategory(Category(catID, "pff"), 1)
         }
-        view.layoutManager = GridLayoutManager(view?.context, 2)
+        recyclerView.layoutManager = GridLayoutManager(recyclerView?.context, 2)
         findViewById<ImageView>(R.id.imageView5).setOnClickListener {
             finish()
         }
@@ -64,6 +66,15 @@ class ViewByCategoryActivity : AppCompatActivity(), ByCategoryView, ProductAdapt
 
     override fun setProducts(products: MutableList<Product>?) {
         productAdapter.setData(products)
+        Log.e("items", products?.size.toString())
+        when (products?.size) {
+            0 -> {
+                findViewById<TextView>(R.id.tvNullProduct).visibility = View.VISIBLE
+            }
+            else -> {
+                findViewById<TextView>(R.id.tvNullProduct).visibility = View.GONE
+            }
+        }
     }
 
     override fun onProductClick(product: Product?) {
