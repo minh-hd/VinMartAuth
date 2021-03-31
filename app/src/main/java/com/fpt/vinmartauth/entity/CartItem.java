@@ -1,11 +1,5 @@
 package com.fpt.vinmartauth.entity;
 
-import com.google.firebase.Timestamp;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-
 public class CartItem {
     private String documentID;
     private String productID;
@@ -13,6 +7,18 @@ public class CartItem {
     private String productTitle;
     private String productPrice;
     private String quantity;
+
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "documentID='" + documentID + '\'' +
+                ", productID='" + productID + '\'' +
+                ", productImage='" + productImage + '\'' +
+                ", productTitle='" + productTitle + '\'' +
+                ", productPrice='" + productPrice + '\'' +
+                ", quantity='" + quantity + '\'' +
+                '}';
+    }
 
     public CartItem() {
     }
