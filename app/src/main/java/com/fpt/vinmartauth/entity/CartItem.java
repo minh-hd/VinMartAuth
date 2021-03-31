@@ -23,6 +23,15 @@ public class CartItem {
     public CartItem() {
     }
 
+    public CartItem(String documentID, String productID, String productImage, String productTitle, String productPrice, String quantity) {
+        this.documentID = documentID;
+        this.productID = productID;
+        this.productImage = productImage;
+        this.productTitle = productTitle;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
+    }
+
     public String getDocumentID() {
         return documentID;
     }
