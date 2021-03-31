@@ -2,26 +2,17 @@ package com.fpt.vinmartauth.model;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.fpt.vinmartauth.entity.Category;
 import com.fpt.vinmartauth.entity.Product;
 import com.fpt.vinmartauth.utils.TextUtils;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ProductModel {
     private final FirebaseFirestore instance = FirestoreInstance.getInstance();
@@ -84,10 +75,11 @@ public class ProductModel {
 
     public interface GetProductsByTitleCallbacks {
         void onSuccess(List<Product> products);
+
         void onFailed();
     }
 
-    public void getProductByCategoryId(Category category,GetProductsByTitleCallbacks callbacks) {
+    public void getProductByCategoryId(Category category, GetProductsByTitleCallbacks callbacks) {
         getAllProduct(new GetAllProductsCallbacks() {
             @Override
             public void onSuccess(List<Product> products) {
@@ -100,6 +92,7 @@ public class ProductModel {
                 callbacks.onSuccess(filteredProducts);
 
             }
+
             @Override
             public void onFailed() {
                 callbacks.onFailed();
@@ -107,7 +100,7 @@ public class ProductModel {
         });
     }
 
-    public void getAllProductSortByPrice(GetProductsByTitleCallbacks callbacks){
+    public void getAllProductSortByPrice(GetProductsByTitleCallbacks callbacks) {
         getAllProduct(new GetAllProductsCallbacks() {
             @Override
             public void onSuccess(List<Product> products) {

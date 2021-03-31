@@ -24,8 +24,8 @@ public class ProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static com.fpt.vinmartauth.view.fragment.ProfileFragment newInstance() {
-        return new com.fpt.vinmartauth.view.fragment.ProfileFragment();
+    public static ProfileFragment newInstance() {
+        return new ProfileFragment();
     }
 
     @Override
