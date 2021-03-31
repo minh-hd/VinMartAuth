@@ -20,13 +20,6 @@ public class CartItemModel {
     private final String CART_COLLECTION_PATH = "cart";
     private final String CART_IS_CHECKOUT_FIELD = "isCheckout";
     private final String CART_UID_FIELD = "UID";
-    private final String ITEM_COLLECTION_PATH = "items";
-    private final String ITEM_DOCUMENT_ID_FIELD = "documentID";
-    private final String ITEM_PRODUCT_TITLE_FIELD = "productTitle";
-    private final String ITEM_PRODUCT_PRICE_FIELD = "productPrice";
-    private final String ITEM_PRODUCT_IMAGE_FIELD = "productImage";
-    private final String ITEM_PRODUCT_PRODUCT_ID_FIELD = "productID";
-    private final String ITEM_QUANTITY_FIELD = "quantity";
     private final CollectionReference cartRef;
     private Cart cartSession;
     private List<CartItem> itemListSession;
@@ -35,7 +28,27 @@ public class CartItemModel {
         instance = FirestoreInstance.getInstance();
         cartRef = instance.collection(CART_COLLECTION_PATH);
     }
-
+    public void getCartByID(String UID, GetCartByIDCallbacks callbacks) {
+        CollectionReference cartRef = instance.collection(CART_COLLECTION_PATH);
+        Query query = cartRef.whereEqualTo(CART_UID_FIELD, UID);
+        query.addSnapshotListener((value, error) -> {
+            if (!value.isEmpty()) {
+                Cart cart = null;
+                for (DocumentSnapshot doc : value.getDocuments()) {
+                    if (!doc.getBoolean(CART_IS_CHECKOUT_FIELD)) {
+                        cart = doc.toObject(Cart.class);
+                        cart.setCheckout(doc.getBoolean(CART_IS_CHECKOUT_FIELD));
+                    }
+                }
+                callbacks.onSuccess(cart);
+            } else {
+                Log.d(ERROR_TAG, "Unable to get cart");
+            }
+        });
+    }
+    public interface GetCartByIDCallbacks {
+        void onSuccess(Cart cart);
+    }
     public void getCheckoutCartAndItems(GetCheckoutCartAndItemsCallbacks callbacks) {
         // Get cart
         CollectionReference ref = instance.collection("carts");

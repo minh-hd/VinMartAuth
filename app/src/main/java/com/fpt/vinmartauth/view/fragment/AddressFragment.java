@@ -1,12 +1,10 @@
 package com.fpt.vinmartauth.view.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
@@ -23,11 +21,8 @@ import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.entity.Customer;
 import com.fpt.vinmartauth.entity.Ship;
 import com.fpt.vinmartauth.validation.AuthValidation;
-import com.fpt.vinmartauth.view.CheckOutActivity;
-import com.fpt.vinmartauth.view.MyClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

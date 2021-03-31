@@ -2,6 +2,7 @@ package com.fpt.vinmartauth.controller;
 
 import android.util.Log;
 
+import com.fpt.vinmartauth.entity.Cart;
 import com.fpt.vinmartauth.entity.CartItem;
 import com.fpt.vinmartauth.model.CartItemModel;
 
@@ -50,10 +51,21 @@ public void fetchAmountTotal()
         }
     });
 }
+public void fetchCart(String UID)
+{
+    cartItemModel.getCartByID(UID, new CartItemModel.GetCartByIDCallbacks() {
+        @Override
+        public void onSuccess(Cart cart) {
+            view.setCart(cart);
+        }
+    });
+}
+
     public interface CartItemCheckoutView {
         void setProductsCO(List<CartItem> cartItems);
         void setTotal(int total);
         void setAmount (int amount);
+        void setCart (Cart cart);
     }
 }
 

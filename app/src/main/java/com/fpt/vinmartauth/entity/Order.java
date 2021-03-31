@@ -2,11 +2,13 @@ package com.fpt.vinmartauth.entity;
 
 public class Order {
     String orderId;
-    Customer customer;
-    Cart cart;
-    Payment payment;
-    Ship ship;
-    OrderStatus status;
+    String customerID;
+    String cartID;
+    String paymentID;
+    String shipID;
+    String statusID;
+    Card card;
+    String address;
 
     public Order() {
     }
@@ -15,13 +17,15 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Order(String orderId, Customer customerID, Cart cartID, Payment paymentID, Ship shipID, OrderStatus statusID) {
+    public Order(String orderId, String customerID, String cartID, String paymentID, String shipID, String statusID, Card card, String address) {
         this.orderId = orderId;
-        this.customer = customerID;
-        this.cart = cartID;
-        this.payment = paymentID;
-        this.ship = shipID;
-        this.status = statusID;
+        this.customerID = customerID;
+        this.cartID = cartID;
+        this.paymentID = paymentID;
+        this.shipID = shipID;
+        this.statusID = statusID;
+        this.card = card;
+        this.address = address;
     }
 
     public String getOrderId() {
@@ -32,43 +36,59 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public String getCustomerID() {
+        return customerID;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
     }
 
-    public Cart getCart() {
-        return cart;
+    public String getCartID() {
+        return cartID;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setCartID(String cartID) {
+        this.cartID = cartID;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public String getPaymentID() {
+        return paymentID;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setPaymentID(String paymentID) {
+        this.paymentID = paymentID;
     }
 
-    public Ship getShip() {
-        return ship;
+    public String getShipID() {
+        return shipID;
     }
 
-    public void setShip(Ship ship) {
-        this.ship = ship;
+    public void setShipID(String shipID) {
+        this.shipID = shipID;
     }
 
-    public OrderStatus getStatus() {
-        return status;
+    public String getStatusID() {
+        return statusID;
     }
 
-    public void setStatus(OrderStatus status) {
-        this.status = status;
+    public void setStatusID(String statusID) {
+        this.statusID = statusID;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

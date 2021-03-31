@@ -9,11 +9,21 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fpt.vinmartauth.R;
+import com.fpt.vinmartauth.adapter.CheckoutCartAdapter;
+import com.fpt.vinmartauth.controller.ConfirmCheckoutController;
+import com.fpt.vinmartauth.controller.CreateOrderController;
+import com.fpt.vinmartauth.entity.Card;
+import com.fpt.vinmartauth.entity.Order;
 import com.fpt.vinmartauth.view.fragment.AddressFragment;
 import com.fpt.vinmartauth.view.fragment.ConfirmFragment;
 import com.fpt.vinmartauth.view.fragment.MainFragment;
@@ -28,17 +38,26 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.util.Random;
+
 public class CheckOutActivity extends AppCompatActivity {
+    CheckoutCartAdapter adapterCart = new CheckoutCartAdapter();
+    private ConfirmCheckoutController controller = new ConfirmCheckoutController();
     TextView fullName, email, phone;
     FirebaseAuth fAuth;
     FirebaseFirestore fstore;
-    String cusID;
-
+    Spinner shipSpinner;
+    EditText address, cardOwner, cardNumber, cardExpiry;
+    String customerID,cartID,paymentID,shipID,statusID,_address, cardOwn, cardNo, cardExp;
+    Card card;
+    AddressFragment adddressViwe;
+    private CreateOrderController controllerCO = new CreateOrderController();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out);
         openFragment(AddressFragment.newInstance());
+
 
 // Set Fragmentclass Arguments
        //   fullName = findViewById(R.id.sa_name);
@@ -60,6 +79,48 @@ public class CheckOutActivity extends AppCompatActivity {
 //                email.setText(value.getString("email"));
 //            }
 //        });
+    }
+
+    @Override
+    public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onPostCreate(savedInstanceState, persistentState);
+        fAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = fAuth.getCurrentUser();
+        customerID = user.getUid();
+
+        RadioGroup rg = (RadioGroup) findViewById(R.id.payment_group);
+        final String value = ((RadioButton) findViewById(rg.getCheckedRadioButtonId())).getText().toString();
+        int selectedId = rg.getCheckedRadioButtonId();
+        paymentID = value;
+        cardOwner = findViewById(R.id.card_owner);
+        cardNumber = findViewById(R.id.card_number);
+        cardExpiry = findViewById(R.id.card_expiry);
+
+        if (value.equalsIgnoreCase("Thanh toán bằng thẻ"))
+        {
+            Random generator = new Random();
+            cardOwn = cardOwner.getText().toString();
+            cardNo = cardNumber.getText().toString();
+            cardExp = cardExpiry.getText().toString();
+            card = new Card("Cdx"+ generator.nextInt(100),cardExp,cardNo,cardOwn );
+        }
+        shipSpinner = findViewById(R.id.citySpinner);
+        shipID = String.valueOf(shipSpinner.getSelectedItem());
+        address = findViewById(R.id.sa_address);
+        _address = address.getText().toString();
+        statusID = "Confirmed";
+        controller.fetchCart(customerID);
+        Order order = new Order();
+        Random generator1 = new Random();
+        order.setOrderId("Ox"+ generator1.nextInt(100));
+        order.setAddress(_address);
+        order.setCard(card);
+        order.setCartID(cartID);
+        order.setCustomerID(customerID);
+        order.setPaymentID(paymentID);
+        order.setShipID(shipID);
+        order.setStatusID(statusID);
+        controllerCO.createOrder(order);
     }
 
     private void openFragment(Fragment fragment) {

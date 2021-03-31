@@ -2,64 +2,77 @@ package com.fpt.vinmartauth.model;
 
 import android.util.Log;
 
-import com.fpt.vinmartauth.entity.Cart;
 import com.fpt.vinmartauth.entity.Order;
+import com.fpt.vinmartauth.entity.OrderStatus;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderModel {
     private final FirebaseFirestore instance = FirestoreInstance.getInstance();
     private final String SUCCESS_TAG = "Success request: ";
     private final String ERROR_TAG = "Error request: ";
-    public void getAllOrder(GetAllOrdersCallbacks callbacks) {
-        CollectionReference orderCollectionRef = instance.collection("orders");
-        orderCollectionRef.get().addOnCompleteListener(task -> {
+    private final FirebaseFirestore db;
+
+    public OrderModel() {
+
+        db = null;
+    }
+
+
+
+    private List<Order> populateOrder(QuerySnapshot collection) {
+        List<Order> orders = new ArrayList<>();
+        for (DocumentSnapshot doc : collection) {
+            Order o = doc.toObject(Order.class);
+
+            orders.add(o);
+        }
+        return orders;
+    }
+    public void createOrder(Order orderDTO, CreateOrdersCallbacks callbacks) {
+        CollectionReference cartRef = instance.collection("orders");
+        cartRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 QuerySnapshot snapshot = task.getResult();
-                List<Order> orders = new ArrayList<>();
-                for (QueryDocumentSnapshot document : snapshot) {
-                    Order order = document.toObject(Order.class);
-                    order.setOrderId(document.getId());
-                    orders.add(order);
-                    Log.d("anhdt", order.toString());
-                }
-                callbacks.onSuccess(orders);
-            } else {
-                callbacks.onFailed();
-            }
-        });
-    }
-
-    public void getOrderByCartId(Cart cart, GetOrderByCartCallbacks callbacks) {
-        getAllOrder(new GetAllOrdersCallbacks() {
-            @Override
-            public void onSuccess(List<Order> orders) {
-                List<Order> filteredOrders = new ArrayList<>();
-                orders.forEach(order -> {
-                    if (order.getCart().getDocumentID().contains(cart.getDocumentID())) {
-                        filteredOrders.add(order);
+                List<Order> allOrder = populateOrder(snapshot);
+                Map<String,Object> orders = new HashMap<>();
+                orders.put("UID", orderDTO.getCustomerID());
+                orders.put("address", orderDTO.getAddress());
+                orders.put("cardID", orderDTO.getCard());
+                orders.put("cart", orderDTO.getCartID());
+                orders.put("payment", orderDTO.getPaymentID());
+                orders.put("shipID", orderDTO.getShipID());
+                orders.put("status", orderDTO.getStatusID());
+                db.collection("orders").document("Ox".concat(String.format("%03d" , allOrder.size() + 1)))
+                        .set(orders).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("anhdt", "Order successfully written!");
                     }
                 });
-                callbacks.onSuccess(filteredOrders);
+                callbacks.onSuccess();
 
-            }
-            @Override
-            public void onFailed() {
+            } else  {
                 callbacks.onFailed();
             }
         });
+
+
+
     }
-    public interface GetOrderByCartCallbacks {
-        void onSuccess(List<Order> orders);
-        void onFailed();
-    }
-    public interface GetAllOrdersCallbacks {
-        void onSuccess(List<Order> orders);
+
+
+    public interface CreateOrdersCallbacks {
+        void onSuccess();
         void onFailed();
     }
 }

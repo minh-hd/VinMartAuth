@@ -18,16 +18,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.adapter.CheckoutCartAdapter;
 import com.fpt.vinmartauth.controller.ConfirmCheckoutController;
+import com.fpt.vinmartauth.controller.CreateOrderController;
+import com.fpt.vinmartauth.entity.Card;
+import com.fpt.vinmartauth.entity.Cart;
 import com.fpt.vinmartauth.entity.CartItem;
+import com.fpt.vinmartauth.entity.Order;
 import com.fpt.vinmartauth.view.MainActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +53,16 @@ public class ConfirmFragment extends Fragment implements ConfirmCheckoutControll
 
     CheckoutCartAdapter adapterCart = new CheckoutCartAdapter();
     private ConfirmCheckoutController controller = new ConfirmCheckoutController();
+    TextView fullName, email, phone;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fstore;
+    Spinner shipSpinner;
+    EditText address, cardOwner, cardNumber, cardExpiry;
+    String customerID,cartID,paymentID,shipID,statusID,_address, cardOwn, cardNo, cardExp;
+    Card card;
+    AddressFragment adddressViwe;
+    private CreateOrderController controllerCO = new CreateOrderController();
+
 
     TextView totalPayment, totalAmount;
     // TODO: Rename parameter arguments, choose names that match
@@ -100,6 +121,8 @@ public class ConfirmFragment extends Fragment implements ConfirmCheckoutControll
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 final Dialog dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
                 // Include dialog.xml file
@@ -145,6 +168,11 @@ public class ConfirmFragment extends Fragment implements ConfirmCheckoutControll
     @Override
     public void setAmount(int amount) {
         totalAmount.setText(amount + "");
+    }
+
+    @Override
+    public void setCart(Cart cart) {
+        cartID = cart.getDocumentID();
     }
 
     @Override

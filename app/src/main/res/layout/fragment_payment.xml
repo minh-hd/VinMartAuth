@@ -328,6 +328,7 @@
 
 
                                 <EditText
+                                    android:id="@+id/card_expiry"
                                     android:hint="Ngày hết hạn"
                                     android:layout_width="match_parent"
                                     android:inputType="date"

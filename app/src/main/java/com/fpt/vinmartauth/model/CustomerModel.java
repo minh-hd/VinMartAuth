@@ -23,6 +23,7 @@ public class CustomerModel {
     customerQuery.get().addOnCompleteListener(task -> {
       if (task.isSuccessful()) {
         Log.i(SUCCESS_TAG, "OK");
+
       } else  {
         Log.d(ERROR_TAG, "Something wrong happened");
       }

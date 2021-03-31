@@ -1,12 +1,10 @@
 package com.fpt.vinmartauth.entity;
 
-import com.google.gson.annotations.SerializedName;
 
 public class OrderStatus {
-    @SerializedName("statusID")
+
     String orderStatusID;
-    @SerializedName("title")
-    String ostitle;
+        String ostitle;
 
     public OrderStatus() {
     }
