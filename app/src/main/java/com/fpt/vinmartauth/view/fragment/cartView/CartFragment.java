@@ -45,7 +45,7 @@ public class CartFragment extends Fragment implements CartView{
     private static final String CURRENCY_SYMBOL = " đ";
     private Button btnCheckout;
     private FirebaseAuth mAuth;
-    private UserSession session = UserSession.getInstance();
+    private final UserSession session = UserSession.getInstance();
 
 
     public CartFragment() {}
