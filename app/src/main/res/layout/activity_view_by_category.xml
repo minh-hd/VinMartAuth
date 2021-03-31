@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.by_category.ViewByCategoryActivity">
+
+    <TextView
+        android:id="@+id/tvCategoryTitle"
+        style="@style/CategoryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCategoryTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvCategoryTitle"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvViewByCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+    <TextView
+        android:id="@+id/tvNewest"
+        style="@style/sorter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mới nhất"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCategoryTitle" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNewest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvNewest"
+        app:layout_constraintTop_toTopOf="@+id/tvNewest">
+
+        <TextView
+            android:id="@+id/tvSortBy"
+            style="@style/sorter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sắp xếp theo giá: "
+            android:textColor="@color/sorter_color"
+            app:layout_constraintBottom_toBottomOf="@+id/tvNewest"
+            app:layout_constraintStart_toEndOf="@+id/tvNewest"
+            app:layout_constraintTop_toTopOf="@+id/tvNewest" />
+
+        <TextView
+            android:id="@+id/tvAscending"
+            style="@style/sorter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tăng dần ↑"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSortBy"
+            app:layout_constraintStart_toEndOf="@+id/tvSortBy"
+            app:layout_constraintTop_toTopOf="@+id/tvSortBy" />
+
+        <TextView
+            android:id="@+id/tvDescending"
+            style="@style/sorter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giảm dần ↓"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAscending"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvAscending"
+            app:layout_constraintTop_toTopOf="@+id/tvAscending" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

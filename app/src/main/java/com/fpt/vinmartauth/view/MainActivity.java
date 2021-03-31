@@ -12,9 +12,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.fpt.vinmartauth.R;
-import com.fpt.vinmartauth.model.CustomerModel;
 import com.fpt.vinmartauth.view.fragment.CartFragment;
-import com.fpt.vinmartauth.view.fragment.MainFragment;
+import com.fpt.vinmartauth.view.productview.ProductFragment;
 import com.fpt.vinmartauth.view.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -23,13 +22,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        openFragment(MainFragment.newInstance());
+        openFragment(ProductFragment.newInstance());
         //call bottom nav view by id
         BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavView);
         //create on-click listener
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = item -> {
             if (item.getItemId() == R.id.home) {
-                openFragment(MainFragment.newInstance());
+                openFragment(ProductFragment.newInstance());
             } else if (item.getItemId() == R.id.cart) {
                 openFragment(CartFragment.newInstance());
             } else if (item.getItemId() == R.id.profile) {
@@ -51,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
             setHomeItem(MainActivity.this);
         } else {//if user is already in the main fragment
             new AlertDialog.Builder(this)
-                    .setTitle("Really Exit?")
-                    .setMessage("Are you sure you want to exit?")
-                    .setNegativeButton("No", null) //if no, show main activity.
-                    .setPositiveButton("Yes", (arg0, arg1) -> {//if yes, back to home screen.
+                    .setTitle("Xác nhận")
+                    .setMessage("Thoát ứng dụng?")
+                    .setNegativeButton("Hủy", null) //if no, show main activity.
+                    .setPositiveButton("Thoát", (arg0, arg1) -> {//if yes, back to home screen.
                         Intent intent = new Intent(Intent.ACTION_MAIN);
                         intent.addCategory(Intent.CATEGORY_HOME);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -12,15 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         tools:layout_editor_absoluteX="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white">
+            android:background="@color/quite_white">
 
             <TextView
                 android:id="@+id/verification"
@@ -35,7 +34,7 @@
 
             <TextView
                 android:id="@+id/email"
-                style="@style/SmallText"
+                style="@style/BoldSmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
@@ -45,7 +44,7 @@
 
             <TextView
                 android:id="@+id/name"
-                style="@style/SmallText"
+                style="@style/BoldSmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
@@ -55,7 +54,7 @@
 
             <TextView
                 android:id="@+id/password"
-                style="@style/SmallText"
+                style="@style/BoldSmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
@@ -71,6 +70,7 @@
                 android:ems="10"
                 android:hint="@string/example_abc_com"
                 android:inputType="textEmailAddress"
+                android:theme="@style/AuthEditText"
                 app:layout_constraintBottom_toTopOf="@+id/password"
                 app:layout_constraintStart_toStartOf="@+id/password"
                 app:layout_constraintTop_toBottomOf="@+id/email" />
@@ -83,6 +83,7 @@
                 android:ems="10"
                 android:hint="@string/enter_password"
                 android:inputType="textPassword"
+                android:theme="@style/AuthEditText"
                 app:layout_constraintBottom_toTopOf="@+id/btnSignUp"
                 app:layout_constraintEnd_toEndOf="@+id/btnSignUp"
                 app:layout_constraintStart_toStartOf="@+id/btnSignUp"
@@ -120,6 +121,7 @@
                 android:ems="10"
                 android:hint="@string/name"
                 android:inputType="textPersonName"
+                android:theme="@style/AuthEditText"
                 app:layout_constraintBottom_toTopOf="@+id/email"
                 app:layout_constraintEnd_toStartOf="@+id/guideline78"
                 app:layout_constraintStart_toStartOf="@+id/email"
@@ -140,15 +142,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".85" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <ImageView
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:contentDescription="@string/back"
         android:src="@drawable/ic_baseline_arrow_back_ios_24"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.476" />
 </androidx.constraintlayout.widget.ConstraintLayout>

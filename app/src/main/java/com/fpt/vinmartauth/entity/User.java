@@ -1,28 +1,20 @@
 package com.fpt.vinmartauth.entity;
 
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Date;
 
-public class Customer {
+public class User {
   private String fullName;
   private String phone;
   private String email;
   private String password;
-  private Enum<Gender> gender;
-  private Date dateOfBirth;
   private String profileImageLink;
 
-  public Customer() {
+  public User() {
   }
 
-  public Customer(String fullName, String phone, String email, String password, Enum<Gender> gender, Date dateOfBirth, String profileImageLink) {
-    this.fullName = fullName;
-    this.phone = phone;
-    this.email = email;
-    this.password = password;
-    this.gender = gender;
-    this.dateOfBirth = dateOfBirth;
-    this.profileImageLink = profileImageLink;
-  }
 
   public String getFullName() {
     return fullName;
@@ -56,27 +48,23 @@ public class Customer {
     this.password = password;
   }
 
-  public Enum<Gender> getGender() {
-    return gender;
-  }
-
-  public void setGender(Enum<Gender> gender) {
-    this.gender = gender;
-  }
-
-  public Date getDateOfBirth() {
-    return dateOfBirth;
-  }
-
-  public void setDateOfBirth(Date dateOfBirth) {
-    this.dateOfBirth = dateOfBirth;
-  }
-
   public String getProfileImageLink() {
     return profileImageLink;
   }
 
   public void setProfileImageLink(String profileImageLink) {
     this.profileImageLink = profileImageLink;
+  }
+
+  @NotNull
+  @Override
+  public String toString() {
+    return "Customer{" +
+            "fullName='" + fullName + '\'' +
+            ", phone='" + phone + '\'' +
+            ", email='" + email + '\'' +
+            ", password='" + password + '\'' +
+            ", profileImageLink='" + profileImageLink + '\'' +
+            '}';
   }
 }
