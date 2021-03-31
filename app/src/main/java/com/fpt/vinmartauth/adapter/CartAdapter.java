@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.fpt.vinmartauth.R;
 import com.fpt.vinmartauth.entity.CartItem;
-import com.fpt.vinmartauth.view.fragment.CartFragment;
+import com.fpt.vinmartauth.view.fragment.cartView.CartFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

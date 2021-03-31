@@ -1,4 +1,4 @@
-package com.fpt.vinmartauth.view.fragment;
+package com.fpt.vinmartauth.view.fragment.cartView;
 
 import com.fpt.vinmartauth.entity.CartItem;
 
