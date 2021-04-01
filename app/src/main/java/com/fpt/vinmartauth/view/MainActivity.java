@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.fpt.vinmartauth.R;
-import com.fpt.vinmartauth.view.fragment.CartFragment;
+import com.fpt.vinmartauth.view.fragment.cartView.CartFragment;
 import com.fpt.vinmartauth.view.productview.ProductFragment;
 import com.fpt.vinmartauth.view.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
