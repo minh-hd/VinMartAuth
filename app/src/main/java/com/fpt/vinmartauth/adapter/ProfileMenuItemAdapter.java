@@ -16,6 +16,7 @@ import com.fpt.vinmartauth.entity.ProfileMenuItem;
 import com.fpt.vinmartauth.view.EditProfile;
 import com.fpt.vinmartauth.view.LoginActivity;
 import com.fpt.vinmartauth.view.MainActivity;
+import com.fpt.vinmartauth.view.fragment.cartView.UserSession;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -93,6 +94,11 @@ public class ProfileMenuItemAdapter extends Adapter {
 
     @Override
     public void signOut() {
+      UserSession session = UserSession.getInstance();
+      session.setCartID("");
+      session.setUID("");
+      CartAdapter cartAdapter = CartAdapter.getInstance();
+      cartAdapter.setData(new ArrayList<>());
       FirebaseAuth.getInstance().signOut();
     }
   }

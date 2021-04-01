@@ -1,7 +1,11 @@
 package com.fpt.vinmartauth.view.fragment.cartView;
 
+import android.app.Activity;
+import android.util.Log;
+
 import com.fpt.vinmartauth.entity.Cart;
 import com.fpt.vinmartauth.entity.CartItem;
+import com.fpt.vinmartauth.entity.Product;
 import com.fpt.vinmartauth.model.CartItemModel;
 
 import java.util.List;
@@ -9,73 +13,50 @@ import java.util.List;
 public class CartViewController {
     private CartView view;
     private final CartItemModel cartItemModel = new CartItemModel();
-    private final UserSession session = UserSession.getInstance();
 
-    void setView(CartView view) {
+    public void setView(CartView view) {
         this.view = view;
     }
 
-    void fetchCartItems() {
-        cartItemModel.getAllCartItem(session.getCartID(), new CartItemModel.GetAllCartsCallbacks() {
+    void fetchCartItems(String cartID, Activity activity) {
+        cartItemModel.getAllCartItem(cartID, activity,new CartItemModel.GetAllCartsCallbacks() {
 
             @Override
             public void onSuccess(List<CartItem> items) {
-                view.setCart(items);
-            }
-
-            @Override
-            public void onFailure() { }
-        });
-    }
-
-    void fetchCartItemsTotal() {
-        cartItemModel.getTotalItemsPrice(session.getCartID(), new CartItemModel.GetTotalPricesCallbacks() {
-            @Override
-            public void onSuccess(int cartTotals) {
-                view.setTotal(cartTotals);
+                view.setCartItems(items);
             }
         });
     }
 
-    void fetchCartAfterDelete(String itemID) {
-        cartItemModel.getCartAfterDelete(session.getCartID(), itemID, new CartItemModel.GetAllCartsCallbacks() {
+    void fetchCartAfterDelete(String cartID, String itemID, Activity activity) {
+        cartItemModel.getCartAfterDelete(cartID, itemID, activity,new CartItemModel.GetAllCartsCallbacks() {
             @Override
             public void onSuccess(List<CartItem> items) {
-                view.setCart(items);
+                view.setCartItems(items);
             }
-
-            @Override
-            public void onFailure() {}
         });
     }
 
-    void doCartItemsUpdate(List<CartItem> items) {
-        cartItemModel.updateCartItemsQuantity(session.getCartID(), items, new CartItemModel.GetAllCartsCallbacks() {
-            @Override
-            public void onSuccess(List<CartItem> items) {
-                view.setCart(items);
-            }
-
-            @Override
-            public void onFailure() {}
-        });
+    void doCartItemsUpdate(String cartID, List<CartItem> items, Activity activity) {
+        cartItemModel.updateCartItemsQuantity(cartID, items, activity);
     }
 
     // invoke on main activity started
-    void fetchUserCart() {
-        cartItemModel.getCurrentUserCart(session.getUID(),new CartItemModel.GetCurrentUserCartCallbacks() {
+    public void fetchUserCart(String UID, Activity activity) {
+        Log.d("SESSION", "Cart fetching");
+        cartItemModel.getCurrentUserCart(UID, activity, new CartItemModel.GetCurrentUserCartCallbacks() {
             @Override
             public void onSuccess(Cart cart) {
-                session.setCartID(cart.getDocumentID());
+                view.setCart(cart);
             }
         });
     }
 
-    void doCartCheckout(List<CartItem> items) {
+    void doCartCheckout(String cartID, List<CartItem> items) {
         // Use Java 8 Stream
         int totalCart = items.stream().mapToInt(i -> Integer.parseInt(i.getProductPrice()) * Integer.parseInt(i.getQuantity())).sum();
         // Get Current cart
-        cartItemModel.updateCartForCheckout(session.getCartID(), totalCart, new CartItemModel.UpdateCartForCheckoutCallbacks() {
+        cartItemModel.updateCartForCheckout(cartID, totalCart, new CartItemModel.UpdateCartForCheckoutCallbacks() {
             @Override
             public void onSuccess(String successMessage) {
                 // set checkout success message
@@ -90,4 +71,17 @@ public class CartViewController {
         });
     }
 
+    public void doAddProductItem(Product product, String cartID, Activity activity) {
+        cartItemModel.addProductToCart(product, cartID, activity, new CartItemModel.UpdateCartForCheckoutCallbacks() {
+            @Override
+            public void onSuccess(String successMessage) {
+                view.setMessage(successMessage);
+            }
+
+            @Override
+            public void onFailure(String failureMessage) {
+                view.setMessage(failureMessage);
+            }
+        });
+    }
 }
