@@ -49,4 +49,6 @@
     <string name="cart_header_label">Giỏ hàng</string>
     <string name="cart_checkout_button">Thanh toán</string>
     <string name="cart_total_holder">0 đ</string>
+    <string name="productTitle">Rau cai ngong tui 300g</string>
+    <string name="productPricePlaceHolder">Gia: 12000đ</string>
 </resources>

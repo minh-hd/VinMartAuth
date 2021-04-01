@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:id="@+id/tv_product_title"
-                android:text="Rau cai ngong tui 300g"
+                android:text="@string/productTitle"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:id="@+id/tv_product_price"
-                android:text="Gia: 12000đ"
+                android:text="@string/productPricePlaceHolder"
                 android:textSize="18sp"/>
             <LinearLayout
                 android:orientation="horizontal"
