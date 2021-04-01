@@ -14,7 +14,7 @@ public class CartViewController {
     private CartView view;
     private final CartItemModel cartItemModel = new CartItemModel();
 
-    void setView(CartView view) {
+    public void setView(CartView view) {
         this.view = view;
     }
 
@@ -25,18 +25,6 @@ public class CartViewController {
             public void onSuccess(List<CartItem> items) {
                 view.setCartItems(items);
             }
-
-            @Override
-            public void onFailure() {}
-        });
-    }
-
-    void fetchCartItemsTotal(String cartID, Activity activity) {
-        cartItemModel.getTotalItemsPrice(cartID, activity, new CartItemModel.GetTotalPricesCallbacks() {
-            @Override
-            public void onSuccess(int cartTotals) {
-                view.setTotal(cartTotals);
-            }
         });
     }
 
@@ -46,28 +34,17 @@ public class CartViewController {
             public void onSuccess(List<CartItem> items) {
                 view.setCartItems(items);
             }
-
-            @Override
-            public void onFailure() {}
         });
     }
 
     void doCartItemsUpdate(String cartID, List<CartItem> items, Activity activity) {
-        cartItemModel.updateCartItemsQuantity(cartID, items, activity,new CartItemModel.GetAllCartsCallbacks() {
-            @Override
-            public void onSuccess(List<CartItem> items) {
-                view.setCartItems(items);
-            }
-
-            @Override
-            public void onFailure() {}
-        });
+        cartItemModel.updateCartItemsQuantity(cartID, items, activity);
     }
 
     // invoke on main activity started
-    void fetchUserCart(String UID, Activity activity) {
+    public void fetchUserCart(String UID, Activity activity) {
         Log.d("SESSION", "Cart fetching");
-        cartItemModel.getCurrentUserCart(UID, activity,new CartItemModel.GetCurrentUserCartCallbacks() {
+        cartItemModel.getCurrentUserCart(UID, activity, new CartItemModel.GetCurrentUserCartCallbacks() {
             @Override
             public void onSuccess(Cart cart) {
                 view.setCart(cart);
@@ -94,8 +71,8 @@ public class CartViewController {
         });
     }
 
-    public void doAddProductItem(Product product, String cartID) {
-        cartItemModel.addProductToCart(product, cartID, new CartItemModel.UpdateCartForCheckoutCallbacks() {
+    public void doAddProductItem(Product product, String cartID, Activity activity) {
+        cartItemModel.addProductToCart(product, cartID, activity, new CartItemModel.UpdateCartForCheckoutCallbacks() {
             @Override
             public void onSuccess(String successMessage) {
                 view.setMessage(successMessage);
@@ -107,5 +84,4 @@ public class CartViewController {
             }
         });
     }
-
 }

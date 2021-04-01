@@ -90,6 +90,7 @@ public class CartFragment extends Fragment implements CartView{
                 tvCartTotal.setText("0 đ");
                 // clear UserSession cartID
                 session.setCartID("");
+                Log.d("checkout", session.getCartID());
             }
         });
         rvCartList.setAdapter(cartAdapter);
@@ -99,8 +100,9 @@ public class CartFragment extends Fragment implements CartView{
     @Override
     public void onPause() {
         super.onPause();
-        if(session.getCartID() != null || "".equals(session.getCartID())) {
-            List<CartItem> cartItemList = cartAdapter.getCartItemList();
+        List<CartItem> cartItemList = cartAdapter.getCartItemList();
+        Log.d("checkout", "Check cartID has been clear: " + session.getCartID().equals(""));
+        if(!session.getCartID().isEmpty() && !cartItemList.isEmpty()) {
             controller.doCartItemsUpdate(session.getCartID(), cartItemList, getActivity());
         }
     }
@@ -110,14 +112,18 @@ public class CartFragment extends Fragment implements CartView{
         Log.d("SESSION", "Init run");
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
+        Log.d("SESSION", "Check user mAuth " + String.valueOf(user == null));
         if (user != null) {
             // run first time
             Log.d("SESSION", "User has logged in");
             if (session.getUID() == null || "".equals(session.getUID())) {
                 session.setUID(user.getUid());
             }
+            Log.d("SESSION", session.getUID());
             // run first time or when user need new cart
-            controller.fetchUserCart(session.getUID(), getActivity());
+            if (session.getCartID() == null || "".equals(session.getCartID())) {
+                controller.fetchUserCart(session.getUID(), getActivity());
+            } else controller.fetchCartItems(session.getCartID(), getActivity());
         } else {
             // redirect to login
             Log.d("SESSION", "User not logged in");
@@ -137,8 +143,7 @@ public class CartFragment extends Fragment implements CartView{
             List<CartItem> cartItemList = cartAdapter.getCartItemList();
             // Show toast message of removed item
             Toast.makeText(getActivity(), TOAST_DELETE_MESSAGE_HEAD + cartItemList.get(
-                    viewHolder.getAdapterPosition()).getProductTitle(), Toast.LENGTH_SHORT
-            ).show();
+                    viewHolder.getAdapterPosition()).getProductTitle(), Toast.LENGTH_SHORT).show();
             // invoke cart item list after delete in firebase
             controller.fetchCartAfterDelete(session.getCartID(), cartItemList.get(viewHolder.getAdapterPosition()).getDocumentID(), getActivity());
             cartAdapter.setData(cartItemList);
@@ -148,12 +153,11 @@ public class CartFragment extends Fragment implements CartView{
 
     @Override
     public void setCartItems(List<CartItem> cartItemList) {
+        int itemTotal = 0;
+        for (CartItem item : cartItemList)
+            itemTotal += Integer.parseInt(item.getQuantity()) * Integer.parseInt(item.getProductPrice());
+        tvCartTotal.setText(String.valueOf(itemTotal).concat(CURRENCY_SYMBOL));
         cartAdapter.setData(cartItemList);
-    }
-
-    @Override
-    public void setTotal(int cartTotal) {
-        tvCartTotal.setText(String.valueOf(cartTotal).concat(CURRENCY_SYMBOL));
     }
 
     @Override
@@ -164,7 +168,7 @@ public class CartFragment extends Fragment implements CartView{
     @Override
     public void setCart(Cart cart) {
         session.setCartID(cart.getDocumentID());
+        Log.d("SESSION", "Got cartID: " + session.getCartID());
         controller.fetchCartItems(session.getCartID(),getActivity());
-        controller.fetchCartItemsTotal(session.getCartID(), getActivity());
     }
 }

@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface CartView {
     void setCartItems(List<CartItem> cartItemList);
-    void setTotal(int cartTotal);
     void setMessage(String message);
     void setCart(Cart cart);
 }
