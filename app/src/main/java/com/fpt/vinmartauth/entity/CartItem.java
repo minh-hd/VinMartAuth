@@ -1,7 +1,5 @@
 package com.fpt.vinmartauth.entity;
 
-import java.util.Date;
-
 public class CartItem {
     private String documentID;
     private String productID;
@@ -10,7 +8,28 @@ public class CartItem {
     private String productPrice;
     private String quantity;
 
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "documentID='" + documentID + '\'' +
+                ", productID='" + productID + '\'' +
+                ", productImage='" + productImage + '\'' +
+                ", productTitle='" + productTitle + '\'' +
+                ", productPrice='" + productPrice + '\'' +
+                ", quantity='" + quantity + '\'' +
+                '}';
+    }
+
     public CartItem() {
+    }
+
+    public CartItem(String documentID, String productID, String productImage, String productTitle, String productPrice, String quantity) {
+        this.documentID = documentID;
+        this.productID = productID;
+        this.productImage = productImage;
+        this.productTitle = productTitle;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
     }
 
     public String getDocumentID() {
@@ -61,3 +80,4 @@ public class CartItem {
         this.quantity = quantity;
     }
 }
+
