@@ -21,8 +21,15 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder>{
 
     private final static List<CartItem> cartItemList = new ArrayList<>();
+    private static final CartAdapter cartAdapter = new CartAdapter();
 
-    public CartAdapter() {}
+    private CartAdapter() {}
+
+    public static CartAdapter getInstance() {
+        if (cartAdapter != null) {
+            return cartAdapter;
+        } else return new CartAdapter();
+    }
 
     public void setData(List<CartItem> cartItems) {
         cartItemList.clear();

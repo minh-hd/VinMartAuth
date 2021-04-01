@@ -97,6 +97,8 @@ public class ProfileMenuItemAdapter extends Adapter {
       UserSession session = UserSession.getInstance();
       session.setCartID("");
       session.setUID("");
+      CartAdapter cartAdapter = CartAdapter.getInstance();
+      cartAdapter.setData(new ArrayList<>());
       FirebaseAuth.getInstance().signOut();
     }
   }
