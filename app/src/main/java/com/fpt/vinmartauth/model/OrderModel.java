@@ -45,11 +45,12 @@ public class OrderModel {
                 QuerySnapshot snapshot = task.getResult();
                 List<Order> allOrder = populateOrder(snapshot);
                 Map<String,Object> orders = new HashMap<>();
-                orders.put("UID", orderDTO.getCustomerID());
+                orders.put("ID",orderDTO.getID());
+                orders.put("UID", orderDTO.getUID());
                 orders.put("address", orderDTO.getAddress());
-                orders.put("cardID", orderDTO.getCard());
-                orders.put("cart", orderDTO.getCartID());
-                orders.put("payment", orderDTO.getPaymentID());
+                orders.put("cardID", orderDTO.getCardID());
+                orders.put("cart", orderDTO.getCart());
+                orders.put("payment", orderDTO.getPayment());
                 orders.put("shipID", orderDTO.getShipID());
                 orders.put("status", orderDTO.getStatusID());
                 db.collection("orders").document("Ox".concat(String.format("%03d" , allOrder.size() + 1)))
@@ -74,6 +75,29 @@ public class OrderModel {
     public interface CreateOrdersCallbacks {
         void onSuccess();
         void onFailed();
+    }
+
+    public interface getAllMOrdersCallBacks{
+        void onSuccess(List<Order> orders);
+        void onFailed();
+    }
+
+    public void getAllOrders(getAllMOrdersCallBacks callBacks){
+        CollectionReference orderRef = instance.collection("orders");
+        orderRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot snapshot = task.getResult();
+                List<Order> orders = new ArrayList<>();
+                for (QueryDocumentSnapshot document : snapshot) {
+                    Order order = document.toObject(Order.class);
+                    orders.add(order);
+                    Log.d("anhntl", order.toString());
+                }
+                callBacks.onSuccess(orders);
+            } else {
+                callBacks.onFailed();
+            }
+        });
     }
 }
 

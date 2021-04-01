@@ -3,8 +3,8 @@ package com.fpt.vinmartauth.entity;
 public class Card {
     String cardID;
     String expDate;
-    String cardNumber;
-    String cardOwner;
+    String no;
+    String owner;
 
 
     public Card() {
@@ -13,8 +13,8 @@ public class Card {
     public Card(String cardID, String expDate, String cardNumber, String cardOwner) {
         this.cardID = cardID;
         this.expDate = expDate;
-        this.cardNumber = cardNumber;
-        this.cardOwner = cardOwner;
+        this.no = cardNumber;
+        this.owner = cardOwner;
 
     }
 
@@ -35,18 +35,18 @@ public class Card {
     }
 
     public String getCardNumber() {
-        return cardNumber;
+        return no;
     }
 
     public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+        this.no = cardNumber;
     }
 
     public String getCardOwner() {
-        return cardOwner;
+        return owner;
     }
 
     public void setCardOwner(String cardOwner) {
-        this.cardOwner = cardOwner;
+        this.owner = cardOwner;
     }
 }

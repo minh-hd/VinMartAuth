@@ -112,12 +112,12 @@ public class CheckOutActivity extends AppCompatActivity {
         controller.fetchCart(customerID);
         Order order = new Order();
         Random generator1 = new Random();
-        order.setOrderId("Ox"+ generator1.nextInt(100));
+        order.setID("Ox"+ generator1.nextInt(100));
         order.setAddress(_address);
-        order.setCard(card);
-        order.setCartID(cartID);
-        order.setCustomerID(customerID);
-        order.setPaymentID(paymentID);
+        order.setCardID(card);
+        order.setCart(cartID);
+        order.setUID(customerID);
+        order.setPayment(paymentID);
         order.setShipID(shipID);
         order.setStatusID(statusID);
         controllerCO.createOrder(order);
