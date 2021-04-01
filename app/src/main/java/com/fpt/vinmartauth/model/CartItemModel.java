@@ -1,12 +1,17 @@
 package com.fpt.vinmartauth.model;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.fpt.vinmartauth.entity.Cart;
 import com.fpt.vinmartauth.entity.CartItem;
 import com.fpt.vinmartauth.entity.Product;
+import com.fpt.vinmartauth.view.dialog.LoadingDialog;
 import com.fpt.vinmartauth.view.fragment.cartView.UserSession;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
@@ -39,6 +44,7 @@ public class CartItemModel {
     private final String CART_DOCUMENT_ID_PREFIX = "Cax";
     private final String ITEM_DOCUMENT_ID_PREFIX = "CI";
     private final String ITEM_DOCUMENT_START_ID = "CI01";
+    private LoadingDialog loadingDialog;
 
 
     public CartItemModel() {
@@ -82,17 +88,25 @@ public class CartItemModel {
 
     // method to create add cart item
     @SuppressLint("DefaultLocale")
-    public void getCurrentUserCart(String UID, GetCurrentUserCartCallbacks callbacks) {
-        CollectionReference cartRef = instance.collection(CART_COLLECTION_PATH);
-        cartRef.get().addOnCompleteListener(task -> {
+    public void getCurrentUserCart(String UID, Activity activity, GetCurrentUserCartCallbacks callbacks) {
+        loadingDialog = new LoadingDialog(activity);
+        loadingDialog.startLoadingDialog();
+        Log.d("SESSION", "Start creating new cart");
+        CollectionReference cartRef = instance.collection(CART_COLLECTION_PATH); // có trả về cartRef
+        Log.d("SESSION", "connection to firebase");
+        cartRef
+                .get()
+                .addOnCompleteListener(task -> {
+            Log.d("SESSION", task.toString());
             if (task.isSuccessful()) {
                 QuerySnapshot collection = task.getResult();
                 List<Cart> allCarts = populateCart(collection);
                 // Using Java 8 Stream(), these 2 lines find cart with right UID and isCheckout = false in list, else return null
                 Cart cart = allCarts.stream()
                         .filter(c -> UID.equals(c.getUID()) && !c.isCheckout()).findFirst().orElse(new Cart());
-                // if cart is null, create new cart
+                // if cart is null, do:
                 if (cart.getDocumentID() == null || "".equals(cart.getDocumentID())) {
+                    // Create new cart
                     cart.setUID(UID);
                     // Generate new documentID
                     cart.setDocumentID(CART_DOCUMENT_ID_PREFIX.concat(String.format("%03d" , allCarts.size() + 1)));
@@ -100,11 +114,18 @@ public class CartItemModel {
                     cartRef.document(cart.getDocumentID()).set(cart).addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
                             Log.d(SUCCESS_TAG, "Create new cart for user");
+                            Log.d("SESSION", "New cart created");
+                            loadingDialog.dismissDialog();
                             callbacks.onSuccess(cart);
                         } else {
                             Log.d(ERROR_TAG, "Unable to create new cart");
                         }
                     });
+                } else {
+                    // Get old cart
+                    Log.d("SESSION", "Old cart found");
+                    loadingDialog.dismissDialog();
+                    callbacks.onSuccess(cart);
                 }
             } else {
                 Log.d(ERROR_TAG, "Unable to get all cart");
@@ -127,7 +148,7 @@ public class CartItemModel {
 
     // method to add cart items
     @SuppressLint("DefaultLocale")
-    public void addCartItems(Product product, String cartID) {
+    public void addProductToCart(Product product, String cartID, UpdateCartForCheckoutCallbacks callbacks) {
         // getAllItemInCart()
         DocumentReference docCart = instance.collection(CART_COLLECTION_PATH)
                 .document(cartID);
@@ -149,7 +170,7 @@ public class CartItemModel {
                                         // product exists, set quantity of item by 1
                                         .update(ITEM_QUANTITY_FIELD, String.valueOf(Integer.parseInt(item.getQuantity()) + 1))
                                         .addOnCompleteListener(task2 -> {
-                                            /* Do callbacks to send update quantity success message */
+                                            callbacks.onSuccess("Thêm vào giỏ hàng: " + item.getProductTitle());
                                         });
                             } else {
                                 // product not exists, add new item to sub-collection "items"
@@ -165,6 +186,7 @@ public class CartItemModel {
                                         .document(item.getDocumentID())
                                         .set(item).addOnSuccessListener(aVoid -> {
                                             /* Do callbacks to send item add success message */
+                                            callbacks.onSuccess(UPDATE_SUCCESS_MESSAGE);
                                         });
                             }
                         } else {
@@ -177,6 +199,7 @@ public class CartItemModel {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     /* Do callbacks to send item add success message */
+                                    callbacks.onSuccess("Thêm vào giỏ hàng: " + item.getProductTitle());
                                 }
                             });
                         }
@@ -186,7 +209,9 @@ public class CartItemModel {
     }
 
     // method to get all cart items
-    public void getAllCartItem(String cartID, GetAllCartsCallbacks callbacks){
+    public void getAllCartItem(String cartID, Activity activity,GetAllCartsCallbacks callbacks){
+//        loadingDialog = new LoadingDialog(activity);
+//        loadingDialog.startLoadingDialog();
         CollectionReference cartRef = instance.collection(CART_COLLECTION_PATH);
         cartRef.document(cartID)
                 .collection(ITEM_COLLECTION_PATH)
@@ -198,6 +223,7 @@ public class CartItemModel {
                     CartItem item = doc.toObject(CartItem.class);
                     items.add(item);
                 }
+//                loadingDialog.dismissDialog();
                 callbacks.onSuccess(items);
             } else {
                 callbacks.onFailure();
@@ -210,13 +236,16 @@ public class CartItemModel {
         void onFailure();
     }
 
-    public void getTotalItemsPrice(String cartID, GetTotalPricesCallbacks callbacks) {
-        getAllCartItem(cartID, new GetAllCartsCallbacks() {
+    public void getTotalItemsPrice(String cartID, Activity activity, GetTotalPricesCallbacks callbacks) {
+//        loadingDialog = new LoadingDialog(activity);
+//        loadingDialog.startLoadingDialog();
+        getAllCartItem(cartID, activity, new GetAllCartsCallbacks() {
             @Override
             public void onSuccess(List<CartItem> items) {
                 int itemTotal = 0;
                 for (CartItem item : items)
                     itemTotal += Integer.parseInt(item.getQuantity()) * Integer.parseInt(item.getProductPrice());
+//                loadingDialog.dismissDialog();
                 callbacks.onSuccess(itemTotal);
             }
 
@@ -232,14 +261,14 @@ public class CartItemModel {
     }
 
     // method to delete cart item
-    public void getCartAfterDelete(String cartID, String itemID, GetAllCartsCallbacks callbacks) {
+    public void getCartAfterDelete(String cartID, String itemID, Activity activity, GetAllCartsCallbacks callbacks) {
         CollectionReference cartRef = instance.collection(CART_COLLECTION_PATH);
         cartRef.document(cartID)
                 .collection(ITEM_COLLECTION_PATH)
                 .document(itemID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                getAllCartItem(cartID, new GetAllCartsCallbacks() {
+                getAllCartItem(cartID, activity,new GetAllCartsCallbacks() {
                     @Override
                     public void onSuccess(List<CartItem> items) {
                         callbacks.onSuccess(items);
@@ -253,7 +282,7 @@ public class CartItemModel {
     }
 
     // method to update cart item quantity
-    public void updateCartItemsQuantity(String cartID, List<CartItem> items, GetAllCartsCallbacks callbacks) {
+    public void updateCartItemsQuantity(String cartID, List<CartItem> items, Activity activity,GetAllCartsCallbacks callbacks) {
         WriteBatch updateBatch =  instance.batch();
         CollectionReference cartItemRef = instance.collection(CART_COLLECTION_PATH)
                 .document(cartID)
@@ -266,7 +295,7 @@ public class CartItemModel {
         updateBatch.commit().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Log.d(SUCCESS_TAG, UPDATE_SUCCESS_MESSAGE);
-                getAllCartItem(cartID, new GetAllCartsCallbacks() {
+                getAllCartItem(cartID, activity,new GetAllCartsCallbacks() {
                     @Override
                     public void onSuccess(List<CartItem> items) {callbacks.onSuccess(items);}
 

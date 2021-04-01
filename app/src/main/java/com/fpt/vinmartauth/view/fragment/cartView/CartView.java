@@ -1,11 +1,13 @@
 package com.fpt.vinmartauth.view.fragment.cartView;
 
+import com.fpt.vinmartauth.entity.Cart;
 import com.fpt.vinmartauth.entity.CartItem;
 
 import java.util.List;
 
 public interface CartView {
-    void setCart(List<CartItem> cartItemList);
+    void setCartItems(List<CartItem> cartItemList);
     void setTotal(int cartTotal);
     void setMessage(String message);
+    void setCart(Cart cart);
 }
