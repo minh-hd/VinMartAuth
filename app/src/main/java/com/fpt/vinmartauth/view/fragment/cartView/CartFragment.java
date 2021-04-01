@@ -74,7 +74,7 @@ public class CartFragment extends Fragment implements CartView{
         rvCartList = view.findViewById(R.id.rvCart);
         btnCheckout = view.findViewById(R.id.btn_checkout);
         rvCartList.setHasFixedSize(true);
-        cartAdapter = new CartAdapter();
+        cartAdapter = CartAdapter.getInstance();
         rvCartList.setLayoutManager(new LinearLayoutManager(getActivity()));
         // Attach ItemTouchHepler to the RecyclerView
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(rvCartList);
