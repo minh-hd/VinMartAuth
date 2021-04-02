@@ -1,24 +1,13 @@
 package com.fpt.vinmartauth.model;
 
-<<<<<<< HEAD
-import android.util.Log;
-
-import com.fpt.vinmartauth.entity.Cart;
-import com.fpt.vinmartauth.entity.CartItem;
-import com.google.firebase.firestore.CollectionReference;
-=======
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
-
-import androidx.annotation.NonNull;
 
 import com.fpt.vinmartauth.entity.Cart;
 import com.fpt.vinmartauth.entity.CartItem;
 import com.fpt.vinmartauth.entity.Product;
 import com.fpt.vinmartauth.view.dialog.LoadingDialog;
-import com.fpt.vinmartauth.view.fragment.cartView.UserSession;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
@@ -28,7 +17,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
-
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -132,7 +120,7 @@ public class CartItemModel {
                         .filter(c -> UID.equals(c.getUID()) && !c.isCheckout()).findFirst().orElse(new Cart());
                 if (cart.getDocumentID() == null || "".equals(cart.getDocumentID())) {
                     cart.setUID(UID);
-                    cart.setDocumentID(CART_DOCUMENT_ID_PREFIX.concat(String.format("%03d" , allCarts.size() + 1)));
+                    cart.setDocumentID(CART_DOCUMENT_ID_PREFIX.concat(String.format("%03d", allCarts.size() + 1)));
                     cart.setCartTotal("");
                     Map<String, Object> cartMap = new HashMap<>();
                     cartMap.put("documentID", cart.getDocumentID());
@@ -180,7 +168,7 @@ public class CartItemModel {
     private int getLatestDocumentID(List<CartItem> items) {
         int lastestIDSuffixNumber = 0;
         for (CartItem item : items) {
-            String [] IDSuffix = item.getDocumentID().split("I");
+            String[] IDSuffix = item.getDocumentID().split("I");
             int processedSuffix = Integer.parseInt(IDSuffix[1]);
             if (processedSuffix > lastestIDSuffixNumber) lastestIDSuffixNumber = processedSuffix;
         }
@@ -208,7 +196,7 @@ public class CartItemModel {
                                 // check if product has exists in cart, return new CartItem if not found
                                 CartItem item = items.stream()
                                         .filter(i -> product.getId().equals(i.getProductID())).findAny().orElse(new CartItem());
-                                Log.d("ITEM", item  != null ? item.toString() : "Item is null");
+                                Log.d("ITEM", item != null ? item.toString() : "Item is null");
                                 if (item.getDocumentID() != null) {
                                     /* GIỎ HÀNG ĐÃ TỒN TẠI SẢN PHẨM VÀ THỰC HIỆN CẬP NHẬT SỐ LƯỢNG */
                                     WriteBatch updateBatch = instance.batch();
@@ -245,7 +233,7 @@ public class CartItemModel {
                                 /* GIỎ HÀNG CHƯA CÓ SẢN PHẨM VÀ THỰC HIỆN THÊM SẢN PHẨM ĐẦU TIÊN */
                                 // add the first item to sub-collection "items"
                                 CartItem item = new CartItem(ITEM_DOCUMENT_START_ID, product.getId(), product.getImage(), product.getTitle(),
-                                        String.valueOf(product.getPrice()),"1");
+                                        String.valueOf(product.getPrice()), "1");
                                 docCart.collection(ITEM_COLLECTION_PATH)
                                         .document(item.getDocumentID())
                                         .set(item).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -264,7 +252,7 @@ public class CartItemModel {
     }
 
     // method to get all cart items
-    public void getAllCartItem(String cartID, Activity activity, GetAllCartsCallbacks callbacks){
+    public void getAllCartItem(String cartID, Activity activity, GetAllCartsCallbacks callbacks) {
         loadingDialog = new LoadingDialog(activity);
         loadingDialog.startLoadingDialog();
         CollectionReference cartRef = instance.collection(CART_COLLECTION_PATH);
@@ -286,7 +274,7 @@ public class CartItemModel {
         });
     }
 
-    public interface GetAllCartsCallbacks{
+    public interface GetAllCartsCallbacks {
         void onSuccess(List<CartItem> items);
     }
 
@@ -298,11 +286,13 @@ public class CartItemModel {
                 Log.d("anhdt", String.valueOf(itemTotal));
                 callbacks.onSuccess(itemTotal);
             }
+
             @Override
             public void onFailure() {
             }
         });
     }
+
     public interface GetTotalPricesCallbacks {
         void onSuccess(int cartTotals);
     }
@@ -315,16 +305,20 @@ public class CartItemModel {
                 Log.d("anhdt", String.valueOf(itemTotalAmount));
                 callbacks.onSuccess(itemTotalAmount);
             }
+
             @Override
             public void onFailure() {
             }
         });
     }
+
     public interface GetTotalAmountCallbacks {
         void onSuccess(int cartAmounTotals);
     }
+
     public interface GetCheckoutCartAndItemsCallbacks {
         void onSuccess(List<CartItem> cartItemList);
+
         void onFailure();
     }
 
@@ -348,14 +342,14 @@ public class CartItemModel {
 
     // method to update cart item quantity
     public void updateCartItemsQuantity(String cartID, List<CartItem> items, Activity activity) {
-        WriteBatch updateBatch =  instance.batch();
+        WriteBatch updateBatch = instance.batch();
         CollectionReference cartItemRef = instance.collection(CART_COLLECTION_PATH)
                 .document(cartID)
                 .collection(ITEM_COLLECTION_PATH);
         // add item needed update to batch
         for (CartItem item : items) {
             DocumentReference docItem = cartItemRef.document(item.getDocumentID());
-            updateBatch.update(docItem, ITEM_QUANTITY_FIELD,item.getQuantity());
+            updateBatch.update(docItem, ITEM_QUANTITY_FIELD, item.getQuantity());
         }
         updateBatch.commit().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -383,6 +377,7 @@ public class CartItemModel {
 
     public interface UpdateCartForCheckoutCallbacks {
         void onSuccess(String successMessage);
+
         void onFailure(String failureMessage);
     }
 

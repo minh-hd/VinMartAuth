@@ -16,6 +16,7 @@ import com.fpt.vinmartauth.entity.ProfileMenuItem;
 import com.fpt.vinmartauth.view.EditProfile;
 import com.fpt.vinmartauth.view.LoginActivity;
 import com.fpt.vinmartauth.view.MainActivity;
+import com.fpt.vinmartauth.view.OrderHistoryActivity;
 import com.fpt.vinmartauth.view.fragment.cartView.UserSession;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -64,6 +65,10 @@ public class ProfileMenuItemAdapter extends Adapter {
         switch (item) {
           case "Chỉnh sửa hồ sơ":
             intent = new Intent(v.getContext(), EditProfile.class);
+            v.getContext().startActivity(intent);
+            break;
+            case "Lịch sử đơn hàng":
+            intent = new Intent(v.getContext(), OrderHistoryActivity.class);
             v.getContext().startActivity(intent);
             break;
           case "Đăng nhập":
