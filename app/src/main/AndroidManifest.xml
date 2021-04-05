@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fpt.vinmartauth">
+    package="com.fpt.vinmartauth"
+    xmlns:tools="http://schemas.android.com/tools"> <!--This line must be included to use prefix tools-->
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.VinMartAuth">
-        <activity android:name=".login.SignupActivity" />
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.VinMartAuth"
+        tools:replace="android:theme"> <!-- This line override theme of elegantNumberButton used in Cart -->
+        <activity android:name=".view.productDetailView.ProductDetailsActivity" />
+        <activity android:name=".view.productlist.ProductListActivity" />
+        <activity android:name=".view.by_category.ViewByCategoryActivity" />
+        <activity android:name=".view.EditProfile"/>
+        <activity android:name=".view.ResetPasswordActivity" />
+        <activity android:name=".view.VerificationActivity" />
+        <activity android:name=".view.SignupActivity" />
+        <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

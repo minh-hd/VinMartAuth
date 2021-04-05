@@ -5,25 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/quite_white"
-    tools:context=".login.SignupActivity">
+    tools:context=".view.SignupActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         tools:layout_editor_absoluteX="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white">
+            android:background="@color/quite_white">
 
             <TextView
-                android:id="@+id/sign_up"
+                android:id="@+id/verification"
                 style="@style/BoldText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,67 +34,70 @@
 
             <TextView
                 android:id="@+id/email"
-                style="@style/SmallText"
+                style="@style/BoldSmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
-                app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+                app:layout_constraintBottom_toTopOf="@+id/etRegEmail"
+                app:layout_constraintStart_toStartOf="@+id/etRegEmail"
+                app:layout_constraintTop_toBottomOf="@+id/etRegName" />
 
             <TextView
                 android:id="@+id/name"
-                style="@style/SmallText"
+                style="@style/BoldSmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
-                app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-                app:layout_constraintTop_toBottomOf="@+id/sign_up" />
+                app:layout_constraintBottom_toTopOf="@+id/etRegName"
+                app:layout_constraintStart_toStartOf="@+id/etRegName"
+                app:layout_constraintTop_toBottomOf="@+id/verification" />
 
             <TextView
                 android:id="@+id/password"
-                style="@style/SmallText"
+                style="@style/BoldSmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
-                app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+                app:layout_constraintBottom_toTopOf="@+id/etRegPassword"
+                app:layout_constraintStart_toStartOf="@+id/etRegPassword"
+                app:layout_constraintTop_toBottomOf="@+id/etRegEmail" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/etRegEmail"
                 android:layout_width="303dp"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/example_abc_com"
                 android:inputType="textEmailAddress"
+                android:theme="@style/AuthEditText"
                 app:layout_constraintBottom_toTopOf="@+id/password"
                 app:layout_constraintStart_toStartOf="@+id/password"
                 app:layout_constraintTop_toBottomOf="@+id/email" />
 
             <EditText
-                android:id="@+id/editTextTextPassword"
+                android:id="@+id/etRegPassword"
                 android:layout_width="303dp"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/enter_password"
                 android:inputType="textPassword"
-                app:layout_constraintBottom_toTopOf="@+id/btn_sign_up"
-                app:layout_constraintStart_toStartOf="@+id/btn_sign_up"
+                android:theme="@style/AuthEditText"
+                app:layout_constraintBottom_toTopOf="@+id/btnSignUp"
+                app:layout_constraintEnd_toEndOf="@+id/btnSignUp"
+                app:layout_constraintStart_toStartOf="@+id/btnSignUp"
                 app:layout_constraintTop_toBottomOf="@+id/password" />
 
             <Button
-                android:id="@+id/btn_sign_up"
+                android:id="@+id/btnSignUp"
                 android:layout_width="303dp"
                 android:layout_height="wrap_content"
                 android:text="@string/sign_up"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline78"
                 app:layout_constraintStart_toStartOf="@+id/guideline7"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/etRegPassword" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline7"
@@ -112,13 +114,14 @@
                 app:layout_constraintGuide_percent=".9" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/etRegName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/name"
                 android:inputType="textPersonName"
+                android:theme="@style/AuthEditText"
                 app:layout_constraintBottom_toTopOf="@+id/email"
                 app:layout_constraintEnd_toStartOf="@+id/guideline78"
                 app:layout_constraintStart_toStartOf="@+id/email"
@@ -139,15 +142,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".85" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <ImageView
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:contentDescription="@string/back"
         android:src="@drawable/ic_baseline_arrow_back_ios_24"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.476" />
 </androidx.constraintlayout.widget.ConstraintLayout>

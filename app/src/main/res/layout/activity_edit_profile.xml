@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutEditProfile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/quite_white"
+    tools:context=".view.EditProfile">
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/swipeRefresh"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.551" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline2">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profileCardView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_margin="0dp"
+            android:background="@color/quite_white"
+            app:contentPadding="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/quite_white">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/avatarCardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="false"
+                    app:cardCornerRadius="50dp"
+                    app:layout_constraintBottom_toTopOf="@+id/tvChangePicture"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageProfile"
+                        android:contentDescription=""
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="false"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/avatar" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tvChangePicture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Chỉnh sửa ảnh đại diện"
+                    android:theme="@style/BoldSmallText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/avatarCardView" />
+
+                <TextView
+                    android:id="@+id/tvFullName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/name"
+                    android:theme="@style/BoldSmallText"
+                    app:layout_constraintStart_toEndOf="@id/tvChangePicture"
+                    app:layout_constraintStart_toStartOf="@id/guideline7"
+                    app:layout_constraintTop_toBottomOf="@id/tvChangePicture" />
+
+                <EditText
+                    android:id="@+id/edtFullName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="Họ và tên"
+                    android:inputType="text"
+                    android:theme="@style/AuthEditText"
+                    app:layout_constraintEnd_toStartOf="@id/guideline78"
+                    app:layout_constraintStart_toStartOf="@id/tvFullName"
+                    app:layout_constraintTop_toBottomOf="@id/tvFullName" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/email"
+                    android:theme="@style/BoldSmallText"
+                    app:layout_constraintStart_toStartOf="@id/edtFullName"
+                    app:layout_constraintTop_toBottomOf="@id/edtFullName" />
+
+                <EditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/email"
+                    android:inputType="text"
+                    android:theme="@style/AuthEditText"
+                    app:layout_constraintEnd_toStartOf="@id/guideline78"
+                    app:layout_constraintStart_toStartOf="@id/tvEmail"
+                    app:layout_constraintTop_toBottomOf="@id/tvEmail"
+                    tools:ignore="TextFields" />
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Số điện thoại"
+                    android:theme="@style/BoldSmallText"
+                    app:layout_constraintStart_toStartOf="@id/edtEmail"
+                    app:layout_constraintTop_toBottomOf="@id/edtEmail" />
+
+                <EditText
+                    android:id="@+id/edtPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="+84912345678"
+                    android:inputType="text"
+                    android:theme="@style/AuthEditText"
+                    app:layout_constraintEnd_toStartOf="@id/guideline78"
+                    app:layout_constraintStart_toStartOf="@id/tvPhone"
+                    app:layout_constraintTop_toBottomOf="@id/tvPhone"
+                    tools:ignore="TextFields" />
+
+                <TextView
+                    android:id="@+id/tvChangePassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Đổi mật khẩu"
+                    android:textColor="@color/primary_crimson"
+                    android:theme="@style/BoldSmallText"
+                    app:layout_constraintEnd_toStartOf="@id/guideline78"
+                    app:layout_constraintTop_toBottomOf="@id/edtPhone" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:text="Lưu"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toStartOf="@id/guideline78"
+                    app:layout_constraintTop_toBottomOf="@id/tvChangePassword" />
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:backgroundTint="@color/gray_text"
+                    android:text="Quay lại"
+                    android:textColor="@color/quite_white"
+                    app:layout_constraintStart_toStartOf="@id/guideline7"
+                    app:layout_constraintTop_toBottomOf="@id/tvChangePassword" />
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".1" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline78"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".9" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

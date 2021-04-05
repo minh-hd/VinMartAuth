@@ -1,16 +1,54 @@
 <resources>
-    <string name="app_name">VinMartAuth</string>
+    <string name="app_name">VịnMart</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="sign_in">Sign in</string>
-    <string name="welcome">Welcome,</string>
-    <string name="sign_in_to_continue">Sign in to Continue</string>
-    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="welcome">Xin chào,</string>
+    <string name="sign_in_to_continue">Đăng nhập để tiếp tục</string>
+    <string name="sign_up">Đăng ký</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="or">-OR-</string>
+    <string name="email_or_phone">Email hoặc số điện thoại</string>
+    <string name="password">Mật khẩu</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="or">-HOẶC-</string>
+    <string name="enter_email_or_phone_number">Nhập email hoặc số điện thoại</string>
     <string name="example_abc_com">example@abc.com</string>
-    <string name="enter_password">Enter Password</string>
-    <string name="name">Name</string>
-    <string name="back">Back</string>
+    <string name="enter_password">Nhập mật khẩu</string>
+    <string name="name">Tên</string>
+    <string name="back">Quay lại</string>
+    <string name="verification">Xác thực</string>
+    <string name="Continue">Tiếp tục</string>
+    <string name="a_6_digit_otp_has_been_sent_to_your_e_mail_address_enter_to_continue">Vui lòng điền mã xác nhận được gửi đến điện thoại của bạn</string>
+    <string name="reset_password">Đặt lại mật khẩu</string>
+    <string name="enter_new_password_to_continue">Điền mật khẩu để tiếp tục</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="str_new_password">Mật khẩu mới</string>
+    <string name="home">Trang chủ</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="profile">Hồ sơ</string>
+    <string name="item_icon">Item Icon</string>
+    <string name="item_name">Item Name</string>
+    <string name="arrow_forward">Arrow forward</string>
+    <string name="edit_profile">Chỉnh sửa hồ sơ</string>
+    <string name="shipping_address">Địa chỉ giao hàng</string>
+    <string name="favorite">Sản phẩm yêu thích</string>
+    <string name="order_history">Lịch sử đơn hàng</string>
+    <string name="track_order">Theo dõi đơn hàng</string>
+    <string name="cards">Thẻ Ngân hàng</string>
+    <string name="notifications">Thông báo</string>
+    <string name="log_out">Đăng xuất</string>
+    <string name="dont_have_an_account">Chưa có tài khoản?</string>
+    <string name="loading_text">Đang tải</string>
+    <string name="title_activity_cart">CartActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="cart_total_label">Tổng tiền:</string>
+    <string name="cart_header_label">Giỏ hàng</string>
+    <string name="cart_checkout_button">Thanh toán</string>
+    <string name="cart_total_holder">0 đ</string>
+    <string name="productTitle">Rau cai ngong tui 300g</string>
+    <string name="productPricePlaceHolder">Gia: 12000đ</string>
 </resources>
